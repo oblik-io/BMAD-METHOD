@@ -1,3 +1,43 @@
+# [4.25.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.6...v4.25.0) (2025-07-05)
+
+
+### Bug Fixes
+
+* update web bundles ([42684e6](https://github.com/bmadcode/BMAD-METHOD/commit/42684e68af4396797962f3f851147523a6741608))
+
+
+### Features
+
+* improvements to agent task usage, sm story drafting, dev implementation, qa review process, and addition of a new sm independant review of a draft story ([2874a54](https://github.com/bmadcode/BMAD-METHOD/commit/2874a54a9b25b48c199b2e9dc63a9555e716c636))
+
+## [4.24.6](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.5...v4.24.6) (2025-07-04)
+
+
+### Bug Fixes
+
+* version bump and web build fix ([1c845e5](https://github.com/bmadcode/BMAD-METHOD/commit/1c845e5b2c77a77d887d8216152ba09110c72e40))
+
+## [4.24.5](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.4...v4.24.5) (2025-07-04)
+
+
+### Bug Fixes
+
+* yaml standardization in files and installer actions ([094f9f3](https://github.com/bmadcode/BMAD-METHOD/commit/094f9f3eabf563c9a89ecaf360fed63386b46ed4))
+
+## [4.24.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.3...v4.24.4) (2025-07-04)
+
+
+### Bug Fixes
+
+* documentation updates ([2018ad0](https://github.com/bmadcode/BMAD-METHOD/commit/2018ad07c7d4c68efb3c24d85ac7612942c6df9c))
+
+## [4.24.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.2...v4.24.3) (2025-07-04)
+
+
+### Bug Fixes
+
+* update YAML library from 'yaml' to 'js-yaml' in resolveExpansionPackCoreAgents for consistency ([#295](https://github.com/bmadcode/BMAD-METHOD/issues/295)) ([03f30ad](https://github.com/bmadcode/BMAD-METHOD/commit/03f30ad28b282fbb4fa5a6ed6b57d0327218cce0))
+
 ## [4.24.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.1...v4.24.2) (2025-07-03)
 
 
@@ -31,7 +71,7 @@
 
 ### Features
 
-* VS Code Copilot integration ([#284](https://github.com/bmadcode/BMAD-METHOD/issues/284)) ([1a4ca4f](https://github.com/bmadcode/BMAD-METHOD/commit/1a4ca4ffa630c2d4156bdd7a040d4c2274801757))
+* Github Copilot integration ([#284](https://github.com/bmadcode/BMAD-METHOD/issues/284)) ([1a4ca4f](https://github.com/bmadcode/BMAD-METHOD/commit/1a4ca4ffa630c2d4156bdd7a040d4c2274801757))
 
 ## [4.22.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.22.0...v4.22.1) (2025-06-30)
 

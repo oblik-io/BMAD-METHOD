@@ -220,7 +220,7 @@ class Installer {
     });
 
     if (files.length > 0) {
-      // Directory has other files, but no BMAD installation.
+      // Directory has other files, but no BMad installation.
       // Treat as clean install but record that it isn't empty.
       state.hasOtherFiles = true;
     }
@@ -235,7 +235,7 @@ class Installer {
   async performFreshInstall(config, installDir, spinner, options = {}) {
     // Ensure modules are initialized
     await initializeModules();
-    spinner.text = "Installing BMAD Method...";
+    spinner.text = "Installing BMad Method...";
 
     let files = [];
 
@@ -396,7 +396,7 @@ class Installer {
     const newVersion = await this.getCoreVersion();
     const versionCompare = this.compareVersions(currentVersion, newVersion);
 
-    console.log(chalk.yellow("\n🔍 Found existing BMAD v4 installation"));
+    console.log(chalk.yellow("\n🔍 Found existing BMad v4 installation"));
     console.log(`   Directory: ${installDir}`);
     console.log(`   Current version: ${currentVersion}`);
     console.log(`   Available version: ${newVersion}`);
@@ -446,8 +446,8 @@ class Installer {
     let choices = [];
     
     if (versionCompare < 0) {
-      console.log(chalk.cyan("\n⬆️  Upgrade available for BMAD core"));
-      choices.push({ name: `Upgrade BMAD core (v${currentVersion} → v${newVersion})`, value: "upgrade" });
+      console.log(chalk.cyan("\n⬆️  Upgrade available for BMad core"));
+      choices.push({ name: `Upgrade BMad core (v${currentVersion} → v${newVersion})`, value: "upgrade" });
     } else if (versionCompare === 0) {
       if (hasIntegrityIssues) {
         // Offer repair option when files are missing or modified
@@ -457,10 +457,10 @@ class Installer {
         });
       }
       console.log(chalk.yellow("\n⚠️  Same version already installed"));
-      choices.push({ name: `Force reinstall BMAD core (v${currentVersion} - reinstall)`, value: "reinstall" });
+      choices.push({ name: `Force reinstall BMad core (v${currentVersion} - reinstall)`, value: "reinstall" });
     } else {
       console.log(chalk.yellow("\n⬇️  Installed version is newer than available"));
-      choices.push({ name: `Downgrade BMAD core (v${currentVersion} → v${newVersion})`, value: "reinstall" });
+      choices.push({ name: `Downgrade BMad core (v${currentVersion} → v${newVersion})`, value: "reinstall" });
     }
     
     choices.push(
@@ -535,7 +535,7 @@ class Installer {
     spinner.stop();
 
     console.log(
-      chalk.yellow("\n🔍 Found BMAD v3 installation (bmad-agent/ directory)")
+      chalk.yellow("\n🔍 Found BMad v3 installation (bmad-agent/ directory)")
     );
     console.log(`   Directory: ${installDir}`);
 
@@ -685,6 +685,10 @@ class Installer {
       };
 
       await this.performFreshInstall(config, installDir, spinner, { isUpdate: true });
+      
+      // Clean up .yml files that now have .yaml counterparts
+      spinner.text = "Cleaning up legacy .yml files...";
+      await this.cleanupLegacyYmlFiles(installDir, spinner);
     } catch (error) {
       spinner.fail("Update failed");
       throw error;
@@ -737,11 +741,26 @@ class Installer {
           if (await fileManager.pathExists(sourcePath)) {
             await fileManager.copyFile(sourcePath, destPath);
             spinner.text = `Restored: ${file}`;
+            
+            // If this is a .yaml file, check for and remove corresponding .yml file
+            if (file.endsWith('.yaml')) {
+              const ymlFile = file.replace(/\.yaml$/, '.yml');
+              const ymlPath = path.join(installDir, ymlFile);
+              if (await fileManager.pathExists(ymlPath)) {
+                const fs = require('fs').promises;
+                await fs.unlink(ymlPath);
+                console.log(chalk.dim(`  Removed legacy: ${ymlFile} (replaced by ${file})`));
+              }
+            }
           } else {
             console.warn(chalk.yellow(`  Warning: Source file not found: ${file}`));
           }
         }
       }
+      
+      // Clean up .yml files that now have .yaml counterparts
+      spinner.text = "Cleaning up legacy .yml files...";
+      await this.cleanupLegacyYmlFiles(installDir, spinner);
       
       spinner.succeed("Repair completed successfully!");
       
@@ -768,7 +787,7 @@ class Installer {
   }
 
   async performReinstall(config, installDir, spinner) {
-    spinner.start("Preparing to reinstall BMAD Method...");
+    spinner.start("Preparing to reinstall BMad Method...");
 
     // Remove existing .bmad-core
     const bmadCorePath = path.join(installDir, ".bmad-core");
@@ -778,11 +797,17 @@ class Installer {
     }
     
     spinner.text = "Installing fresh copy...";
-    return await this.performFreshInstall(config, installDir, spinner, { isUpdate: true });
+    const result = await this.performFreshInstall(config, installDir, spinner, { isUpdate: true });
+    
+    // Clean up .yml files that now have .yaml counterparts
+    spinner.text = "Cleaning up legacy .yml files...";
+    await this.cleanupLegacyYmlFiles(installDir, spinner);
+    
+    return result;
   }
 
   showSuccessMessage(config, installDir, options = {}) {
-    console.log(chalk.green("\n✓ BMAD Method installed successfully!\n"));
+    console.log(chalk.green("\n✓ BMad Method installed successfully!\n"));
 
     const ides = config.ides || (config.ide ? [config.ide] : []);
     if (ides.length > 0) {
@@ -790,7 +815,7 @@ class Installer {
         const ideConfig = configLoader.getIdeConfiguration(ide);
         if (ideConfig?.instructions) {
           console.log(
-            chalk.bold(`To use BMAD agents in ${ideConfig.name}:`)
+            chalk.bold(`To use BMad agents in ${ideConfig.name}:`)
           );
           console.log(ideConfig.instructions);
         }
@@ -879,7 +904,7 @@ class Installer {
       };
       return await this.install(config);
     }
-    console.log(chalk.red("No BMAD installation found."));
+    console.log(chalk.red("No BMad installation found."));
   }
 
   async listAgents() {
@@ -887,7 +912,7 @@ class Installer {
     await initializeModules();
     const agents = await configLoader.getAvailableAgents();
 
-    console.log(chalk.bold("\nAvailable BMAD Agents:\n"));
+    console.log(chalk.bold("\nAvailable BMad Agents:\n"));
 
     for (const agent of agents) {
       console.log(chalk.cyan(`  ${agent.id.padEnd(20)}`), agent.description);
@@ -903,7 +928,7 @@ class Installer {
     await initializeModules();
     const expansionPacks = await this.getAvailableExpansionPacks();
 
-    console.log(chalk.bold("\nAvailable BMAD Expansion Packs:\n"));
+    console.log(chalk.bold("\nAvailable BMad Expansion Packs:\n"));
 
     if (expansionPacks.length === 0) {
       console.log(chalk.yellow("No expansion packs found."));
@@ -932,7 +957,7 @@ class Installer {
 
     if (!installDir) {
       console.log(
-        chalk.yellow("No BMAD installation found in current directory tree")
+        chalk.yellow("No BMad installation found in current directory tree")
       );
       return;
     }
@@ -944,7 +969,7 @@ class Installer {
       return;
     }
 
-    console.log(chalk.bold("\nBMAD Installation Status:\n"));
+    console.log(chalk.bold("\nBMad Installation Status:\n"));
     console.log(`  Directory:      ${installDir}`);
     console.log(`  Version:        ${manifest.version}`);
     console.log(
@@ -1210,7 +1235,7 @@ class Installer {
 
   async resolveExpansionPackCoreDependencies(installDir, expansionDotFolder, packId, spinner) {
     const glob = require('glob');
-    const yaml = require('yaml');
+    const yaml = require('js-yaml');
     const fs = require('fs').promises;
     
     // Find all agent files in the expansion pack
@@ -1265,7 +1290,7 @@ class Installer {
 
   async resolveExpansionPackCoreAgents(installDir, expansionDotFolder, packId, spinner) {
     const glob = require('glob');
-    const yaml = require('yaml');
+    const yaml = require('js-yaml');
     const fs = require('fs').promises;
     
     // Find all team files in the expansion pack
@@ -1399,7 +1424,7 @@ class Installer {
     await initializeModules();
     
     try {
-      // Find the dist directory in the BMAD installation
+      // Find the dist directory in the BMad installation
       const distDir = configLoader.getDistPath();
       
       if (!(await fileManager.pathExists(distDir))) {
@@ -1635,6 +1660,42 @@ class Installer {
     }
     
     return 0;
+  }
+
+  async cleanupLegacyYmlFiles(installDir, spinner) {
+    const glob = require('glob');
+    const fs = require('fs').promises;
+    
+    try {
+      // Find all .yml files in the installation directory
+      const ymlFiles = glob.sync('**/*.yml', {
+        cwd: installDir,
+        ignore: ['**/node_modules/**', '**/.git/**']
+      });
+      
+      let deletedCount = 0;
+      
+      for (const ymlFile of ymlFiles) {
+        // Check if corresponding .yaml file exists
+        const yamlFile = ymlFile.replace(/\.yml$/, '.yaml');
+        const ymlPath = path.join(installDir, ymlFile);
+        const yamlPath = path.join(installDir, yamlFile);
+        
+        if (await fileManager.pathExists(yamlPath)) {
+          // .yaml counterpart exists, delete the .yml file
+          await fs.unlink(ymlPath);
+          deletedCount++;
+          console.log(chalk.dim(`  Removed legacy: ${ymlFile} (replaced by ${yamlFile})`));
+        }
+      }
+      
+      if (deletedCount > 0) {
+        console.log(chalk.green(`✓ Cleaned up ${deletedCount} legacy .yml files`));
+      }
+      
+    } catch (error) {
+      console.warn(chalk.yellow(`Warning: Could not cleanup legacy .yml files: ${error.message}`));
+    }
   }
 
   async findInstallation() {

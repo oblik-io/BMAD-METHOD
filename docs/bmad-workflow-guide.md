@@ -1,12 +1,12 @@
-# BMAD Method Universal Workflow Guide
+# BMad Method Universal Workflow Guide
 
-This guide outlines the core BMAD workflow that applies regardless of which AI-powered IDE you're using.
+This guide outlines the core BMad workflow that applies regardless of which AI-powered IDE you're using.
 
 ## Overview
 
-The BMAD Method follows a structured approach to AI-assisted software development:
+The BMad Method follows a structured approach to AI-assisted software development:
 
-1. **Install BMAD** in your project
+1. **Install BMad** in your project
 2. **Plan with Gemini** using team-fullstack
 3. **Organize with bmad-master** (document sharding)
 4. **Develop iteratively** with SM → Dev cycles
@@ -15,14 +15,14 @@ The BMAD Method follows a structured approach to AI-assisted software developmen
 
 ### Phase 1: Project Setup
 
-1. **Install BMAD in your project**:
+1. **Install BMad in your project**:
 
    ```bash
    npx bmad-method install
    ```
 
    - Choose "Complete installation"
-   - Select your IDE (Cursor, Claude Code, Windsurf, Roo Code, or VS Code Copilot)
+   - Select your IDE (Cursor, Claude Code, Windsurf, Roo Code, or Github Copilot)
 
 2. **Verify installation**:
    - `.bmad-core/` folder created with all agents
@@ -35,7 +35,7 @@ Use Google's Gemini for collaborative planning with the full team:
 
 1. **Open [Google Gems](https://gemini.google.com/gems/view)**
 2. **Create a new Gem**:
-   - Give it a title and description (e.g., "BMAD Team Fullstack")
+   - Give it a title and description (e.g., "BMad Team Fullstack")
 3. **Load team-fullstack**:
    - Copy contents of: `dist/teams/team-fullstack.txt` from your project
    - Paste this content into the Gem setup to configure the team
@@ -113,7 +113,7 @@ Follow the SM → Dev cycle for systematic story development:
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
 - **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-bmad-master`)
-- **VS Code Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
+- **Github Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
 
 ### Chat Management:
 
