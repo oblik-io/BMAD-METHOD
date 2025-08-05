@@ -1,0 +1,27 @@
+name: bmad-prp-integration
+version: 1.0.0
+short-title: BMad-PRP Integration Pack
+description: >-
+  Integration expansion pack that combines BMad-Method's structured planning 
+  and team coordination with PRPs-agentic-eng's optimized single-agent execution.
+  Enables hybrid workflows for enhanced development productivity.
+author: Brian (BMad) & Community
+slashPrefix: bmadprp
+dependencies:
+  core:
+    - pm
+    - architect
+    - sm
+    - dev
+    - qa
+  templates:
+    - story-tmpl.yaml
+    - prd-tmpl.yaml
+    - architecture-tmpl.yaml
+  tasks:
+    - create-next-story.md
+    - shard-doc.md
+    - validate-next-story.md
+  data:
+    - bmad-kb.md
+    - technical-preferences.md 

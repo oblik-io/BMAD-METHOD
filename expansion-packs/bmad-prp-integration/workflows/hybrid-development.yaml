@@ -1,0 +1,240 @@
+workflow:
+  id: hybrid-development-v1
+  name: Hybrid Development Workflow
+  version: 1.0
+  description: >
+    Combines BMad-Method's structured planning with PRPs-agentic-eng's optimized execution.
+    This workflow provides the best of both approaches: systematic planning and one-pass implementation.
+
+phases:
+  - id: planning
+    name: Planning Phase (BMad)
+    description: "Use BMad agents to create comprehensive planning artifacts"
+    agents: [pm, architect, sm]
+    outputs:
+      - prd.md
+      - architecture.md
+      - stories/
+    validation:
+      - prd-checklist
+      - architecture-checklist
+      - story-validation
+    workflow:
+      - pm: "Create PRD from requirements"
+      - architect: "Design system architecture"
+      - sm: "Create detailed stories"
+      - po: "Validate planning artifacts"
+    
+  - id: prp-generation
+    name: PRP Generation Phase
+    description: "Convert BMad stories to PRP format for optimized execution"
+    agents: [prp-converter]
+    inputs:
+      - stories/
+    outputs:
+      - PRPs/
+    validation:
+      - prp-format-check
+      - context-completeness
+      - validation-loop-check
+    workflow:
+      - prp-converter: "Convert stories to PRP format"
+      - prp-converter: "Validate PRP completeness"
+      - prp-converter: "Generate PRP files"
+    
+  - id: execution
+    name: Execution Phase (PRP)
+    description: "Execute PRPs using PRPs-agentic-eng for one-pass implementation"
+    agents: [prp-executor]
+    inputs:
+      - PRPs/
+    outputs:
+      - implemented-features/
+      - execution-results/
+    validation:
+      - execution-success
+      - code-quality
+      - test-coverage
+    workflow:
+      - prp-executor: "Set up execution environment"
+      - prp-executor: "Execute PRPs"
+      - prp-executor: "Collect execution results"
+      - prp-executor: "Validate implementation"
+    
+  - id: validation
+    name: Validation & Integration Phase
+    description: "Validate results and integrate back into BMad workflow"
+    agents: [qa, prp-validator]
+    inputs:
+      - implemented-features/
+      - execution-results/
+    outputs:
+      - validated-stories/
+      - quality-report/
+    validation:
+      - acceptance-criteria
+      - integration-tests
+      - quality-standards
+    workflow:
+      - prp-validator: "Validate PRP execution results"
+      - qa: "Review implementation quality"
+      - prp-validator: "Map results to BMad format"
+      - qa: "Update story completion status"
+
+execution_modes:
+  - id: sequential
+    name: Sequential Execution
+    description: "Execute phases in sequence with validation gates"
+    phases: [planning, prp-generation, execution, validation]
+    validation_gates:
+      - after: planning
+        validation: [prd-checklist, architecture-checklist]
+      - after: prp-generation
+        validation: [prp-format-check, context-completeness]
+      - after: execution
+        validation: [execution-success, code-quality]
+      - after: validation
+        validation: [acceptance-criteria, integration-tests]
+    
+  - id: parallel
+    name: Parallel Execution
+    description: "Execute compatible phases in parallel"
+    parallel_groups:
+      - phases: [planning, prp-generation]
+        description: "Planning and PRP generation can overlap"
+      - phases: [execution]
+        description: "PRP execution runs independently"
+      - phases: [validation]
+        description: "Validation runs after execution"
+    dependencies:
+      - execution: [prp-generation]
+      - validation: [execution]
+    
+  - id: adaptive
+    name: Adaptive Execution
+    description: "Dynamically adjust workflow based on context"
+    decision_points:
+      - phase: planning
+        condition: "Simple project"
+        action: "Skip detailed architecture, go directly to PRP generation"
+      - phase: prp-generation
+        condition: "Complex story"
+        action: "Enhance context with additional documentation"
+      - phase: execution
+        condition: "Execution failure"
+        action: "Fall back to BMad development workflow"
+      - phase: validation
+        condition: "Quality issues"
+        action: "Additional validation and refinement"
+
+quality_gates:
+  - id: planning-quality
+    name: Planning Quality Gate
+    phase: planning
+    criteria:
+      - prd_complete: true
+      - architecture_designed: true
+      - stories_created: true
+      - acceptance_criteria_defined: true
+    actions:
+      - pass: "Continue to PRP generation"
+      - fail: "Return to planning phase"
+      
+  - id: prp-quality
+    name: PRP Quality Gate
+    phase: prp-generation
+    criteria:
+      - prp_format_valid: true
+      - context_complete: true
+      - validation_loops_executable: true
+      - traceability_maintained: true
+    actions:
+      - pass: "Continue to execution"
+      - fail: "Enhance PRP context"
+      
+  - id: execution-quality
+    name: Execution Quality Gate
+    phase: execution
+    criteria:
+      - execution_successful: true
+      - code_quality_acceptable: true
+      - tests_passing: true
+      - requirements_met: true
+    actions:
+      - pass: "Continue to validation"
+      - fail: "Debug and retry execution"
+      
+  - id: validation-quality
+    name: Validation Quality Gate
+    phase: validation
+    criteria:
+      - acceptance_criteria_met: true
+      - integration_tests_passing: true
+      - quality_standards_met: true
+      - documentation_complete: true
+    actions:
+      - pass: "Workflow complete"
+      - fail: "Address quality issues"
+
+error_handling:
+  - id: planning-errors
+    name: Planning Error Handling
+    phase: planning
+    errors:
+      - missing_requirements: "Request additional requirements"
+      - incomplete_architecture: "Enhance architecture design"
+      - invalid_stories: "Refine story definitions"
+    recovery:
+      - action: "Return to planning phase"
+      - validation: "Re-validate planning artifacts"
+      
+  - id: prp-errors
+    name: PRP Generation Error Handling
+    phase: prp-generation
+    errors:
+      - invalid_story_format: "Fix story format issues"
+      - missing_context: "Enhance context documentation"
+      - validation_failures: "Fix validation loop issues"
+    recovery:
+      - action: "Enhance PRP context"
+      - validation: "Re-validate PRP format"
+      
+  - id: execution-errors
+    name: Execution Error Handling
+    phase: execution
+    errors:
+      - environment_issues: "Fix execution environment"
+      - dependency_issues: "Resolve missing dependencies"
+      - execution_failures: "Debug execution issues"
+    recovery:
+      - action: "Fix execution environment"
+      - fallback: "Use BMad development workflow"
+      
+  - id: validation-errors
+    name: Validation Error Handling
+    phase: validation
+    errors:
+      - quality_issues: "Address quality problems"
+      - test_failures: "Fix failing tests"
+      - integration_issues: "Resolve integration problems"
+    recovery:
+      - action: "Address quality issues"
+      - iteration: "Re-run validation phase"
+
+success_criteria:
+  - all_phases_completed: true
+  - quality_gates_passed: true
+  - acceptance_criteria_met: true
+  - integration_tests_passing: true
+  - documentation_complete: true
+  - traceability_maintained: true
+
+metrics:
+  - planning_time: "Time spent in planning phase"
+  - prp_generation_time: "Time spent generating PRPs"
+  - execution_time: "Time spent executing PRPs"
+  - validation_time: "Time spent in validation"
+  - total_time: "Total workflow execution time"
+  - success_rate: "Percentage of successful executions"
+  - quality_score: "Overall quality assessment"
+  - user_satisfaction: "User satisfaction with results" 

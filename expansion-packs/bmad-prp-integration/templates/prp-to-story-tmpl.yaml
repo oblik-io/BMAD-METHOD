@@ -1,0 +1,150 @@
+template:
+  id: prp-to-story-template-v1
+  name: PRP Result to Story Conversion Template
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/stories/{{story_id}}.{{story_title_short}}.story.md
+    title: "Story {{story_id}}: {{story_title}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+agent_config:
+  editable_sections: 
+    - Status
+    - Dev Agent Record
+    - Implementation Results
+    - Validation Results
+    - Change Log
+
+sections:
+  - id: status
+    title: Status
+    type: choice
+    choices: [Done, Review, InProgress, Approved, Draft]
+    instruction: |
+      Update story status based on PRP execution results:
+      - Done: PRP executed successfully, all validations passed
+      - Review: PRP executed but requires review
+      - InProgress: PRP execution in progress
+      - Approved: Ready for PRP execution
+      - Draft: Story being prepared
+    owner: prp-validator
+    editors: [prp-validator, sm]
+    
+  - id: dev-record
+    title: Dev Agent Record
+    type: structured-text
+    instruction: |
+      Document the PRP execution results and implementation details:
+      
+      ### Implementation Summary
+      - Brief summary of what was implemented
+      - Key technical decisions made
+      - Any deviations from original plan
+      
+      ### Code Changes
+      - Files created or modified
+      - Key implementation patterns used
+      - Technical architecture decisions
+      
+      ### Challenges & Solutions
+      - Any challenges encountered during implementation
+      - Solutions implemented
+      - Lessons learned for future stories
+    template: |
+      ### Implementation Summary
+      {{implementation_summary}}
+      
+      ### Code Changes
+      {{code_changes}}
+      
+      ### Challenges & Solutions
+      {{challenges_solutions}}
+    elicit: true
+    owner: prp-validator
+    editors: [prp-validator, dev]
+    
+  - id: implementation-results
+    title: Implementation Results
+    type: structured-text
+    instruction: |
+      Document the specific implementation results from PRP execution:
+      
+      ### Completed Tasks
+      - List all completed tasks from PRP implementation
+      - Include task completion status and details
+      
+      ### Acceptance Criteria Status
+      - Map each acceptance criterion to implementation status
+      - Include validation results for each criterion
+      
+      ### Technical Artifacts
+      - Generated code files and locations
+      - Test files and coverage information
+      - Documentation created or updated
+    template: |
+      ### Completed Tasks
+      {{completed_tasks}}
+      
+      ### Acceptance Criteria Status
+      {{acceptance_criteria_status}}
+      
+      ### Technical Artifacts
+      {{technical_artifacts}}
+    elicit: true
+    owner: prp-validator
+    editors: [prp-validator]
+    
+  - id: validation-results
+    title: Validation Results
+    type: structured-text
+    instruction: |
+      Document validation results from PRP execution:
+      
+      ### Quality Validation
+      - Code quality check results
+      - Linting and formatting validation
+      - Security scan results
+      
+      ### Test Results
+      - Unit test execution results
+      - Test coverage information
+      - Integration test results
+      
+      ### Performance Validation
+      - Performance benchmark results
+      - Memory usage analysis
+      - Response time measurements
+    template: |
+      ### Quality Validation
+      {{quality_validation}}
+      
+      ### Test Results
+      {{test_results}}
+      
+      ### Performance Validation
+      {{performance_validation}}
+    elicit: true
+    owner: prp-validator
+    editors: [prp-validator, qa]
+    
+  - id: change-log
+    title: Change Log
+    type: table
+    columns: [Date, Version, Description, Author]
+    instruction: |
+      Track changes made during PRP execution and story completion:
+      - Implementation changes and decisions
+      - Validation results and updates
+      - Status changes and approvals
+    template: |
+      | Date | Version | Description | Author |
+      |------|---------|-------------|--------|
+      | {{current_date}} | {{version}} | PRP execution completed | PRP Validator |
+      | {{current_date}} | {{version}} | Validation results documented | PRP Validator |
+      | {{current_date}} | {{version}} | Story status updated to Done | PRP Validator |
+    owner: prp-validator
+    editors: [prp-validator, sm, qa] 

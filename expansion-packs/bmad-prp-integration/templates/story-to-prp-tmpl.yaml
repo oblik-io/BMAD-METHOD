@@ -1,0 +1,157 @@
+template:
+  id: story-to-prp-template-v1
+  name: Story to PRP Conversion Template
+  version: 1.0
+  output:
+    format: markdown
+    filename: PRPs/{{story_id}}.{{story_title_short}}.md
+    title: "PRP: {{story_title}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+agent_config:
+  editable_sections: 
+    - Goal
+    - Why
+    - What
+    - All Needed Context
+    - Implementation Blueprint
+    - Validation Loop
+
+sections:
+  - id: goal
+    title: Goal
+    type: template-text
+    template: |
+      **Feature Goal**: {{story_goal}}
+      
+      **Deliverable**: {{deliverable}}
+      
+      **Success Definition**: {{success_definition}}
+    instruction: |
+      Convert the BMad story goal into PRP goal format. Extract the specific, measurable end state 
+      and concrete deliverables from the story requirements.
+    elicit: true
+    owner: prp-converter
+    editors: [prp-converter]
+    
+  - id: why
+    title: Why
+    type: bullet-list
+    instruction: |
+      Extract the business value, user impact, and justification from the story. Include:
+      - Business value and user impact
+      - Integration with existing features
+      - Problems this solves and for whom
+    template: |
+      - [Business value and user impact from story]
+      - [Integration with existing features]
+      - [Problems this solves and for whom]
+    elicit: true
+    owner: prp-converter
+    editors: [prp-converter]
+    
+  - id: what
+    title: What
+    type: template-text
+    template: |
+      {{story_description}}
+      
+      ### Success Criteria
+      {{acceptance_criteria}}
+    instruction: |
+      Convert the story description and acceptance criteria into PRP "What" section. 
+      Maintain all user-visible behavior and technical requirements.
+    elicit: true
+    owner: prp-converter
+    editors: [prp-converter]
+    
+  - id: context
+    title: All Needed Context
+    type: structured-text
+    instruction: |
+      Map BMad architecture context to PRP context format. Include:
+      
+      ### Context Completeness Check
+      _Before writing this PRP, validate: "If someone knew nothing about this codebase, would they have everything needed to implement this successfully?"_
+      
+      ### Documentation & References
+      - Map architecture documents to PRP context format
+      - Include relevant code examples and patterns
+      - Add known gotchas and technical constraints
+      
+      ### Current Codebase Context
+      - Extract relevant file paths and structures
+      - Include existing patterns and conventions
+      - Map technical stack and dependencies
+    template: |
+      ### Context Completeness Check
+      _Before writing this PRP, validate: "If someone knew nothing about this codebase, would they have everything needed to implement this successfully?"_
+      
+      ### Documentation & References
+      {{architecture_context}}
+      
+      ### Current Codebase Context
+      {{codebase_context}}
+      
+      ### Known Gotchas
+      {{technical_constraints}}
+    elicit: true
+    owner: prp-converter
+    editors: [prp-converter]
+    
+  - id: implementation
+    title: Implementation Blueprint
+    type: structured-text
+    instruction: |
+      Convert BMad tasks and subtasks into PRP implementation blueprint. Include:
+      
+      ### Data models and structure
+      - Extract data model requirements from story
+      - Include schema and validation requirements
+      
+      ### Implementation Tasks (ordered by dependencies)
+      - Convert BMad tasks to PRP implementation tasks
+      - Maintain task dependencies and sequencing
+      - Include technical implementation details
+    template: |
+      ### Data models and structure
+      {{data_models}}
+      
+      ### Implementation Tasks (ordered by dependencies)
+      {{implementation_tasks}}
+    elicit: true
+    owner: prp-converter
+    editors: [prp-converter]
+    
+  - id: validation
+    title: Validation Loop
+    type: structured-text
+    instruction: |
+      Convert BMad testing requirements into PRP validation loop. Include:
+      
+      ### Level 1: Syntax & Style
+      - Code quality and style checks
+      - Linting and formatting validation
+      
+      ### Level 2: Unit Tests
+      - Unit test requirements and coverage
+      - Test framework and patterns
+      
+      ### Level 3: Integration Test
+      - Integration testing requirements
+      - End-to-end validation
+    template: |
+      ### Level 1: Syntax & Style
+      {{syntax_validation}}
+      
+      ### Level 2: Unit Tests
+      {{unit_test_validation}}
+      
+      ### Level 3: Integration Test
+      {{integration_validation}}
+    elicit: true
+    owner: prp-converter
+    editors: [prp-converter] 
