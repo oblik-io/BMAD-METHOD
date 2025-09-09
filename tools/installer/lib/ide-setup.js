@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const yaml = require('js-yaml');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
+const cjson = require('comment-json');
 const fileManager = require('./file-manager');
 const configLoader = require('./config-loader');
 const { extractYamlFromAgent } = require('../../lib/yaml-utils');
@@ -43,6 +44,9 @@ class IdeSetup extends BaseIdeSetup {
     switch (ide) {
       case 'cursor': {
         return this.setupCursor(installDir, selectedAgent);
+      }
+      case 'opencode': {
+        return this.setupOpenCode(installDir, selectedAgent);
       }
       case 'claude-code': {
         return this.setupClaudeCode(installDir, selectedAgent);
@@ -90,6 +94,124 @@ class IdeSetup extends BaseIdeSetup {
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
       }
+    }
+  }
+
+  async setupOpenCode(installDir, selectedAgent) {
+    // Minimal JSON-only integration per plan:
+    // - If opencode.json or opencode.jsonc exists: only ensure instructions include .bmad-core/core-config.yaml
+    // - If none exists: create minimal opencode.jsonc with $schema and instructions array including that file
+
+    const jsonPath = path.join(installDir, 'opencode.json');
+    const jsoncPath = path.join(installDir, 'opencode.jsonc');
+    const hasJson = await fileManager.pathExists(jsonPath);
+    const hasJsonc = await fileManager.pathExists(jsoncPath);
+
+    const ensureInstructionRef = (obj) => {
+      const ref = './.bmad-core/core-config.yaml';
+      if (!obj.instructions) obj.instructions = [];
+      if (!Array.isArray(obj.instructions)) obj.instructions = [obj.instructions];
+      const hasRef = obj.instructions.some((it) =>
+        typeof it === 'string'
+          ? it === ref
+          : it && typeof it.file === 'string'
+            ? it.file === ref
+            : false,
+      );
+      if (!hasRef) obj.instructions.push({ file: ref });
+      return obj;
+    };
+
+    const mergeBmadAgentsAndCommands = async (configObj) => {
+      // Ensure objects exist
+      if (!configObj.agent || typeof configObj.agent !== 'object') configObj.agent = {};
+      if (!configObj.command || typeof configObj.command !== 'object') configObj.command = {};
+
+      // Agents: use core agent ids by default
+      const agentIds = selectedAgent ? [selectedAgent] : await this.getCoreAgentIds(installDir);
+      for (const agentId of agentIds) {
+        const key = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
+        const existing = configObj.agent[key];
+        const agentDef = {
+          instructions: [{ file: `./.bmad-core/agents/${agentId}.md` }],
+          tools: ['write', 'edit', 'bash'],
+          mode: 'subagent',
+          bmadManaged: true,
+        };
+        if (!existing) {
+          configObj.agent[key] = agentDef;
+        } else if (existing && existing.bmadManaged) {
+          // Update to latest shape without clobbering non-BMAD entries
+          existing.instructions = agentDef.instructions;
+          existing.tools = agentDef.tools;
+          existing.mode = agentDef.mode;
+          existing.bmadManaged = true;
+          configObj.agent[key] = existing;
+        }
+      }
+
+      // Commands: expose core tasks as commands
+      const taskIds = await this.getAllTaskIds(installDir);
+      for (const taskId of taskIds) {
+        const key = `bmad:tasks:${taskId}`;
+        const existing = configObj.command[key];
+        const cmdDef = {
+          instructions: [{ file: `./.bmad-core/tasks/${taskId}.md` }],
+          bmadManaged: true,
+        };
+        if (!existing) {
+          configObj.command[key] = cmdDef;
+        } else if (existing && existing.bmadManaged) {
+          existing.instructions = cmdDef.instructions;
+          existing.bmadManaged = true;
+          configObj.command[key] = existing;
+        }
+      }
+
+      return configObj;
+    };
+
+    if (hasJson || hasJsonc) {
+      // Preserve existing top-level fields; only touch instructions
+      const targetPath = hasJsonc ? jsoncPath : jsonPath;
+      try {
+        const raw = await fs.readFile(targetPath, 'utf8');
+        // Use comment-json for both .json and .jsonc for resilience
+        const parsed = cjson.parse(raw, undefined, true);
+        ensureInstructionRef(parsed);
+        await mergeBmadAgentsAndCommands(parsed);
+        const output = cjson.stringify(parsed, null, 2);
+        await fs.writeFile(targetPath, output + (output.endsWith('\n') ? '' : '\n'));
+        console.log(
+          chalk.green(
+            '✓ Updated OpenCode config: ensured BMAD instructions and merged agents/commands',
+          ),
+        );
+      } catch (error) {
+        console.log(chalk.red('✗ Failed to update existing OpenCode config'), error.message);
+        return false;
+      }
+      return true;
+    }
+
+    // Create minimal opencode.jsonc
+    const minimal = {
+      $schema: 'https://opencode.ai/config.json',
+      instructions: [{ file: './.bmad-core/core-config.yaml' }],
+      agent: {},
+      command: {},
+    };
+    try {
+      await mergeBmadAgentsAndCommands(minimal);
+      const output = cjson.stringify(minimal, null, 2);
+      await fs.writeFile(jsoncPath, output + (output.endsWith('\n') ? '' : '\n'));
+      console.log(
+        chalk.green('✓ Created opencode.jsonc with BMAD instructions, agents, and commands'),
+      );
+      return true;
+    } catch (error) {
+      console.log(chalk.red('✗ Failed to create opencode.jsonc'), error.message);
+      return false;
     }
   }
 
