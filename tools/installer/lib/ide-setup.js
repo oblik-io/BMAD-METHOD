@@ -111,14 +111,8 @@ class IdeSetup extends BaseIdeSetup {
       const ref = './.bmad-core/core-config.yaml';
       if (!obj.instructions) obj.instructions = [];
       if (!Array.isArray(obj.instructions)) obj.instructions = [obj.instructions];
-      const hasRef = obj.instructions.some((it) =>
-        typeof it === 'string'
-          ? it === ref
-          : it && typeof it.file === 'string'
-            ? it.file === ref
-            : false,
-      );
-      if (!hasRef) obj.instructions.push({ file: ref });
+      const hasRef = obj.instructions.some((it) => typeof it === 'string' && it === ref);
+      if (!hasRef) obj.instructions.push(ref);
       return obj;
     };
 
@@ -133,19 +127,20 @@ class IdeSetup extends BaseIdeSetup {
         const key = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
         const existing = configObj.agent[key];
         const agentDef = {
-          instructions: [{ file: `./.bmad-core/agents/${agentId}.md` }],
-          tools: ['write', 'edit', 'bash'],
+          prompt: `{file:./.bmad-core/agents/${agentId}.md}`,
           mode: 'subagent',
-          bmadManaged: true,
         };
         if (!existing) {
           configObj.agent[key] = agentDef;
-        } else if (existing && existing.bmadManaged) {
-          // Update to latest shape without clobbering non-BMAD entries
-          existing.instructions = agentDef.instructions;
-          existing.tools = agentDef.tools;
+        } else if (
+          existing &&
+          typeof existing === 'object' &&
+          typeof existing.prompt === 'string' &&
+          existing.prompt.includes(`./.bmad-core/agents/${agentId}.md`)
+        ) {
+          // Update only BMAD-managed entries detected by prompt path
+          existing.prompt = agentDef.prompt;
           existing.mode = agentDef.mode;
-          existing.bmadManaged = true;
           configObj.agent[key] = existing;
         }
       }
@@ -156,14 +151,18 @@ class IdeSetup extends BaseIdeSetup {
         const key = `bmad:tasks:${taskId}`;
         const existing = configObj.command[key];
         const cmdDef = {
-          instructions: [{ file: `./.bmad-core/tasks/${taskId}.md` }],
-          bmadManaged: true,
+          template: `{file:./.bmad-core/tasks/${taskId}.md}`,
         };
         if (!existing) {
           configObj.command[key] = cmdDef;
-        } else if (existing && existing.bmadManaged) {
-          existing.instructions = cmdDef.instructions;
-          existing.bmadManaged = true;
+        } else if (
+          existing &&
+          typeof existing === 'object' &&
+          typeof existing.template === 'string' &&
+          existing.template.includes(`./.bmad-core/tasks/${taskId}.md`)
+        ) {
+          // Update only BMAD-managed entries detected by template path
+          existing.template = cmdDef.template;
           configObj.command[key] = existing;
         }
       }
@@ -197,7 +196,7 @@ class IdeSetup extends BaseIdeSetup {
     // Create minimal opencode.jsonc
     const minimal = {
       $schema: 'https://opencode.ai/config.json',
-      instructions: [{ file: './.bmad-core/core-config.yaml' }],
+      instructions: ['./.bmad-core/core-config.yaml'],
       agent: {},
       command: {},
     };
