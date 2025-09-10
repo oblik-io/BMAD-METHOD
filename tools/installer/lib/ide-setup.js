@@ -269,6 +269,7 @@ class IdeSetup extends BaseIdeSetup {
         const agentDef = {
           prompt: fileRef,
           mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
+          tools: { write: true, edit: true, bash: true },
         };
         if (!existing) {
           configObj.agent[key] = agentDef;
@@ -281,6 +282,7 @@ class IdeSetup extends BaseIdeSetup {
         ) {
           existing.prompt = agentDef.prompt;
           existing.mode = agentDef.mode;
+          existing.tools = { write: true, edit: true, bash: true };
           configObj.agent[key] = existing;
           summary.agentsUpdated++;
         } else {
@@ -300,6 +302,7 @@ class IdeSetup extends BaseIdeSetup {
           const agentDef = {
             prompt: fileRef,
             mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
+            tools: { write: true, edit: true, bash: true },
           };
           if (!existing) {
             configObj.agent[prefixedKey] = agentDef;
@@ -312,6 +315,7 @@ class IdeSetup extends BaseIdeSetup {
           ) {
             existing.prompt = agentDef.prompt;
             existing.mode = agentDef.mode;
+            existing.tools = { write: true, edit: true, bash: true };
             configObj.agent[prefixedKey] = existing;
             summary.agentsUpdated++;
           } else {
