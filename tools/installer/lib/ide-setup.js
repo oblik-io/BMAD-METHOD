@@ -153,11 +153,18 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     const ensureInstructionRef = (obj) => {
-      const ref = '.bmad-core/core-config.yaml';
+      const preferred = '.bmad-core/core-config.yaml';
+      const alt = './.bmad-core/core-config.yaml';
       if (!obj.instructions) obj.instructions = [];
       if (!Array.isArray(obj.instructions)) obj.instructions = [obj.instructions];
-      const hasRef = obj.instructions.some((it) => typeof it === 'string' && it === ref);
-      if (!hasRef) obj.instructions.push(ref);
+      // Normalize alternative form (with './') to preferred without './'
+      obj.instructions = obj.instructions.map((it) =>
+        typeof it === 'string' && it === alt ? preferred : it,
+      );
+      const hasPreferred = obj.instructions.some(
+        (it) => typeof it === 'string' && it === preferred,
+      );
+      if (!hasPreferred) obj.instructions.push(preferred);
       return obj;
     };
 
@@ -165,6 +172,8 @@ class IdeSetup extends BaseIdeSetup {
       // Ensure objects exist
       if (!configObj.agent || typeof configObj.agent !== 'object') configObj.agent = {};
       if (!configObj.command || typeof configObj.command !== 'object') configObj.command = {};
+      if (!configObj.instructions) configObj.instructions = [];
+      if (!Array.isArray(configObj.instructions)) configObj.instructions = [configObj.instructions];
 
       // Track a concise summary of changes
       const summary = {
@@ -178,16 +187,78 @@ class IdeSetup extends BaseIdeSetup {
         commandsSkipped: 0,
       };
 
-      // Agents: use core agent ids by default
-      // If pre-config provided selected agents for opencode, respect that list
-      const preSelected = preConfiguredSettings?.selectedAgents;
-      const agentIds =
-        preSelected && Array.isArray(preSelected) && preSelected.length > 0
-          ? preSelected
-          : selectedAgent
-            ? [selectedAgent]
-            : await this.getCoreAgentIds(installDir);
-      for (const agentId of agentIds) {
+      // Determine package scope: previously SELECTED packages in installer UI
+      const selectedPackages = preConfiguredSettings?.selectedPackages || {
+        includeCore: true,
+        packs: [],
+      };
+
+      // Helper: ensure an instruction path is present without './' prefix, de-duplicating './' variants
+      const ensureInstructionPath = (pathNoDot) => {
+        const withDot = `./${pathNoDot}`;
+        // Normalize any existing './' variant to non './'
+        configObj.instructions = configObj.instructions.map((it) =>
+          typeof it === 'string' && it === withDot ? pathNoDot : it,
+        );
+        const has = configObj.instructions.some((it) => typeof it === 'string' && it === pathNoDot);
+        if (!has) configObj.instructions.push(pathNoDot);
+      };
+
+      // Helper: detect orchestrator agents to set as primary mode
+      const isOrchestratorAgent = (agentId) => /(^|-)orchestrator$/i.test(agentId);
+
+      // Build core sets
+      const coreAgentIds = new Set();
+      const coreTaskIds = new Set();
+      if (selectedPackages.includeCore) {
+        for (const id of await this.getCoreAgentIds(installDir)) coreAgentIds.add(id);
+        for (const id of await this.getCoreTaskIds(installDir)) coreTaskIds.add(id);
+      }
+
+      // Build packs info: { packId, packPath, packKey, agents:Set, tasks:Set }
+      const packsInfo = [];
+      if (Array.isArray(selectedPackages.packs)) {
+        for (const packId of selectedPackages.packs) {
+          const dotPackPath = path.join(installDir, `.${packId}`);
+          const altPackPath = path.join(installDir, 'expansion-packs', packId);
+          const packPath = (await fileManager.pathExists(dotPackPath))
+            ? dotPackPath
+            : (await fileManager.pathExists(altPackPath))
+              ? altPackPath
+              : null;
+          if (!packPath) continue;
+
+          // Ensure pack config.yaml is added to instructions (relative path, no './')
+          const packConfigAbs = path.join(packPath, 'config.yaml');
+          if (await fileManager.pathExists(packConfigAbs)) {
+            const relCfg = path.relative(installDir, packConfigAbs).replaceAll('\\', '/');
+            ensureInstructionPath(relCfg);
+          }
+
+          const packKey = packId.replace(/^bmad-/, '').replaceAll('/', '-');
+          const info = { packId, packPath, packKey, agents: new Set(), tasks: new Set() };
+
+          const glob = require('glob');
+          const agentsDir = path.join(packPath, 'agents');
+          if (await fileManager.pathExists(agentsDir)) {
+            const files = glob.sync('*.md', { cwd: agentsDir });
+            for (const f of files) info.agents.add(path.basename(f, '.md'));
+          }
+          const tasksDir = path.join(packPath, 'tasks');
+          if (await fileManager.pathExists(tasksDir)) {
+            const files = glob.sync('*.md', { cwd: tasksDir });
+            for (const f of files) info.tasks.add(path.basename(f, '.md'));
+          }
+          packsInfo.push(info);
+        }
+      }
+
+      // Generate agents - core first (respect optional agent prefix)
+      for (const agentId of coreAgentIds) {
+        const p = await this.findAgentPath(agentId, installDir); // prefers core
+        if (!p) continue;
+        const rel = path.relative(installDir, p).replaceAll('\\', '/');
+        const fileRef = `{file:./${rel}}`;
         const baseKey = agentId;
         const key = useAgentPrefix
           ? baseKey.startsWith('bmad-')
@@ -196,8 +267,8 @@ class IdeSetup extends BaseIdeSetup {
           : baseKey;
         const existing = configObj.agent[key];
         const agentDef = {
-          prompt: `{file:./.bmad-core/agents/${agentId}.md}`,
-          mode: 'subagent',
+          prompt: fileRef,
+          mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
         };
         if (!existing) {
           configObj.agent[key] = agentDef;
@@ -206,9 +277,8 @@ class IdeSetup extends BaseIdeSetup {
           existing &&
           typeof existing === 'object' &&
           typeof existing.prompt === 'string' &&
-          existing.prompt.includes(`./.bmad-core/agents/${agentId}.md`)
+          existing.prompt.includes(rel)
         ) {
-          // Update only BMAD-managed entries detected by prompt path
           existing.prompt = agentDef.prompt;
           existing.mode = agentDef.mode;
           configObj.agent[key] = existing;
@@ -218,14 +288,47 @@ class IdeSetup extends BaseIdeSetup {
         }
       }
 
-      // Commands: expose core tasks as commands
-      const taskIds = await this.getAllTaskIds(installDir);
-      for (const taskId of taskIds) {
+      // Generate agents - expansion packs (forced pack-specific prefix)
+      for (const pack of packsInfo) {
+        for (const agentId of pack.agents) {
+          const p = path.join(pack.packPath, 'agents', `${agentId}.md`);
+          if (!(await fileManager.pathExists(p))) continue;
+          const rel = path.relative(installDir, p).replaceAll('\\', '/');
+          const fileRef = `{file:./${rel}}`;
+          const prefixedKey = `bmad-${pack.packKey}-${agentId}`;
+          const existing = configObj.agent[prefixedKey];
+          const agentDef = {
+            prompt: fileRef,
+            mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
+          };
+          if (!existing) {
+            configObj.agent[prefixedKey] = agentDef;
+            summary.agentsAdded++;
+          } else if (
+            existing &&
+            typeof existing === 'object' &&
+            typeof existing.prompt === 'string' &&
+            existing.prompt.includes(rel)
+          ) {
+            existing.prompt = agentDef.prompt;
+            existing.mode = agentDef.mode;
+            configObj.agent[prefixedKey] = existing;
+            summary.agentsUpdated++;
+          } else {
+            summary.agentsSkipped++;
+          }
+        }
+      }
+
+      // Generate commands - core first (respect optional command prefix)
+      for (const taskId of coreTaskIds) {
+        const p = await this.findTaskPath(taskId, installDir); // prefers core/common
+        if (!p) continue;
+        const rel = path.relative(installDir, p).replaceAll('\\', '/');
+        const fileRef = `{file:./${rel}}`;
         const key = useCommandPrefix ? `bmad:tasks:${taskId}` : `${taskId}`;
         const existing = configObj.command[key];
-        const cmdDef = {
-          template: `{file:./.bmad-core/tasks/${taskId}.md}`,
-        };
+        const cmdDef = { template: fileRef };
         if (!existing) {
           configObj.command[key] = cmdDef;
           summary.commandsAdded++;
@@ -233,14 +336,41 @@ class IdeSetup extends BaseIdeSetup {
           existing &&
           typeof existing === 'object' &&
           typeof existing.template === 'string' &&
-          existing.template.includes(`./.bmad-core/tasks/${taskId}.md`)
+          existing.template.includes(rel)
         ) {
-          // Update only BMAD-managed entries detected by template path
           existing.template = cmdDef.template;
           configObj.command[key] = existing;
           summary.commandsUpdated++;
         } else {
           summary.commandsSkipped++;
+        }
+      }
+
+      // Generate commands - expansion packs (forced pack-specific prefix)
+      for (const pack of packsInfo) {
+        for (const taskId of pack.tasks) {
+          const p = path.join(pack.packPath, 'tasks', `${taskId}.md`);
+          if (!(await fileManager.pathExists(p))) continue;
+          const rel = path.relative(installDir, p).replaceAll('\\', '/');
+          const fileRef = `{file:./${rel}}`;
+          const prefixedKey = `bmad:${pack.packKey}:${taskId}`;
+          const existing = configObj.command[prefixedKey];
+          const cmdDef = { template: fileRef };
+          if (!existing) {
+            configObj.command[prefixedKey] = cmdDef;
+            summary.commandsAdded++;
+          } else if (
+            existing &&
+            typeof existing === 'object' &&
+            typeof existing.template === 'string' &&
+            existing.template.includes(rel)
+          ) {
+            existing.template = cmdDef.template;
+            configObj.command[prefixedKey] = existing;
+            summary.commandsUpdated++;
+          } else {
+            summary.commandsSkipped++;
+          }
         }
       }
 
@@ -279,7 +409,7 @@ class IdeSetup extends BaseIdeSetup {
     // Create minimal opencode.jsonc
     const minimal = {
       $schema: 'https://opencode.ai/config.json',
-      instructions: ['./.bmad-core/core-config.yaml'],
+      instructions: ['.bmad-core/core-config.yaml'],
       agent: {},
       command: {},
     };

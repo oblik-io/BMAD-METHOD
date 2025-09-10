@@ -484,28 +484,9 @@ async function promptInstallation() {
     console.log(chalk.cyan('\n⚙️  OpenCode (SST) Configuration'));
     console.log(
       chalk.dim(
-        'Select which agents you want in opencode.json(c) and choose optional key prefixes (defaults: no prefixes).\n',
+        'OpenCode will include agents and tasks from the packages you selected above; choose optional key prefixes (defaults: no prefixes).\n',
       ),
     );
-
-    // Load available agents from installer
-    const availableAgents = (await installer.getAvailableAgents()) || [];
-    const agentChoices = availableAgents.map((a) => ({ name: a.id, value: a.id }));
-
-    const { selectedOpenCodeAgents } = await inquirer.prompt([
-      {
-        type: 'checkbox',
-        name: 'selectedOpenCodeAgents',
-        message: 'Select agents to add to OpenCode:',
-        choices: agentChoices,
-        validate: (selected) => {
-          if (selected.length === 0) {
-            return 'Please select at least one agent for OpenCode or deselect OpenCode from IDEs.';
-          }
-          return true;
-        },
-      },
-    ]);
 
     const { useAgentPrefix, useCommandPrefix } = await inquirer.prompt([
       {
@@ -527,8 +508,11 @@ async function promptInstallation() {
         useAgentPrefix,
         useCommandPrefix,
       },
-      // pass selected agents so IDE setup only applies those
-      selectedAgents: selectedOpenCodeAgents,
+      // pass previously selected packages so IDE setup only applies those
+      selectedPackages: {
+        includeCore: selectedItems.includes('bmad-core'),
+        packs: answers.expansionPacks || [],
+      },
     };
   }
 
