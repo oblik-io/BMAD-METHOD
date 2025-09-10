@@ -207,6 +207,55 @@ class IdeSetup extends BaseIdeSetup {
       // Helper: detect orchestrator agents to set as primary mode
       const isOrchestratorAgent = (agentId) => /(^|-)orchestrator$/i.test(agentId);
 
+      // Helper: extract whenToUse string from an agent markdown file
+      const extractWhenToUseFromFile = async (absPath) => {
+        try {
+          const raw = await fileManager.readFile(absPath);
+          const yamlMatch = raw.match(/```ya?ml\r?\n([\s\S]*?)```/);
+          const yamlBlock = yamlMatch ? yamlMatch[1].trim() : null;
+          if (!yamlBlock) return null;
+          // Try quoted first, then unquoted
+          const quoted = yamlBlock.match(/whenToUse:\s*"([^"]+)"/i);
+          if (quoted && quoted[1]) return quoted[1].trim();
+          const unquoted = yamlBlock.match(/whenToUse:\s*([^\n\r]+)/i);
+          if (unquoted && unquoted[1]) return unquoted[1].trim();
+        } catch {
+          // ignore
+        }
+        return null;
+      };
+
+      // Helper: extract Purpose string from a task markdown file's YAML
+      const extractTaskPurposeFromFile = async (absPath) => {
+        try {
+          const raw = await fileManager.readFile(absPath);
+          const yamlMatch = raw.match(/```ya?ml\r?\n([\s\S]*?)```/);
+          const yamlBlock = yamlMatch ? yamlMatch[1].trim() : null;
+          if (!yamlBlock) return null;
+          // Try parsing YAML for better robustness
+          try {
+            const data = yaml.load(yamlBlock);
+            if (data) {
+              let val = data.Purpose ?? data.purpose;
+              if (!val && data.task && (data.task.Purpose || data.task.purpose)) {
+                val = data.task.Purpose ?? data.task.purpose;
+              }
+              if (typeof val === 'string') return val.trim();
+            }
+          } catch {
+            // ignore YAML parse errors
+          }
+          // Fallback regex
+          const quoted = yamlBlock.match(/(?:^|\n)\s*(?:Purpose|purpose):\s*"([^"]+)"/);
+          if (quoted && quoted[1]) return quoted[1].trim();
+          const unquoted = yamlBlock.match(/(?:^|\n)\s*(?:Purpose|purpose):\s*([^\n\r]+)/);
+          if (unquoted && unquoted[1]) return unquoted[1].trim();
+        } catch {
+          // ignore
+        }
+        return null;
+      };
+
       // Build core sets
       const coreAgentIds = new Set();
       const coreTaskIds = new Set();
@@ -266,10 +315,12 @@ class IdeSetup extends BaseIdeSetup {
             : `bmad-${baseKey}`
           : baseKey;
         const existing = configObj.agent[key];
+        const whenToUse = await extractWhenToUseFromFile(p);
         const agentDef = {
           prompt: fileRef,
           mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
           tools: { write: true, edit: true, bash: true },
+          ...(whenToUse ? { description: whenToUse } : {}),
         };
         if (!existing) {
           configObj.agent[key] = agentDef;
@@ -282,6 +333,7 @@ class IdeSetup extends BaseIdeSetup {
         ) {
           existing.prompt = agentDef.prompt;
           existing.mode = agentDef.mode;
+          if (whenToUse) existing.description = whenToUse;
           existing.tools = { write: true, edit: true, bash: true };
           configObj.agent[key] = existing;
           summary.agentsUpdated++;
@@ -299,10 +351,12 @@ class IdeSetup extends BaseIdeSetup {
           const fileRef = `{file:./${rel}}`;
           const prefixedKey = `bmad-${pack.packKey}-${agentId}`;
           const existing = configObj.agent[prefixedKey];
+          const whenToUse = await extractWhenToUseFromFile(p);
           const agentDef = {
             prompt: fileRef,
             mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
             tools: { write: true, edit: true, bash: true },
+            ...(whenToUse ? { description: whenToUse } : {}),
           };
           if (!existing) {
             configObj.agent[prefixedKey] = agentDef;
@@ -315,6 +369,7 @@ class IdeSetup extends BaseIdeSetup {
           ) {
             existing.prompt = agentDef.prompt;
             existing.mode = agentDef.mode;
+            if (whenToUse) existing.description = whenToUse;
             existing.tools = { write: true, edit: true, bash: true };
             configObj.agent[prefixedKey] = existing;
             summary.agentsUpdated++;
@@ -332,7 +387,8 @@ class IdeSetup extends BaseIdeSetup {
         const fileRef = `{file:./${rel}}`;
         const key = useCommandPrefix ? `bmad:tasks:${taskId}` : `${taskId}`;
         const existing = configObj.command[key];
-        const cmdDef = { template: fileRef };
+        const purpose = await extractTaskPurposeFromFile(p);
+        const cmdDef = { template: fileRef, ...(purpose ? { description: purpose } : {}) };
         if (!existing) {
           configObj.command[key] = cmdDef;
           summary.commandsAdded++;
@@ -343,6 +399,7 @@ class IdeSetup extends BaseIdeSetup {
           existing.template.includes(rel)
         ) {
           existing.template = cmdDef.template;
+          if (purpose) existing.description = purpose;
           configObj.command[key] = existing;
           summary.commandsUpdated++;
         } else {
@@ -359,7 +416,8 @@ class IdeSetup extends BaseIdeSetup {
           const fileRef = `{file:./${rel}}`;
           const prefixedKey = `bmad:${pack.packKey}:${taskId}`;
           const existing = configObj.command[prefixedKey];
-          const cmdDef = { template: fileRef };
+          const purpose = await extractTaskPurposeFromFile(p);
+          const cmdDef = { template: fileRef, ...(purpose ? { description: purpose } : {}) };
           if (!existing) {
             configObj.command[prefixedKey] = cmdDef;
             summary.commandsAdded++;
@@ -370,6 +428,7 @@ class IdeSetup extends BaseIdeSetup {
             existing.template.includes(rel)
           ) {
             existing.template = cmdDef.template;
+            if (purpose) existing.description = purpose;
             configObj.command[prefixedKey] = existing;
             summary.commandsUpdated++;
           } else {
