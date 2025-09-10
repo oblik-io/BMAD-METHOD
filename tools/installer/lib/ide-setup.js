@@ -401,6 +401,12 @@ class IdeSetup extends BaseIdeSetup {
           summary.agentsUpdated++;
         } else {
           summary.agentsSkipped++;
+          // Collision warning: key exists but does not appear BMAD-managed (different prompt path)
+          console.log(
+            chalk.yellow(
+              `⚠︎ Skipped agent key '${key}' (existing entry not BMAD-managed). Tip: enable agent prefixes to avoid collisions.`,
+            ),
+          );
         }
       }
 
@@ -437,6 +443,11 @@ class IdeSetup extends BaseIdeSetup {
             summary.agentsUpdated++;
           } else {
             summary.agentsSkipped++;
+            console.log(
+              chalk.yellow(
+                `⚠︎ Skipped agent key '${prefixedKey}' (existing entry not BMAD-managed). Tip: enable agent prefixes to avoid collisions.`,
+              ),
+            );
           }
         }
       }
@@ -466,6 +477,11 @@ class IdeSetup extends BaseIdeSetup {
           summary.commandsUpdated++;
         } else {
           summary.commandsSkipped++;
+          console.log(
+            chalk.yellow(
+              `⚠︎ Skipped command key '${key}' (existing entry not BMAD-managed). Tip: enable command prefixes to avoid collisions.`,
+            ),
+          );
         }
       }
 
@@ -495,6 +511,11 @@ class IdeSetup extends BaseIdeSetup {
             summary.commandsUpdated++;
           } else {
             summary.commandsSkipped++;
+            console.log(
+              chalk.yellow(
+                `⚠︎ Skipped command key '${prefixedKey}' (existing entry not BMAD-managed). Tip: enable command prefixes to avoid collisions.`,
+              ),
+            );
           }
         }
       }
