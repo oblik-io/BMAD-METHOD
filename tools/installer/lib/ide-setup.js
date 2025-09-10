@@ -225,31 +225,93 @@ class IdeSetup extends BaseIdeSetup {
         return null;
       };
 
-      // Helper: extract Purpose string from a task markdown file's YAML
+      // Helper: extract Purpose string from a task file (YAML fenced block, Markdown heading, or inline 'Purpose:')
       const extractTaskPurposeFromFile = async (absPath) => {
+        const cleanupAndSummarize = (text) => {
+          if (!text) return null;
+          let t = String(text);
+          // Drop code fences and HTML comments
+          t = t.replaceAll(/```[\s\S]*?```/g, '');
+          t = t.replaceAll(/<!--([\s\S]*?)-->/g, '');
+          // Normalize line endings
+          t = t.replaceAll(/\r\n?/g, '\n');
+          // Take the first non-empty paragraph
+          const paragraphs = t.split(/\n\s*\n/g).map((p) => p.trim());
+          let first = paragraphs.find((p) => p.length > 0) || '';
+          // Remove leading list markers, quotes, and headings remnants
+          first = first.replaceAll(/^\s*[>*-]\s+/gm, '');
+          first = first.replaceAll(/^#{1,6}\s+/gm, '');
+          // Strip simple Markdown formatting
+          first = first.replaceAll(/\*\*([^*]+)\*\*/g, '$1').replaceAll(/\*([^*]+)\*/g, '$1');
+          first = first.replaceAll(/`([^`]+)`/g, '$1');
+          // Collapse whitespace
+          first = first.replaceAll(/\s+/g, ' ').trim();
+          if (!first) return null;
+          // Prefer ending at a sentence boundary if long
+          const maxLen = 320;
+          if (first.length > maxLen) {
+            const boundary = first.slice(0, maxLen + 40).match(/^[\s\S]*?[.!?](\s|$)/);
+            const cut = boundary ? boundary[0] : first.slice(0, maxLen);
+            return cut.trim();
+          }
+          return first;
+        };
+
         try {
           const raw = await fileManager.readFile(absPath);
+          // 1) YAML fenced block: look for Purpose fields
           const yamlMatch = raw.match(/```ya?ml\r?\n([\s\S]*?)```/);
           const yamlBlock = yamlMatch ? yamlMatch[1].trim() : null;
-          if (!yamlBlock) return null;
-          // Try parsing YAML for better robustness
-          try {
-            const data = yaml.load(yamlBlock);
-            if (data) {
-              let val = data.Purpose ?? data.purpose;
-              if (!val && data.task && (data.task.Purpose || data.task.purpose)) {
-                val = data.task.Purpose ?? data.task.purpose;
+          if (yamlBlock) {
+            try {
+              const data = yaml.load(yamlBlock);
+              if (data) {
+                let val = data.Purpose ?? data.purpose;
+                if (!val && data.task && (data.task.Purpose || data.task.purpose)) {
+                  val = data.task.Purpose ?? data.task.purpose;
+                }
+                if (typeof val === 'string') {
+                  const cleaned = cleanupAndSummarize(val);
+                  if (cleaned) return cleaned;
+                }
               }
-              if (typeof val === 'string') return val.trim();
+            } catch {
+              // ignore YAML parse errors
             }
-          } catch {
-            // ignore YAML parse errors
+            // Fallback regex inside YAML block
+            const quoted = yamlBlock.match(/(?:^|\n)\s*(?:Purpose|purpose):\s*"([^"]+)"/);
+            if (quoted && quoted[1]) {
+              const cleaned = cleanupAndSummarize(quoted[1]);
+              if (cleaned) return cleaned;
+            }
+            const unquoted = yamlBlock.match(/(?:^|\n)\s*(?:Purpose|purpose):\s*([^\n\r]+)/);
+            if (unquoted && unquoted[1]) {
+              const cleaned = cleanupAndSummarize(unquoted[1]);
+              if (cleaned) return cleaned;
+            }
           }
-          // Fallback regex
-          const quoted = yamlBlock.match(/(?:^|\n)\s*(?:Purpose|purpose):\s*"([^"]+)"/);
-          if (quoted && quoted[1]) return quoted[1].trim();
-          const unquoted = yamlBlock.match(/(?:^|\n)\s*(?:Purpose|purpose):\s*([^\n\r]+)/);
-          if (unquoted && unquoted[1]) return unquoted[1].trim();
+
+          // 2) Markdown heading section: ## Purpose (any level >= 2)
+          const headingRe = /^(#{2,6})\s*Purpose\s*$/im;
+          const headingMatch = headingRe.exec(raw);
+          if (headingMatch) {
+            const headingLevel = headingMatch[1].length;
+            const sectionStart = headingMatch.index + headingMatch[0].length;
+            const rest = raw.slice(sectionStart);
+            // Next heading of same or higher level ends the section
+            const nextHeadingRe = new RegExp(`^#{1,${headingLevel}}\\s+[^\n]+`, 'im');
+            const nextMatch = nextHeadingRe.exec(rest);
+            const section = nextMatch ? rest.slice(0, nextMatch.index) : rest;
+            const cleaned = cleanupAndSummarize(section);
+            if (cleaned) return cleaned;
+          }
+
+          // 3) Inline single-line fallback: Purpose: ...
+          const inline = raw.match(/(?:^|\n)\s*Purpose\s*:\s*([^\n\r]+)/i);
+          if (inline && inline[1]) {
+            const cleaned = cleanupAndSummarize(inline[1]);
+            if (cleaned) return cleaned;
+          }
         } catch {
           // ignore
         }
