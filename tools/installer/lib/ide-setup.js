@@ -46,7 +46,7 @@ class IdeSetup extends BaseIdeSetup {
         return this.setupCursor(installDir, selectedAgent);
       }
       case 'opencode': {
-        return this.setupOpenCode(installDir, selectedAgent);
+        return this.setupOpenCode(installDir, selectedAgent, spinner, preConfiguredSettings);
       }
       case 'claude-code': {
         return this.setupClaudeCode(installDir, selectedAgent);
@@ -97,7 +97,7 @@ class IdeSetup extends BaseIdeSetup {
     }
   }
 
-  async setupOpenCode(installDir, selectedAgent) {
+  async setupOpenCode(installDir, selectedAgent, spinner = null, preConfiguredSettings = null) {
     // Minimal JSON-only integration per plan:
     // - If opencode.json or opencode.jsonc exists: only ensure instructions include .bmad-core/core-config.yaml
     // - If none exists: create minimal opencode.jsonc with $schema and instructions array including that file
@@ -107,8 +107,53 @@ class IdeSetup extends BaseIdeSetup {
     const hasJson = await fileManager.pathExists(jsonPath);
     const hasJsonc = await fileManager.pathExists(jsoncPath);
 
+    // Determine key prefix preferences (with sensible defaults)
+    // Defaults: non-prefixed (agents = "dev", commands = "create-doc")
+    let useAgentPrefix = false;
+    let useCommandPrefix = false;
+
+    // Allow pre-configuration (if passed) to skip prompts
+    const pre = preConfiguredSettings && preConfiguredSettings.opencode;
+    if (pre && typeof pre.useAgentPrefix === 'boolean') useAgentPrefix = pre.useAgentPrefix;
+    if (pre && typeof pre.useCommandPrefix === 'boolean') useCommandPrefix = pre.useCommandPrefix;
+
+    // If no pre-config and in interactive mode, prompt the user
+    if (!pre) {
+      // Pause spinner during prompts if active
+      let spinnerWasActive = false;
+      if (spinner && spinner.isSpinning) {
+        spinner.stop();
+        spinnerWasActive = true;
+      }
+
+      try {
+        const resp = await inquirer.prompt([
+          {
+            type: 'confirm',
+            name: 'useAgentPrefix',
+            message:
+              "Prefix agent keys with 'bmad-'? (Recommended to avoid collisions, e.g., 'bmad-dev')",
+            default: false,
+          },
+          {
+            type: 'confirm',
+            name: 'useCommandPrefix',
+            message:
+              "Prefix command keys with 'bmad:tasks:'? (Recommended, e.g., 'bmad:tasks:create-doc')",
+            default: false,
+          },
+        ]);
+        useAgentPrefix = resp.useAgentPrefix;
+        useCommandPrefix = resp.useCommandPrefix;
+      } catch {
+        // Keep defaults if prompt fails or is not interactive
+      } finally {
+        if (spinner && spinnerWasActive) spinner.start();
+      }
+    }
+
     const ensureInstructionRef = (obj) => {
-      const ref = './.bmad-core/core-config.yaml';
+      const ref = '.bmad-core/core-config.yaml';
       if (!obj.instructions) obj.instructions = [];
       if (!Array.isArray(obj.instructions)) obj.instructions = [obj.instructions];
       const hasRef = obj.instructions.some((it) => typeof it === 'string' && it === ref);
@@ -121,10 +166,34 @@ class IdeSetup extends BaseIdeSetup {
       if (!configObj.agent || typeof configObj.agent !== 'object') configObj.agent = {};
       if (!configObj.command || typeof configObj.command !== 'object') configObj.command = {};
 
+      // Track a concise summary of changes
+      const summary = {
+        target: null,
+        created: false,
+        agentsAdded: 0,
+        agentsUpdated: 0,
+        agentsSkipped: 0,
+        commandsAdded: 0,
+        commandsUpdated: 0,
+        commandsSkipped: 0,
+      };
+
       // Agents: use core agent ids by default
-      const agentIds = selectedAgent ? [selectedAgent] : await this.getCoreAgentIds(installDir);
+      // If pre-config provided selected agents for opencode, respect that list
+      const preSelected = preConfiguredSettings?.selectedAgents;
+      const agentIds =
+        preSelected && Array.isArray(preSelected) && preSelected.length > 0
+          ? preSelected
+          : selectedAgent
+            ? [selectedAgent]
+            : await this.getCoreAgentIds(installDir);
       for (const agentId of agentIds) {
-        const key = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
+        const baseKey = agentId;
+        const key = useAgentPrefix
+          ? baseKey.startsWith('bmad-')
+            ? baseKey
+            : `bmad-${baseKey}`
+          : baseKey;
         const existing = configObj.agent[key];
         const agentDef = {
           prompt: `{file:./.bmad-core/agents/${agentId}.md}`,
@@ -132,6 +201,7 @@ class IdeSetup extends BaseIdeSetup {
         };
         if (!existing) {
           configObj.agent[key] = agentDef;
+          summary.agentsAdded++;
         } else if (
           existing &&
           typeof existing === 'object' &&
@@ -142,19 +212,23 @@ class IdeSetup extends BaseIdeSetup {
           existing.prompt = agentDef.prompt;
           existing.mode = agentDef.mode;
           configObj.agent[key] = existing;
+          summary.agentsUpdated++;
+        } else {
+          summary.agentsSkipped++;
         }
       }
 
       // Commands: expose core tasks as commands
       const taskIds = await this.getAllTaskIds(installDir);
       for (const taskId of taskIds) {
-        const key = `bmad:tasks:${taskId}`;
+        const key = useCommandPrefix ? `bmad:tasks:${taskId}` : `${taskId}`;
         const existing = configObj.command[key];
         const cmdDef = {
           template: `{file:./.bmad-core/tasks/${taskId}.md}`,
         };
         if (!existing) {
           configObj.command[key] = cmdDef;
+          summary.commandsAdded++;
         } else if (
           existing &&
           typeof existing === 'object' &&
@@ -164,10 +238,13 @@ class IdeSetup extends BaseIdeSetup {
           // Update only BMAD-managed entries detected by template path
           existing.template = cmdDef.template;
           configObj.command[key] = existing;
+          summary.commandsUpdated++;
+        } else {
+          summary.commandsSkipped++;
         }
       }
 
-      return configObj;
+      return { configObj, summary };
     };
 
     if (hasJson || hasJsonc) {
@@ -178,12 +255,18 @@ class IdeSetup extends BaseIdeSetup {
         // Use comment-json for both .json and .jsonc for resilience
         const parsed = cjson.parse(raw, undefined, true);
         ensureInstructionRef(parsed);
-        await mergeBmadAgentsAndCommands(parsed);
+        const { configObj, summary } = await mergeBmadAgentsAndCommands(parsed);
         const output = cjson.stringify(parsed, null, 2);
         await fs.writeFile(targetPath, output + (output.endsWith('\n') ? '' : '\n'));
         console.log(
           chalk.green(
             '✓ Updated OpenCode config: ensured BMAD instructions and merged agents/commands',
+          ),
+        );
+        // Summary output
+        console.log(
+          chalk.dim(
+            `  File: ${path.basename(targetPath)} | Agents +${summary.agentsAdded} ~${summary.agentsUpdated} ⨯${summary.agentsSkipped} | Commands +${summary.commandsAdded} ~${summary.commandsUpdated} ⨯${summary.commandsSkipped}`,
           ),
         );
       } catch (error) {
@@ -201,11 +284,16 @@ class IdeSetup extends BaseIdeSetup {
       command: {},
     };
     try {
-      await mergeBmadAgentsAndCommands(minimal);
+      const { configObj, summary } = await mergeBmadAgentsAndCommands(minimal);
       const output = cjson.stringify(minimal, null, 2);
       await fs.writeFile(jsoncPath, output + (output.endsWith('\n') ? '' : '\n'));
       console.log(
         chalk.green('✓ Created opencode.jsonc with BMAD instructions, agents, and commands'),
+      );
+      console.log(
+        chalk.dim(
+          `  File: opencode.jsonc | Agents +${summary.agentsAdded} | Commands +${summary.commandsAdded}`,
+        ),
       );
       return true;
     } catch (error) {

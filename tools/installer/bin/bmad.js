@@ -479,6 +479,59 @@ async function promptInstallation() {
     answers.githubCopilotConfig = { configChoice };
   }
 
+  // Configure OpenCode (SST) immediately if selected
+  if (ides.includes('opencode')) {
+    console.log(chalk.cyan('\n⚙️  OpenCode (SST) Configuration'));
+    console.log(
+      chalk.dim(
+        'Select which agents you want in opencode.json(c) and choose optional key prefixes (defaults: no prefixes).\n',
+      ),
+    );
+
+    // Load available agents from installer
+    const availableAgents = (await installer.getAvailableAgents()) || [];
+    const agentChoices = availableAgents.map((a) => ({ name: a.id, value: a.id }));
+
+    const { selectedOpenCodeAgents } = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        name: 'selectedOpenCodeAgents',
+        message: 'Select agents to add to OpenCode:',
+        choices: agentChoices,
+        validate: (selected) => {
+          if (selected.length === 0) {
+            return 'Please select at least one agent for OpenCode or deselect OpenCode from IDEs.';
+          }
+          return true;
+        },
+      },
+    ]);
+
+    const { useAgentPrefix, useCommandPrefix } = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'useAgentPrefix',
+        message: "Prefix agent keys with 'bmad-'? (e.g., 'bmad-dev')",
+        default: false,
+      },
+      {
+        type: 'confirm',
+        name: 'useCommandPrefix',
+        message: "Prefix command keys with 'bmad:tasks:'? (e.g., 'bmad:tasks:create-doc')",
+        default: false,
+      },
+    ]);
+
+    answers.openCodeConfig = {
+      opencode: {
+        useAgentPrefix,
+        useCommandPrefix,
+      },
+      // pass selected agents so IDE setup only applies those
+      selectedAgents: selectedOpenCodeAgents,
+    };
+  }
+
   // Configure Auggie CLI (Augment Code) immediately if selected
   if (ides.includes('auggie-cli')) {
     console.log(chalk.cyan('\n📍 Auggie CLI Location Configuration'));
