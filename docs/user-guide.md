@@ -207,7 +207,7 @@ BMAD integrates with OpenCode via a project-level `opencode.jsonc`/`opencode.jso
   - `instructions`: `.bmad-core/core-config.yaml` plus any selected expansion pack `config.yaml` files.
   - `agent`: BMAD agents from core and selected packs.
     - `prompt`: `{file:./.bmad-core/agents/<id>.md}` (or pack path)
-    - `mode`: `primary` for orchestrators, otherwise `subagent`
+    - `mode`: `primary` for orchestrators, otherwise `all`
     - `tools`: `{ write: true, edit: true, bash: true }`
     - `description`: extracted from the agent’s `whenToUse`
   - `command`: BMAD tasks from core and selected packs.

@@ -380,7 +380,7 @@ class IdeSetup extends BaseIdeSetup {
         const whenToUse = await extractWhenToUseFromFile(p);
         const agentDef = {
           prompt: fileRef,
-          mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
+          mode: isOrchestratorAgent(agentId) ? 'primary' : 'all',
           tools: { write: true, edit: true, bash: true },
           ...(whenToUse ? { description: whenToUse } : {}),
         };
@@ -422,7 +422,7 @@ class IdeSetup extends BaseIdeSetup {
           const whenToUse = await extractWhenToUseFromFile(p);
           const agentDef = {
             prompt: fileRef,
-            mode: isOrchestratorAgent(agentId) ? 'primary' : 'subagent',
+            mode: isOrchestratorAgent(agentId) ? 'primary' : 'all',
             tools: { write: true, edit: true, bash: true },
             ...(whenToUse ? { description: whenToUse } : {}),
           };
@@ -550,7 +550,7 @@ class IdeSetup extends BaseIdeSetup {
 
         // Brief context note for modes and tools
         section += `Note\n`;
-        section += `- Orchestrators run as mode: primary; other agents as subagent.\n`;
+        section += `- Orchestrators run as mode: primary; other agents as all.\n`;
         section += `- All agents have tools enabled: write, edit, bash.\n\n`;
 
         section += `## Agents\n\n`;
