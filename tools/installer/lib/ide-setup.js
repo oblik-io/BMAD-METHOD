@@ -133,14 +133,14 @@ class IdeSetup extends BaseIdeSetup {
             name: 'useAgentPrefix',
             message:
               "Prefix agent keys with 'bmad-'? (Recommended to avoid collisions, e.g., 'bmad-dev')",
-            default: false,
+            default: true,
           },
           {
             type: 'confirm',
             name: 'useCommandPrefix',
             message:
               "Prefix command keys with 'bmad:tasks:'? (Recommended, e.g., 'bmad:tasks:create-doc')",
-            default: false,
+            default: true,
           },
         ]);
         useAgentPrefix = resp.useAgentPrefix;

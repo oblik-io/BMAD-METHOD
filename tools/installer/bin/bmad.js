@@ -493,13 +493,13 @@ async function promptInstallation() {
         type: 'confirm',
         name: 'useAgentPrefix',
         message: "Prefix agent keys with 'bmad-'? (e.g., 'bmad-dev')",
-        default: false,
+        default: true,
       },
       {
         type: 'confirm',
         name: 'useCommandPrefix',
         message: "Prefix command keys with 'bmad:tasks:'? (e.g., 'bmad:tasks:create-doc')",
-        default: false,
+        default: true,
       },
     ]);
 
