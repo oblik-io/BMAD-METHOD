@@ -173,11 +173,11 @@ ide-configurations:
       # 4. Re-run this installer to refresh agent sections when the core changes.
 
   opencode:
-    name: SST OpenCode CLI
+    name: OpenCode CLI
     format: jsonc-config
     file: opencode.jsonc
     instructions: |
-      # To use BMAD agents with SST OpenCode CLI:
+      # To use BMAD agents with OpenCode CLI:
       # 1. The installer creates/updates `opencode.jsonc` at your project root.
       # 2. It ensures the BMAD core instructions file is referenced: `./.bmad-core/core-config.yaml`.
       # 3. If an existing `opencode.json` or `opencode.jsonc` is present, it is preserved and only `instructions` are minimally merged.

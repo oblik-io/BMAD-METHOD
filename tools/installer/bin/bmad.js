@@ -410,7 +410,7 @@ async function promptInstallation() {
           { name: 'Auggie CLI (Augment Code)', value: 'auggie-cli' },
           { name: 'Codex CLI', value: 'codex' },
           { name: 'Codex Web', value: 'codex-web' },
-          { name: 'OpenCode (SST)', value: 'opencode' },
+          { name: 'OpenCode', value: 'opencode' },
         ],
       },
     ]);
@@ -479,9 +479,9 @@ async function promptInstallation() {
     answers.githubCopilotConfig = { configChoice };
   }
 
-  // Configure OpenCode (SST) immediately if selected
+  // Configure OpenCode immediately if selected
   if (ides.includes('opencode')) {
-    console.log(chalk.cyan('\n⚙️  OpenCode (SST) Configuration'));
+    console.log(chalk.cyan('\n⚙️  OpenCode Configuration'));
     console.log(
       chalk.dim(
         'OpenCode will include agents and tasks from the packages you selected above; choose optional key prefixes (defaults: no prefixes).\n',
