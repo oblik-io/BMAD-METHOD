@@ -123,6 +123,22 @@ sections:
           - "**Repository Pattern:** Abstract data access logic - _Rationale:_ Enables testing and future database migration flexibility"
           - "**Event-Driven Communication:** Using SNS/SQS for service decoupling - _Rationale:_ Supports async processing and system resilience"
 
+  - id: git-workflow
+    title: Git Workflow Complexity
+    condition: Project uses Git version control
+    instruction: |
+      Define the expected Git branching and review process for this project.
+      The chosen level will guide the Scrum Master when generating stories
+      for git operations (branch creation, PRs, merges, tags).
+      Options:
+      - Simple: Feature branches, direct merges to main, lightweight reviews.
+      - Medium: Epic branches, story-based merges, QA gate required before merge.
+      - Complex: Release branches, hotfix branches, audit gates, formal tagging policy.
+
+      Be clear and concise: pick the minimum viable level of complexity
+      needed to balance developer velocity, quality control, and compliance.
+    elicit: true
+
   - id: tech-stack
     title: Tech Stack
     instruction: |
