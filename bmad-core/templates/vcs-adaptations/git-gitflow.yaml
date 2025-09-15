@@ -1,0 +1,77 @@
+# Git GitFlow Adaptation Template
+# For ~20% of users - versioned releases
+
+name: GitFlow
+description: Structured branches with develop, release, and hotfix flows
+optimized_for: "Desktop software, mobile apps, versioned APIs, scheduled releases"
+
+artifact_patterns:
+  architecture:
+    structure: "version-aligned"
+    location: "docs/architecture/"
+    format: |
+      - Main architecture in docs/architecture/
+      - Version-specific changes in docs/releases/v{version}/
+      - Comprehensive planning documents
+
+  stories:
+    granularity: "medium"
+    size: "3-5 days of work"
+    format: |
+      - Stories grouped by release version
+      - Located in docs/releases/v{version}/stories/
+      - Can span multiple commits in feature branch
+
+  commits:
+    style: "descriptive"
+    branch_prefixes:
+      feature: "feature/"
+      release: "release/"
+      hotfix: "hotfix/"
+      bugfix: "bugfix/"
+    examples:
+      - "feature/user-auth: implement OAuth2 flow"
+      - "release/2.1.0: prepare release notes"
+      - "hotfix/critical-payment-bug: fix decimal handling"
+
+agent_adaptations:
+  architect:
+    - Generate comprehensive release-oriented architecture
+    - Include version migration guides
+    - Document breaking changes clearly
+
+  pm:
+    - Create release-scoped PRDs
+    - Define features by target version
+    - Maintain product roadmap document
+
+  sm:
+    - Group stories by release milestone
+    - Create epic-level organization
+    - Track story status across branches
+
+  dev:
+    - Follow branch naming conventions strictly
+    - Include version tags in code comments
+    - Generate migration scripts when needed
+
+  qa:
+    - Comprehensive test plans per release
+    - Regression test suites for versions
+    - Hotfix validation procedures
+
+version_management:
+  develop_branch: "Latest development work"
+  main_branch: "Production-ready releases only"
+  release_process: |
+    1. Branch release/x.y.z from develop
+    2. Fix bugs in release branch
+    3. Merge to main and tag
+    4. Merge back to develop
+
+best_practices:
+  - "Never commit directly to main"
+  - "Feature branches from develop, not main"
+  - "Hotfixes from main, merge to both main and develop"
+  - "Release branches for final preparations"
+  - "Semantic versioning (MAJOR.MINOR.PATCH)"

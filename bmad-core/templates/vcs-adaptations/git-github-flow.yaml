@@ -1,0 +1,72 @@
+# Git GitHub Flow Adaptation Template
+# For ~40% of users - the most common workflow
+
+name: GitHub Flow
+description: Simple feature branches with pull requests
+optimized_for: "Web applications, continuous deployment, small to medium teams"
+
+artifact_patterns:
+  architecture:
+    structure: "feature-aligned"
+    location: "docs/architecture/features/{feature-name}/"
+    format: |
+      - Main architecture in docs/architecture/README.md
+      - Feature additions in feature branches
+      - Lightweight, PR-friendly documents
+
+  stories:
+    granularity: "small"
+    size: "1-3 days of work"
+    format: |
+      - One story per PR ideal
+      - Story file travels with code changes
+      - Located in docs/stories/{story-id}.md
+
+  commits:
+    style: "conventional"
+    examples:
+      - "feat: add user authentication"
+      - "fix: resolve login timeout issue"
+      - "docs: update API documentation"
+    pr_description: |
+      ## What
+      Brief description of changes
+
+      ## Why
+      Context from story: {story-id}
+
+      ## Testing
+      - [ ] Unit tests pass
+      - [ ] Manual testing completed
+
+agent_adaptations:
+  architect:
+    - Generate lightweight, modular architecture docs
+    - Focus on changed components only
+    - Include "Impact Analysis" section for features
+
+  pm:
+    - Create feature-scoped PRDs when needed
+    - Keep requirements atomic and PR-sized
+
+  sm:
+    - Generate small, independent stories
+    - Each story should map to one PR
+    - Include acceptance criteria for PR review
+
+  dev:
+    - Suggest feature branch names: feature/story-{id}
+    - Generate atomic commits
+    - Include PR template in first commit
+
+  qa:
+    - Test plans per PR
+    - Focus on regression in changed areas
+    - Checklist format for PR reviews
+
+best_practices:
+  - "Keep PRs small - under 400 lines ideal"
+  - "One story = One PR when possible"
+  - "Branch from main, merge to main"
+  - "Delete branches after merge"
+  - "Deploy immediately after merge (if CI passes)"

@@ -1,0 +1,107 @@
+# No Version Control Template
+# For ~5% of users - prototypes, one-time scripts, POCs
+
+name: No Version Control
+description: Single deliverable packages without version tracking
+optimized_for: "Prototypes, data migrations, one-time scripts, proof of concepts"
+
+artifact_patterns:
+  architecture:
+    structure: "monolithic"
+    location: "deliverables/"
+    format: |
+      - Single comprehensive document
+      - All requirements embedded
+      - Self-contained package
+    naming: "{project}_{type}_YYYYMMDD.md"
+
+  stories:
+    granularity: "complete-features"
+    format: |
+      - All stories in one document
+      - Sequential implementation order
+      - No branching considerations
+    naming: "{project}_requirements_YYYYMMDD.md"
+
+  code:
+    delivery: "complete-packages"
+    format: |
+      - All code in one deliverable
+      - Extensive inline comments
+      - Setup instructions included
+    naming: "{project}_complete_YYYYMMDD.zip"
+
+package_structure:
+  example: |
+    project_20240315/
+    ├── README.md               # Complete instructions
+    ├── requirements.txt        # All dependencies
+    ├── src/                   # All source code
+    │   └── main.py
+    ├── docs/                  # All documentation
+    │   ├── architecture.md
+    │   └── requirements.md
+    ├── scripts/               # Setup/run scripts
+    │   └── setup.sh
+    └── tests/                 # Test files if any
+
+agent_adaptations:
+  architect:
+    - Generate single, complete architecture document
+    - Include all diagrams inline (base64 or ASCII)
+    - No references to branches or versions
+    - Date-stamp all documents
+
+  pm:
+    - Create comprehensive PRD upfront
+    - All requirements in one document
+    - Clear success criteria
+
+  sm:
+    - Sequential story implementation plan
+    - Dependencies clearly mapped
+    - No parallel work assumptions
+
+  dev:
+    - Generate complete, runnable code
+    - Extensive comments explaining logic
+    - No commit messages
+    - Include all necessary files
+
+  qa:
+    - Single test plan document
+    - Manual test procedures
+    - No regression considerations
+
+documentation:
+  readme_template: |
+    # {Project Name}
+    Generated: {Date}
+
+    ## Quick Start
+    1. Extract all files
+    2. Run setup script: ./scripts/setup.sh
+    3. Execute: python src/main.py
+
+    ## Requirements
+    - Python 3.8+
+    - Dependencies in requirements.txt
+
+    ## What This Does
+    {Clear description}
+
+    ## File Descriptions
+    {List each file and its purpose}
+
+    ## Notes
+    - This is a complete, self-contained package
+    - No version control required
+    - For questions, refer to docs/
+
+best_practices:
+  - "Date-stamp everything"
+  - "Over-document rather than under-document"
+  - "Include all dependencies explicitly"
+  - "Test the complete package before delivery"
+  - "One ZIP/folder contains everything"
+  - "No external references"
