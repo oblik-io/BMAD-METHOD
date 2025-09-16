@@ -2,15 +2,86 @@
 
 ## Purpose
 
-Identify and adapt to the team's version control system at project initialization.
+Intelligently identify and adapt to the team's version control system using a hybrid detection + confirmation approach.
 
 ## Philosophy
 
+- **Detection as a HINT, not a DECISION**
 - Optimize for the 85-90% who use Git
-- Remain open for the 10-15% with special needs
-- Suggest best practices without forcing them
+- Auto-detect for brownfield, ask for greenfield
+- Confirm with user when confidence < 100%
+- Progressive disclosure: simple cases fast, complex cases handled
 
 ## Task Instructions
+
+### Step 0: Auto-Detection (Brownfield Projects)
+
+For existing Git repositories, attempt automatic workflow detection:
+
+```yaml
+auto_detection:
+  enabled: true
+  confidence_threshold: 0.7
+
+  indicators:
+    gitflow:
+      - pattern: 'branch:develop exists'
+        weight: 0.3
+      - pattern: 'branches matching release/* or hotfix/*'
+        weight: 0.3
+      - pattern: 'long-lived feature branches (>14 days)'
+        weight: 0.2
+      - pattern: 'version tags (v1.0.0, etc.)'
+        weight: 0.2
+
+    github_flow:
+      - pattern: 'PR/MR merges to main/master'
+        weight: 0.3
+      - pattern: 'feature/* branches < 7 days lifespan'
+        weight: 0.3
+      - pattern: 'squash-and-merge commit patterns'
+        weight: 0.2
+      - pattern: 'no develop branch'
+        weight: 0.2
+
+    trunk_based:
+      - pattern: 'direct commits to main > 50%'
+        weight: 0.4
+      - pattern: 'branches live < 1 day'
+        weight: 0.3
+      - pattern: 'feature flags in codebase'
+        weight: 0.3
+
+  migration_detection:
+    check_periods:
+      recent: 'last 30 days'
+      historical: '30-90 days ago'
+    alert_if_different: true
+```
+
+#### Detection Results Presentation
+
+If detection confidence ≥ 70%:
+
+```yaml
+prompt: |
+  🔍 Analyzed your Git history...
+
+  Detected workflow: **{detected_workflow}** (confidence: {score}%)
+
+  Evidence:
+  {foreach evidence}
+    ✓ {evidence_item}
+  {/foreach}
+
+  Is this correct?
+  1. Yes, that's right
+  2. No, we actually use something else
+  3. We recently changed our approach
+  4. It's more complex than that
+```
+
+If detection confidence < 70% or no Git repo found, proceed to Step 1.
 
 ### Step 1: Initial Discovery
 
@@ -30,7 +101,7 @@ prompt: |
 
 ### Step 2A: Git-Based Workflows (Options 1-2)
 
-If user selects Git-based:
+If user selects Git-based (or auto-detection had low confidence):
 
 ```yaml
 elicit: true
@@ -55,7 +126,7 @@ prompt: |
   Select a number (1-5):
 ```
 
-#### If "Not sure" (Option 4):
+#### If "Not sure" (Option 4) or Low Auto-Detection Confidence:
 
 ```yaml
 elicit: true
@@ -122,9 +193,30 @@ prompt: |
   [Free text input]
 ```
 
-### Step 3: Store Configuration
+### Step 2E: Handle Workflow Migration
 
-Save the VCS configuration for all agents to access:
+If auto-detection found different patterns in recent vs historical periods:
+
+```yaml
+prompt: |
+  📊 Noticed a change in your workflow patterns:
+
+  **Previously (30-90 days ago):**
+  - {old_workflow_patterns}
+
+  **Recently (last 30 days):**
+  - {new_workflow_patterns}
+
+  Which should BMAD optimize for?
+  1. The new approach (we've migrated)
+  2. The old approach (recent was exceptional)
+  3. Both (we're in transition)
+  4. Neither (let me explain)
+```
+
+### Step 3: Store Configuration with Metadata
+
+Save the enhanced VCS configuration for all agents to access:
 
 ```yaml
 vcs_config:
@@ -132,31 +224,80 @@ vcs_config:
   workflow: [github-flow|gitflow|trunk-based|custom|none]
   details: [user's custom description if provided]
 
+  # New metadata for auto-detection
+  detection_method: [auto-detected|user-selected|hybrid]
+  confidence_score: 0.85 # If auto-detected
+  detection_evidence:
+    - 'Found develop branch'
+    - 'Release branches present'
+    - 'Average branch lifespan: 12 days'
+
   adaptations:
     artifact_format: [branches|monolithic|platform-specific]
     terminology: [git|generic|platform-specific]
     commit_style: [conventional|team-specific|none]
+
+  # Cache for subsequent runs
+  cache:
+    detected_at: '2024-01-15T10:30:00Z'
+    valid_until: '2024-01-22T10:30:00Z' # 7 days
 ```
 
-### Step 4: Confirm Understanding
+### Step 4: Cached Detection on Subsequent Runs
+
+```yaml
+if cache_exists and not expired:
+  prompt: |
+    📌 Last time you were using **{cached_workflow}**.
+    Still accurate? (Y/n):
+
+  if no:
+    options: 1. "We switched workflows" → Re-run detection
+      2. "It was incorrectly detected" → Manual selection
+      3. "Let me choose again" → Show full menu
+```
+
+### Step 5: Confirm Understanding
 
 ```yaml
 output: |
   VCS Configuration Confirmed:
   - System: {type}
   - Workflow: {workflow}
+  {if auto_detected}
+  - Detection confidence: {confidence}%
+  {/if}
   - BMAD will adapt by: {key_adaptations}
 
   All agents will generate artifacts compatible with your setup.
 ```
 
+## Escape Hatches
+
+For advanced users who want to bypass auto-detection:
+
+```yaml
+cli_options:
+  --skip-detection: 'Jump straight to manual selection'
+  --force-workflow=[gitflow|github|trunk]: 'Specify workflow directly'
+  --no-cache: "Don't cache detection results"
+
+example_usage: |
+  bmad init --skip-detection
+  bmad init --force-workflow=gitflow
+```
+
 ## Success Criteria
 
-- 80% of users can select from predefined options
+- **Auto-detection accuracy > 80%** for standard workflows
+- **User correction rate < 20%** for auto-detected cases
+- **Time to configuration < 30 seconds** for detected cases
+- 80% of users can select from predefined options (when not auto-detected)
 - 20% custom cases are handled gracefully
 - Configuration is stored and accessible to all agents
 - No Git assumptions for non-Git users
 - Clear recommendations when requested
+- **Detection treated as hint, not decision** - always confirmed with user
 
 ## Agent Adaptations Based on VCS
 
