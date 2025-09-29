@@ -1,0 +1,139 @@
+---
+last-redoc-date: 2025-09-30
+---
+
+# Test Architect (TEA) Agent Guide
+
+## Overview
+
+- **Persona:** Murat, Master Test Architect & Quality Advisor focused on risk-based testing, fixture architecture, ATDD, and CI/CD governance.
+- **Mission:** Deliver actionable quality strategies, automation coverage, and gate decisions that scale with project level and compliance demands.
+- **Use When:** Project level ≥2, integration risk is non-trivial, brownfield regression risk exists, or compliance/NFR evidence is required.
+
+## Prerequisites & Setup
+
+1. Run the core planning workflows first:
+   - Analyst `*product-brief`
+   - Product Manager `*plan-project`
+   - Architect `*solution-architecture`
+2. Confirm `bmad/bmm/config.yaml` defines `project_name`, `output_folder`, `dev_story_location`, and language settings.
+3. Ensure a test harness exists; if not, schedule `*framework` before development.
+4. Skim supporting references under `./testarch/`:
+   - `tea-knowledge.md`
+   - `test-levels-framework.md`
+   - `test-priorities-matrix.md`
+
+## High-Level Cheat Sheets
+
+### Greenfield Feature Launch (Level 2)
+
+| Phase | Test Architect | Dev / Team | Outputs |
+| --- | --- | --- | --- |
+| Setup | - | Analyst `*product-brief`, PM `*plan-project`, Architect `*solution-architecture` | `{output_folder}/product-brief*.md`, `PRD.md`, `epics.md`, `solution-architecture.md` |
+| Pre-Implementation | Run `*framework` (if harness missing), `*risk-profile`, `*test-design` | Review risk/design guidance, align backlog | Test scaffold, risk memo, test design strategy |
+| Story Prep | - | Scrum Master `*create-story`, `*story-context` | Story markdown + context XML |
+| Implementation | (Optional) Trigger `*atdd` before dev to supply failing tests + checklist | Implement story guided by ATDD checklist | Failing acceptance/component tests + implementation checklist |
+| Post-Dev | Execute `*automate`, re-run `*trace` | Address recommendations, update code/tests | Regression specs, refreshed coverage matrix |
+| Release | Refresh `*risk-profile`/`*test-design` if scope changed, run `*gate` | Confirm Definition of Done, share release notes | Gate YAML + release summary (owners, waivers) |
+
+<details>
+<summary>Execution Notes</summary>
+
+- Run `*framework` only once per repo or when modern harness support is missing.
+- `*risk-profile` grounds risk scores in PRD/architecture evidence (Probability × Impact with mitigation plan).
+- `*test-design` maps acceptance criteria across unit/integration/E2E levels using the priority matrix.
+- Use `*atdd` before coding when the team can adopt ATDD; share its checklist with the dev agent.
+- Post-implementation, keep `*trace` current, expand coverage with `*automate`, and finish with `*gate` after refreshing risk/design artifacts if anything shifted.
+
+</details>
+
+### Brownfield Feature Enhancement (Level 2–3)
+
+| Phase | Test Architect | Dev / Team | Outputs |
+| --- | --- | --- | --- |
+| Refresh Context | - | Analyst/PM/Architect rerun planning workflows | Updated planning artifacts in `{output_folder}` |
+| Baseline Coverage | Run `*trace` to inventory existing tests | Review matrix, flag hotspots | Coverage matrix + initial gate snippet |
+| Risk Targeting | Execute `*risk-profile`, `*test-design` | Align remediation/backlog priorities | Brownfield risk memo + scenario matrix |
+| Story Prep | - | Scrum Master `*create-story` | Updated story markdown |
+| Implementation | (Optional) Run `*atdd` before dev | Implement story, referencing checklist/tests | Failing acceptance tests + implementation checklist |
+| Post-Dev | Apply `*automate`, re-run `*trace`, trigger `*nfr-assess` if needed | Resolve gaps, update docs/tests | Regression specs, refreshed coverage matrix, NFR report |
+| Release | Refresh `*risk-profile`/`*test-design` if scope changed, run `*gate` | Product Owner `*assess-project-ready`, share release notes | Gate YAML + release summary |
+
+<details>
+<summary>Execution Notes</summary>
+
+- Lead with `*trace` so remediation plans target true coverage gaps.
+- `*risk-profile` + `*test-design` should highlight regression hotspots and P0 scenarios.
+- Use `*atdd` when stories benefit from ATDD; otherwise proceed to implementation and rely on post-dev automation.
+- After development, expand coverage with `*automate`, re-run `*trace`, and close with `*gate` (including `*nfr-assess` where infrastructure/perf changed).
+- Product Owner `*assess-project-ready` confirms the team has artifacts before handoff or release.
+
+</details>
+
+### Enterprise / Compliance Program (Level 4)
+
+| Phase | Test Architect | Dev / Team | Outputs |
+| --- | --- | --- | --- |
+| Strategic Planning | - | Analyst/PM/Architect standard workflows | Enterprise-grade PRD, epics, architecture |
+| Quality Planning | Run `*framework`, `*risk-profile`, `*test-design`, `*nfr-assess` | Review guidance, align compliance requirements | Harness scaffold, risk + NFR documentation |
+| Pipeline Enablement | Configure `*ci` | Coordinate secrets, pipeline approvals | `.github/workflows/test.yml`, helper scripts |
+| Execution | Enforce `*atdd`, `*automate`, `*trace` per story | Implement stories, resolve TEA findings | Tests, fixtures, coverage matrices |
+| Release | Refresh `*risk-profile`/`*test-design`, rerun `*trace`, `*automate`, `*gate` | Capture sign-offs, archive artifacts | Updated assessments, gate YAML, audit trail |
+
+<details>
+<summary>Execution Notes</summary>
+
+- Use `*atdd` for every story when feasible so acceptance tests lead implementation in regulated environments.
+- `*ci` scaffolds selective testing scripts, burn-in jobs, caching, and notifications for long-running suites.
+- Prior to release, refresh planning artifacts, rerun coverage (`*trace`, `*automate`), and formalize the decision in `*gate`; store everything for audits.
+
+</details>
+
+## Command Catalog
+
+| Command | Task File | Primary Outputs | Notes |
+| --- | --- | --- | --- |
+| `*framework` | `testarch/framework.md` | Playwright/Cypress scaffold, `.env.example`, `.nvmrc`, sample specs | Use when no production-ready harness exists |
+| `*atdd` | `testarch/atdd.md` | Failing acceptance/component tests, implementation checklist | Requires approved story + harness |
+| `*automate` | `testarch/automate.md` | Prioritized specs, fixtures, README/script updates, DoD summary | Avoid duplicate coverage (see priority matrix) |
+| `*ci` | `testarch/ci.md` | CI workflow, selective test scripts, secrets checklist | Platform-aware (GitHub Actions default) |
+| `*risk-profile` | `testarch/risk-profile.md` | Probability × impact matrix, mitigations, gate snippet | Grounded in PRD/architecture evidence |
+| `*test-design` | `testarch/test-design.md` | Scenario-to-level/priorities tables, coverage guidance | Aligns with risk profile and priority matrix |
+| `*trace` | `testarch/trace-requirements.md` | Coverage matrix, recommendations, gate snippet | Requires access to story/tests repositories |
+| `*nfr-assess` | `testarch/nfr-assess.md` | NFR assessment report with actions | Focus on security/performance/reliability |
+| `*gate` | `testarch/tea-gate.md` | Gate YAML + summary (PASS/CONCERNS/FAIL/WAIVED) | Deterministic decision rules + rationale |
+| `*review-gate` | `bmm/tasks/review-story.md` | Legacy story review workflow (Risk Aware Results) | Use only when legacy gate format required |
+
+<details>
+<summary>Command Guidance & Context Loading</summary>
+
+- Each task reads one row from `tea-commands.csv` via `command_key`, expanding pipe-delimited (`|`) values into checklists.
+- Keep CSV rows lightweight; place in-depth heuristics in `tea-knowledge.md` and reference via `knowledge_tags`.
+- If the CSV grows substantially, consider splitting into scoped registries (e.g., planning vs execution) or upgrading to Markdown tables for humans.
+- `tea-knowledge.md` encapsulates Murat’s philosophy—update both CSV and knowledge file together to avoid drift.
+
+</details>
+
+## Engagement Playbooks
+
+- **Greenfield Launch:** Follow the greenfield cheat sheet end-to-end—share planning artifacts up front and finish with the release row (refresh risk/design, rerun `*trace`, run `*gate`).
+- **Brownfield Enhancement:** Use the brownfield table; baseline with `*trace`, plan remediation, and complete the release row (including `*nfr-assess` when applicable).
+- **Enterprise / Compliance:** Add `*ci` early, enforce `*atdd`, and rely on the release row for audit-ready outputs (refresh risk/design, rerun `*trace`/`*automate`, log `*gate`).
+
+## Worked Example – “Atlas Payments” Brownfield Story
+
+1. **Context Refresh:** Analyst reruns `*product-brief`; PM executes `*plan-project` to update PRD, analysis, and `epics.md`; Architect triggers `*solution-architecture` capturing legacy payment flows.
+2. **Baseline Coverage:** TEA executes `*trace` to record current coverage in `docs/qa/assessments/atlas-payment-trace.md`.
+3. **Risk & Design:** `*risk-profile` flags settlement edge cases; `*test-design` allocates new API/E2E scenarios with P0 priorities.
+4. **Story Prep:** Scrum Master generates `stories/story-1.1.md` via `*create-story`, automatically pulling updated context.
+5. **ATDD First:** TEA runs `*atdd`, producing failing Playwright specs under `tests/e2e/payments/` plus an implementation checklist.
+6. **Post-Implementation:** TEA applies `*automate`, re-runs `*trace`, performs `*nfr-assess` to validate SLAs, and closes with `*gate` marking PASS with follow-ups.
+
+## Appendix
+
+- **Legacy Command Decomposition:** The historical `*review` flow is retired; coverage now handled by `*trace`, deep analysis by `*risk-profile`/`*test-design`/`*nfr-assess`, and gating by `*gate`.
+- **Supporting Knowledge:**
+  - `tea-knowledge.md` – Murat’s testing philosophy, heuristics, and risk scales.
+  - `test-levels-framework.md` – Decision matrix for unit/integration/E2E selection.
+  - `test-priorities-matrix.md` – Priority (P0–P3) criteria and target coverage percentages.
+- **Visual Aids:** Coordinate with module maintainers if a flowchart or diagram should accompany these cheat sheets for downstream docs.
