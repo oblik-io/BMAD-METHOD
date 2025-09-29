@@ -34,7 +34,7 @@ last-redoc-date: 2025-09-30
 | Story Prep | - | Scrum Master `*create-story`, `*story-context` | Story markdown + context XML |
 | Implementation | (Optional) Trigger `*atdd` before dev to supply failing tests + checklist | Implement story guided by ATDD checklist | Failing acceptance/component tests + implementation checklist |
 | Post-Dev | Execute `*automate`, re-run `*trace` | Address recommendations, update code/tests | Regression specs, refreshed coverage matrix |
-| Release | Refresh `*risk-profile`/`*test-design` if scope changed, run `*gate` | Confirm Definition of Done, share release notes | Gate YAML + release summary (owners, waivers) |
+| Release | Run `*trace`, `*automate`, `*gate` | Confirm Definition of Done, share release notes | Gate YAML + release summary (owners, waivers) |
 
 <details>
 <summary>Execution Notes</summary>
@@ -43,7 +43,7 @@ last-redoc-date: 2025-09-30
 - `*risk-profile` grounds risk scores in PRD/architecture evidence (Probability × Impact with mitigation plan).
 - `*test-design` maps acceptance criteria across unit/integration/E2E levels using the priority matrix.
 - Use `*atdd` before coding when the team can adopt ATDD; share its checklist with the dev agent.
-- Post-implementation, keep `*trace` current, expand coverage with `*automate`, and finish with `*gate` after refreshing risk/design artifacts if anything shifted.
+- Post-implementation, keep `*trace` current, expand coverage with `*automate`, and finish with `*gate`.
 
 </details>
 
@@ -57,7 +57,7 @@ last-redoc-date: 2025-09-30
 | Story Prep | - | Scrum Master `*create-story` | Updated story markdown |
 | Implementation | (Optional) Run `*atdd` before dev | Implement story, referencing checklist/tests | Failing acceptance tests + implementation checklist |
 | Post-Dev | Apply `*automate`, re-run `*trace`, trigger `*nfr-assess` if needed | Resolve gaps, update docs/tests | Regression specs, refreshed coverage matrix, NFR report |
-| Release | Refresh `*risk-profile`/`*test-design` if scope changed, run `*gate` | Product Owner `*assess-project-ready`, share release notes | Gate YAML + release summary |
+| Release | Run `*trace`, `*automate`, `*gate` | Product Owner `*assess-project-ready`, share release notes | Gate YAML + release summary |
 
 <details>
 <summary>Execution Notes</summary>
@@ -65,7 +65,7 @@ last-redoc-date: 2025-09-30
 - Lead with `*trace` so remediation plans target true coverage gaps.
 - `*risk-profile` + `*test-design` should highlight regression hotspots and P0 scenarios.
 - Use `*atdd` when stories benefit from ATDD; otherwise proceed to implementation and rely on post-dev automation.
-- After development, expand coverage with `*automate`, re-run `*trace`, and close with `*gate` (including `*nfr-assess` where infrastructure/perf changed).
+- After development, expand coverage with `*automate`, re-run `*trace`, and close with `*gate` (include `*nfr-assess` when infrastructure/perf changed).
 - Product Owner `*assess-project-ready` confirms the team has artifacts before handoff or release.
 
 </details>
@@ -78,14 +78,14 @@ last-redoc-date: 2025-09-30
 | Quality Planning | Run `*framework`, `*risk-profile`, `*test-design`, `*nfr-assess` | Review guidance, align compliance requirements | Harness scaffold, risk + NFR documentation |
 | Pipeline Enablement | Configure `*ci` | Coordinate secrets, pipeline approvals | `.github/workflows/test.yml`, helper scripts |
 | Execution | Enforce `*atdd`, `*automate`, `*trace` per story | Implement stories, resolve TEA findings | Tests, fixtures, coverage matrices |
-| Release | Refresh `*risk-profile`/`*test-design`, rerun `*trace`, `*automate`, `*gate` | Capture sign-offs, archive artifacts | Updated assessments, gate YAML, audit trail |
+| Release | Run `*trace`, `*automate`, `*gate` | Capture sign-offs, archive artifacts | Updated assessments, gate YAML, audit trail |
 
 <details>
 <summary>Execution Notes</summary>
 
 - Use `*atdd` for every story when feasible so acceptance tests lead implementation in regulated environments.
 - `*ci` scaffolds selective testing scripts, burn-in jobs, caching, and notifications for long-running suites.
-- Prior to release, refresh planning artifacts, rerun coverage (`*trace`, `*automate`), and formalize the decision in `*gate`; store everything for audits.
+- Prior to release, rerun coverage (`*trace`, `*automate`) and formalize the decision in `*gate`; store everything for audits.
 
 </details>
 
@@ -101,8 +101,7 @@ last-redoc-date: 2025-09-30
 | `*test-design` | `testarch/test-design.md` | Scenario-to-level/priorities tables, coverage guidance | Aligns with risk profile and priority matrix |
 | `*trace` | `testarch/trace-requirements.md` | Coverage matrix, recommendations, gate snippet | Requires access to story/tests repositories |
 | `*nfr-assess` | `testarch/nfr-assess.md` | NFR assessment report with actions | Focus on security/performance/reliability |
-| `*gate` | `testarch/tea-gate.md` | Gate YAML + summary (PASS/CONCERNS/FAIL/WAIVED) | Deterministic decision rules + rationale |
-| `*review-gate` | `bmm/tasks/review-story.md` | Legacy story review workflow (Risk Aware Results) | Use only when legacy gate format required |
+| `*gate` | `testarch/gate.md` | Gate YAML + summary (PASS/CONCERNS/FAIL/WAIVED) | Deterministic decision rules + rationale |
 
 <details>
 <summary>Command Guidance & Context Loading</summary>
@@ -116,9 +115,9 @@ last-redoc-date: 2025-09-30
 
 ## Engagement Playbooks
 
-- **Greenfield Launch:** Follow the greenfield cheat sheet end-to-end—share planning artifacts up front and finish with the release row (refresh risk/design, rerun `*trace`, run `*gate`).
-- **Brownfield Enhancement:** Use the brownfield table; baseline with `*trace`, plan remediation, and complete the release row (including `*nfr-assess` when applicable).
-- **Enterprise / Compliance:** Add `*ci` early, enforce `*atdd`, and rely on the release row for audit-ready outputs (refresh risk/design, rerun `*trace`/`*automate`, log `*gate`).
+- **Greenfield Launch:** Follow the greenfield cheat sheet end-to-end—share planning artifacts up front and finish with the release row (rerun `*trace`, `*automate`, run `*gate`).
+- **Brownfield Enhancement:** Use the brownfield table; baseline with `*trace`, plan remediation, and complete the release row (rerun `*trace`, `*automate`, run `*gate`, plus `*nfr-assess` when needed).
+- **Enterprise / Compliance:** Add `*ci` early, enforce `*atdd`, and rely on the release row for audit-ready outputs (rerun `*trace`, `*automate`, log `*gate`).
 
 ## Worked Example – “Atlas Payments” Brownfield Story
 
