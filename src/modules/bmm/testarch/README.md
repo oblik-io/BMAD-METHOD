@@ -30,18 +30,17 @@ last-redoc-date: 2025-09-30
 | Phase | Test Architect | Dev / Team | Outputs |
 | --- | --- | --- | --- |
 | Setup | - | Analyst `*product-brief`, PM `*plan-project`, Architect `*solution-architecture` | `{output_folder}/product-brief*.md`, `PRD.md`, `epics.md`, `solution-architecture.md` |
-| Pre-Implementation | Run `*framework` (if harness missing), `*risk-profile`, `*test-design` | Review risk/design guidance, align backlog | Test scaffold, risk memo, test design strategy |
+| Pre-Implementation | Run `*framework` (if harness missing) and `*test-design` | Review risk/design guidance, align backlog | Test scaffold, risk memo, test design strategy |
 | Story Prep | - | Scrum Master `*create-story`, `*story-context` | Story markdown + context XML |
-| Implementation | (Optional) Trigger `*atdd` before dev to supply failing tests + checklist | Implement story guided by ATDD checklist | Failing acceptance/component tests + implementation checklist |
+| Implementation | (Optional) Trigger `*atdd` before dev to supply failing tests + checklist | Implement story guided by ATDD checklist | Failing acceptance tests + implementation checklist |
 | Post-Dev | Execute `*automate`, re-run `*trace` | Address recommendations, update code/tests | Regression specs, refreshed coverage matrix |
-| Release | Run `*trace`, `*automate`, `*gate` | Confirm Definition of Done, share release notes | Gate YAML + release summary (owners, waivers) |
+| Release | Run `*gate` | Confirm Definition of Done, share release notes | Gate YAML + release summary (owners, waivers) |
 
 <details>
 <summary>Execution Notes</summary>
 
 - Run `*framework` only once per repo or when modern harness support is missing.
-- `*risk-profile` grounds risk scores in PRD/architecture evidence (Probability × Impact with mitigation plan).
-- `*test-design` maps acceptance criteria across unit/integration/E2E levels using the priority matrix.
+- `*test-design` handles risk scoring, mitigations, and scenario planning in one pass.
 - Use `*atdd` before coding when the team can adopt ATDD; share its checklist with the dev agent.
 - Post-implementation, keep `*trace` current, expand coverage with `*automate`, and finish with `*gate`.
 
@@ -53,17 +52,17 @@ last-redoc-date: 2025-09-30
 | --- | --- | --- | --- |
 | Refresh Context | - | Analyst/PM/Architect rerun planning workflows | Updated planning artifacts in `{output_folder}` |
 | Baseline Coverage | Run `*trace` to inventory existing tests | Review matrix, flag hotspots | Coverage matrix + initial gate snippet |
-| Risk Targeting | Execute `*risk-profile`, `*test-design` | Align remediation/backlog priorities | Brownfield risk memo + scenario matrix |
+| Risk Targeting | Run `*test-design` | Align remediation/backlog priorities | Brownfield risk memo + scenario matrix |
 | Story Prep | - | Scrum Master `*create-story` | Updated story markdown |
 | Implementation | (Optional) Run `*atdd` before dev | Implement story, referencing checklist/tests | Failing acceptance tests + implementation checklist |
 | Post-Dev | Apply `*automate`, re-run `*trace`, trigger `*nfr-assess` if needed | Resolve gaps, update docs/tests | Regression specs, refreshed coverage matrix, NFR report |
-| Release | Run `*trace`, `*automate`, `*gate` | Product Owner `*assess-project-ready`, share release notes | Gate YAML + release summary |
+| Release | Run `*gate` | Product Owner `*assess-project-ready`, share release notes | Gate YAML + release summary |
 
 <details>
 <summary>Execution Notes</summary>
 
 - Lead with `*trace` so remediation plans target true coverage gaps.
-- `*risk-profile` + `*test-design` should highlight regression hotspots and P0 scenarios.
+- `*test-design` should highlight regression hotspots, mitigations, and P0 scenarios.
 - Use `*atdd` when stories benefit from ATDD; otherwise proceed to implementation and rely on post-dev automation.
 - After development, expand coverage with `*automate`, re-run `*trace`, and close with `*gate` (include `*nfr-assess` when infrastructure/perf changed).
 - Product Owner `*assess-project-ready` confirms the team has artifacts before handoff or release.
@@ -75,10 +74,10 @@ last-redoc-date: 2025-09-30
 | Phase | Test Architect | Dev / Team | Outputs |
 | --- | --- | --- | --- |
 | Strategic Planning | - | Analyst/PM/Architect standard workflows | Enterprise-grade PRD, epics, architecture |
-| Quality Planning | Run `*framework`, `*risk-profile`, `*test-design`, `*nfr-assess` | Review guidance, align compliance requirements | Harness scaffold, risk + NFR documentation |
+| Quality Planning | Run `*framework`, `*test-design`, `*nfr-assess` | Review guidance, align compliance requirements | Harness scaffold, risk + coverage plan, NFR documentation |
 | Pipeline Enablement | Configure `*ci` | Coordinate secrets, pipeline approvals | `.github/workflows/test.yml`, helper scripts |
 | Execution | Enforce `*atdd`, `*automate`, `*trace` per story | Implement stories, resolve TEA findings | Tests, fixtures, coverage matrices |
-| Release | Run `*trace`, `*automate`, `*gate` | Capture sign-offs, archive artifacts | Updated assessments, gate YAML, audit trail |
+| Release | Run `*gate` | Capture sign-offs, archive artifacts | Updated assessments, gate YAML, audit trail |
 
 <details>
 <summary>Execution Notes</summary>
@@ -94,11 +93,10 @@ last-redoc-date: 2025-09-30
 | Command | Task File | Primary Outputs | Notes |
 | --- | --- | --- | --- |
 | `*framework` | `testarch/framework.md` | Playwright/Cypress scaffold, `.env.example`, `.nvmrc`, sample specs | Use when no production-ready harness exists |
-| `*atdd` | `testarch/atdd.md` | Failing acceptance/component tests, implementation checklist | Requires approved story + harness |
+| `*atdd` | `testarch/atdd.md` | Failing acceptance tests, implementation checklist | Requires approved story + harness |
 | `*automate` | `testarch/automate.md` | Prioritized specs, fixtures, README/script updates, DoD summary | Avoid duplicate coverage (see priority matrix) |
 | `*ci` | `testarch/ci.md` | CI workflow, selective test scripts, secrets checklist | Platform-aware (GitHub Actions default) |
-| `*risk-profile` | `testarch/risk-profile.md` | Probability × impact matrix, mitigations, gate snippet | Grounded in PRD/architecture evidence |
-| `*test-design` | `testarch/test-design.md` | Scenario-to-level/priorities tables, coverage guidance | Aligns with risk profile and priority matrix |
+| `*test-design` | `testarch/test-design.md` | Combined risk assessment, mitigation plan, and coverage strategy | Handles risk scoring and test design in one pass |
 | `*trace` | `testarch/trace-requirements.md` | Coverage matrix, recommendations, gate snippet | Requires access to story/tests repositories |
 | `*nfr-assess` | `testarch/nfr-assess.md` | NFR assessment report with actions | Focus on security/performance/reliability |
 | `*gate` | `testarch/gate.md` | Gate YAML + summary (PASS/CONCERNS/FAIL/WAIVED) | Deterministic decision rules + rationale |
@@ -115,22 +113,22 @@ last-redoc-date: 2025-09-30
 
 ## Engagement Playbooks
 
-- **Greenfield Launch:** Follow the greenfield cheat sheet end-to-end—share planning artifacts up front and finish with the release row (rerun `*trace`, `*automate`, run `*gate`).
-- **Brownfield Enhancement:** Use the brownfield table; baseline with `*trace`, plan remediation, and complete the release row (rerun `*trace`, `*automate`, run `*gate`, plus `*nfr-assess` when needed).
-- **Enterprise / Compliance:** Add `*ci` early, enforce `*atdd`, and rely on the release row for audit-ready outputs (rerun `*trace`, `*automate`, log `*gate`).
+- **Greenfield Launch:** Follow the greenfield cheat sheet end-to-end—share planning artifacts up front and finish with the release row (`*gate`).
+- **Brownfield Enhancement:** Use the brownfield table; baseline with `*trace`, plan remediation, and complete the release row (`*gate`, plus `*nfr-assess` when needed).
+- **Enterprise / Compliance:** Add `*ci` early, enforce `*atdd`, and rely on the release row for audit-ready outputs (`*gate`).
 
 ## Worked Example – “Atlas Payments” Brownfield Story
 
 1. **Context Refresh:** Analyst reruns `*product-brief`; PM executes `*plan-project` to update PRD, analysis, and `epics.md`; Architect triggers `*solution-architecture` capturing legacy payment flows.
 2. **Baseline Coverage:** TEA executes `*trace` to record current coverage in `docs/qa/assessments/atlas-payment-trace.md`.
-3. **Risk & Design:** `*risk-profile` flags settlement edge cases; `*test-design` allocates new API/E2E scenarios with P0 priorities.
+3. **Risk & Design:** `*test-design` flags settlement edge cases, plans mitigations, and allocates new API/E2E scenarios with P0 priorities.
 4. **Story Prep:** Scrum Master generates `stories/story-1.1.md` via `*create-story`, automatically pulling updated context.
 5. **ATDD First:** TEA runs `*atdd`, producing failing Playwright specs under `tests/e2e/payments/` plus an implementation checklist.
 6. **Post-Implementation:** TEA applies `*automate`, re-runs `*trace`, performs `*nfr-assess` to validate SLAs, and closes with `*gate` marking PASS with follow-ups.
 
 ## Appendix
 
-- **Legacy Command Decomposition:** The historical `*review` flow is retired; coverage now handled by `*trace`, deep analysis by `*risk-profile`/`*test-design`/`*nfr-assess`, and gating by `*gate`.
+- **Legacy Command Decomposition:** The historical `*review` flow is retired; coverage now handled by `*trace`, deep analysis by `*test-design`/`*nfr-assess`, and gating by `*gate`.
 - **Supporting Knowledge:**
   - `tea-knowledge.md` – Murat’s testing philosophy, heuristics, and risk scales.
   - `test-levels-framework.md` – Decision matrix for unit/integration/E2E selection.
