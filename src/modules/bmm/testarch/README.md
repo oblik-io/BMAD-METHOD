@@ -27,14 +27,14 @@ last-redoc-date: 2025-09-30
 
 ### Greenfield Feature Launch (Level 2)
 
-| Phase | Test Architect | Dev / Team | Outputs |
-| --- | --- | --- | --- |
-| Setup | - | Analyst `*product-brief`, PM `*plan-project`, Architect `*solution-architecture` | `{output_folder}/product-brief*.md`, `PRD.md`, `epics.md`, `solution-architecture.md` |
-| Pre-Implementation | Run `*framework` (if harness missing) and `*test-design` | Review risk/design guidance, align backlog | Test scaffold, risk memo, test design strategy |
-| Story Prep | - | Scrum Master `*create-story`, `*story-context` | Story markdown + context XML |
-| Implementation | (Optional) Trigger `*atdd` before dev to supply failing tests + checklist | Implement story guided by ATDD checklist | Failing acceptance tests + implementation checklist |
-| Post-Dev | Execute `*automate`, re-run `*trace` | Address recommendations, update code/tests | Regression specs, refreshed coverage matrix |
-| Release | Run `*gate` | Confirm Definition of Done, share release notes | Gate YAML + release summary (owners, waivers) |
+| Phase              | Test Architect                                                            | Dev / Team                                                                       | Outputs                                                                               |
+| ------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Setup              | -                                                                         | Analyst `*product-brief`, PM `*plan-project`, Architect `*solution-architecture` | `{output_folder}/product-brief*.md`, `PRD.md`, `epics.md`, `solution-architecture.md` |
+| Pre-Implementation | Run `*framework` (if harness missing) and `*test-design`                  | Review risk/design guidance, align backlog                                       | Test scaffold, risk memo, test design strategy                                        |
+| Story Prep         | -                                                                         | Scrum Master `*create-story`, `*story-context`                                   | Story markdown + context XML                                                          |
+| Implementation     | (Optional) Trigger `*atdd` before dev to supply failing tests + checklist | Implement story guided by ATDD checklist                                         | Failing acceptance tests + implementation checklist                                   |
+| Post-Dev           | Execute `*automate`, re-run `*trace`                                      | Address recommendations, update code/tests                                       | Regression specs, refreshed coverage matrix                                           |
+| Release            | Run `*gate`                                                               | Confirm Definition of Done, share release notes                                  | Gate YAML + release summary (owners, waivers)                                         |
 
 <details>
 <summary>Execution Notes</summary>
@@ -48,15 +48,15 @@ last-redoc-date: 2025-09-30
 
 ### Brownfield Feature Enhancement (Level 2–3)
 
-| Phase | Test Architect | Dev / Team | Outputs |
-| --- | --- | --- | --- |
-| Refresh Context | - | Analyst/PM/Architect rerun planning workflows | Updated planning artifacts in `{output_folder}` |
-| Baseline Coverage | Run `*trace` to inventory existing tests | Review matrix, flag hotspots | Coverage matrix + initial gate snippet |
-| Risk Targeting | Run `*test-design` | Align remediation/backlog priorities | Brownfield risk memo + scenario matrix |
-| Story Prep | - | Scrum Master `*create-story` | Updated story markdown |
-| Implementation | (Optional) Run `*atdd` before dev | Implement story, referencing checklist/tests | Failing acceptance tests + implementation checklist |
-| Post-Dev | Apply `*automate`, re-run `*trace`, trigger `*nfr-assess` if needed | Resolve gaps, update docs/tests | Regression specs, refreshed coverage matrix, NFR report |
-| Release | Run `*gate` | Product Owner `*assess-project-ready`, share release notes | Gate YAML + release summary |
+| Phase             | Test Architect                                                      | Dev / Team                                                 | Outputs                                                 |
+| ----------------- | ------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
+| Refresh Context   | -                                                                   | Analyst/PM/Architect rerun planning workflows              | Updated planning artifacts in `{output_folder}`         |
+| Baseline Coverage | Run `*trace` to inventory existing tests                            | Review matrix, flag hotspots                               | Coverage matrix + initial gate snippet                  |
+| Risk Targeting    | Run `*test-design`                                                  | Align remediation/backlog priorities                       | Brownfield risk memo + scenario matrix                  |
+| Story Prep        | -                                                                   | Scrum Master `*create-story`                               | Updated story markdown                                  |
+| Implementation    | (Optional) Run `*atdd` before dev                                   | Implement story, referencing checklist/tests               | Failing acceptance tests + implementation checklist     |
+| Post-Dev          | Apply `*automate`, re-run `*trace`, trigger `*nfr-assess` if needed | Resolve gaps, update docs/tests                            | Regression specs, refreshed coverage matrix, NFR report |
+| Release           | Run `*gate`                                                         | Product Owner `*assess-project-ready`, share release notes | Gate YAML + release summary                             |
 
 <details>
 <summary>Execution Notes</summary>
@@ -71,13 +71,13 @@ last-redoc-date: 2025-09-30
 
 ### Enterprise / Compliance Program (Level 4)
 
-| Phase | Test Architect | Dev / Team | Outputs |
-| --- | --- | --- | --- |
-| Strategic Planning | - | Analyst/PM/Architect standard workflows | Enterprise-grade PRD, epics, architecture |
-| Quality Planning | Run `*framework`, `*test-design`, `*nfr-assess` | Review guidance, align compliance requirements | Harness scaffold, risk + coverage plan, NFR documentation |
-| Pipeline Enablement | Configure `*ci` | Coordinate secrets, pipeline approvals | `.github/workflows/test.yml`, helper scripts |
-| Execution | Enforce `*atdd`, `*automate`, `*trace` per story | Implement stories, resolve TEA findings | Tests, fixtures, coverage matrices |
-| Release | Run `*gate` | Capture sign-offs, archive artifacts | Updated assessments, gate YAML, audit trail |
+| Phase               | Test Architect                                   | Dev / Team                                     | Outputs                                                   |
+| ------------------- | ------------------------------------------------ | ---------------------------------------------- | --------------------------------------------------------- |
+| Strategic Planning  | -                                                | Analyst/PM/Architect standard workflows        | Enterprise-grade PRD, epics, architecture                 |
+| Quality Planning    | Run `*framework`, `*test-design`, `*nfr-assess`  | Review guidance, align compliance requirements | Harness scaffold, risk + coverage plan, NFR documentation |
+| Pipeline Enablement | Configure `*ci`                                  | Coordinate secrets, pipeline approvals         | `.github/workflows/test.yml`, helper scripts              |
+| Execution           | Enforce `*atdd`, `*automate`, `*trace` per story | Implement stories, resolve TEA findings        | Tests, fixtures, coverage matrices                        |
+| Release             | Run `*gate`                                      | Capture sign-offs, archive artifacts           | Updated assessments, gate YAML, audit trail               |
 
 <details>
 <summary>Execution Notes</summary>
@@ -90,16 +90,16 @@ last-redoc-date: 2025-09-30
 
 ## Command Catalog
 
-| Command | Task File | Primary Outputs | Notes |
-| --- | --- | --- | --- |
-| `*framework` | `testarch/framework.md` | Playwright/Cypress scaffold, `.env.example`, `.nvmrc`, sample specs | Use when no production-ready harness exists |
-| `*atdd` | `testarch/atdd.md` | Failing acceptance tests, implementation checklist | Requires approved story + harness |
-| `*automate` | `testarch/automate.md` | Prioritized specs, fixtures, README/script updates, DoD summary | Avoid duplicate coverage (see priority matrix) |
-| `*ci` | `testarch/ci.md` | CI workflow, selective test scripts, secrets checklist | Platform-aware (GitHub Actions default) |
-| `*test-design` | `testarch/test-design.md` | Combined risk assessment, mitigation plan, and coverage strategy | Handles risk scoring and test design in one pass |
-| `*trace` | `testarch/trace-requirements.md` | Coverage matrix, recommendations, gate snippet | Requires access to story/tests repositories |
-| `*nfr-assess` | `testarch/nfr-assess.md` | NFR assessment report with actions | Focus on security/performance/reliability |
-| `*gate` | `testarch/gate.md` | Gate YAML + summary (PASS/CONCERNS/FAIL/WAIVED) | Deterministic decision rules + rationale |
+| Command        | Task File                        | Primary Outputs                                                      | Notes                                            |
+| -------------- | -------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------ |
+| `*framework`   | `testarch/framework.md`          | Playwright/Cypress scaffold, `.env.example`, `.nvmrc`, sample specs  | Use when no production-ready harness exists      |
+| `*atdd`        | `testarch/atdd.md`               | Failing Acceptance-Test Driven Development, implementation checklist | Requires approved story + harness                |
+| `*automate`    | `testarch/automate.md`           | Prioritized specs, fixtures, README/script updates, DoD summary      | Avoid duplicate coverage (see priority matrix)   |
+| `*ci`          | `testarch/ci.md`                 | CI workflow, selective test scripts, secrets checklist               | Platform-aware (GitHub Actions default)          |
+| `*test-design` | `testarch/test-design.md`        | Combined risk assessment, mitigation plan, and coverage strategy     | Handles risk scoring and test design in one pass |
+| `*trace`       | `testarch/trace-requirements.md` | Coverage matrix, recommendations, gate snippet                       | Requires access to story/tests repositories      |
+| `*nfr-assess`  | `testarch/nfr-assess.md`         | NFR assessment report with actions                                   | Focus on security/performance/reliability        |
+| `*gate`        | `testarch/gate.md`               | Gate YAML + summary (PASS/CONCERNS/FAIL/WAIVED)                      | Deterministic decision rules + rationale         |
 
 <details>
 <summary>Command Guidance & Context Loading</summary>
