@@ -64,6 +64,7 @@ output: |
 ## Error Handling
 
 If validation fails:
+
 - Report specific field with error
 - Suggest correction
 - Offer to re-run discovery
