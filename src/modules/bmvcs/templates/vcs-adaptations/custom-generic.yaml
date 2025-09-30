@@ -1,0 +1,117 @@
+# Custom/Generic VCS Template
+# For ~10% of users - SVN, Perforce, custom workflows, complex setups
+
+name: Custom/Generic VCS
+description: Adaptable template for non-standard version control systems
+optimized_for: "Legacy systems, enterprise custom workflows, specialized VCS tools"
+
+discovery_required:
+  questions_to_ask:
+    - "What commands do you use to save changes?"
+    - "How do you mark versions or milestones?"
+    - "How do team members share code?"
+    - "What's your review process?"
+    - "Any specific naming conventions?"
+
+artifact_patterns:
+  architecture:
+    structure: "flexible"
+    format: |
+      - Ask: "What format works best with your system?"
+      - Default to markdown if no preference
+      - Avoid Git-specific terminology
+    terminology_mapping:
+      - instead_of: "branch"
+        use: "workspace/stream/variant"
+      - instead_of: "commit"
+        use: "changeset/submission/check-in"
+      - instead_of: "merge"
+        use: "integrate/incorporate/combine"
+  stories:
+    format: |
+      - Ask about existing story/task tracking
+      - Adapt to their terminology
+      - Focus on deliverables, not process
+
+  code:
+    delivery: "aligned-to-vcs"
+    format: |
+      - Ask: "How should code changes be packaged?"
+      - Follow their existing patterns
+      - Document changes clearly
+
+agent_adaptations:
+  architect:
+    - Use VCS-neutral language
+    - Ask about their documentation standards
+    - Adapt diagrams to their tooling
+
+  pm:
+    - Align with existing requirement formats
+    - Use their project terminology
+    - No assumptions about workflow
+
+  sm:
+    - Match their task breakdown approach
+    - Use their status terminology
+    - Respect existing processes
+
+  dev:
+    - Follow their code organization
+    - Match their change description format
+    - No Git-specific suggestions
+
+  qa:
+    - Align with their testing workflow
+    - Use their defect tracking terms
+    - Respect existing procedures
+
+generic_terminology:
+  version_control_neutral:
+    - 'Use "Save changes" instead of "commit"'
+    - 'Use "Code variant" instead of "branch"'
+    - 'Use "Combine changes" instead of "merge"'
+    - 'Use "Change history" instead of "git log"'
+    - 'Use "Revert changes" instead of "git revert"'
+
+svn_specific:
+  if_detected: "Subversion/SVN"
+  adaptations:
+    - 'Use "revision" instead of "commit"'
+    - "Trunk/branches/tags structure"
+    - "Revision numbers, not hashes"
+    - '"svn update" before changes'
+
+perforce_specific:
+  if_detected: "Perforce"
+  adaptations:
+    - 'Use "changelist" instead of "commit"'
+    - "Workspace/depot terminology"
+    - "Client specs consideration"
+    - "Large binary file handling"
+
+adaptation_strategy: |
+  1. Never assume - always ask
+  2. Learn their terminology first
+  3. Mirror their existing patterns
+  4. Document in their style
+  5. Deliver in their format
+
+example_interactions:
+  discovering_process: |
+    BMAD: "How do you typically save and share code changes?"
+    User: "We use Perforce with numbered changelists"
+    BMAD: "Got it! I'll use Perforce terminology. Should I organize
+           changes as separate changelists or group them?"
+
+  adapting_output: |
+    Instead of: "Create a feature branch and commit changes"
+    Generate: "Create a workspace and submit a changelist"
+
+best_practices:
+  - "Listen more than suggest"
+  - "Use their language, not ours"
+  - "Ask when uncertain"
+  - "Document their process, don't change it"
+  - "Be flexible in output format"
+  - "Respect existing workflows"

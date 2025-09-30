@@ -1,0 +1,99 @@
+# Git Trunk-Based Development Template
+# For ~15% of users - mature CI/CD teams
+
+name: Trunk-Based Development
+description: Direct commits or very short-lived branches to main
+optimized_for: "Continuous deployment, mature DevOps teams, microservices"
+
+prerequisites:
+  required:
+    - "Comprehensive automated testing"
+    - "Feature flags system"
+    - "CI/CD pipeline with automatic rollback"
+  recommended:
+    - "Monitoring and alerting"
+    - "Blue-green or canary deployments"
+
+artifact_patterns:
+  architecture:
+    structure: "incrementally-evolving"
+    location: "docs/architecture/"
+    format: |
+      - Living documents that evolve with each change
+      - Feature flags documented inline
+      - ADRs (Architecture Decision Records) for changes
+
+  stories:
+    granularity: "tiny"
+    size: "Hours to 1 day maximum"
+    format: |
+      - Ultra-small, immediately mergeable
+      - Flag-gated feature development
+      - Located in docs/stories/current/
+
+  commits:
+    style: "atomic"
+    frequency: "Multiple per day"
+    examples:
+      - "add user email validation behind flag:validate-email"
+      - "refactor payment service for performance"
+      - "enable feature flag:new-checkout-flow for 10% users"
+    flag_convention: "flag:{feature-name}"
+
+agent_adaptations:
+  architect:
+    - Design for feature flags from start
+    - Document flag dependencies
+    - Create rollback procedures
+
+  pm:
+    - Define features as flag-gated increments
+    - Specify rollout percentages
+    - Create flag retirement timeline
+
+  sm:
+    - Generate tiny, atomic stories
+    - Each story deployable behind flag
+    - Include flag configuration in story
+
+  dev:
+    - Implement feature flags first
+    - Keep changes small and isolated
+    - Include flag cleanup tasks
+    - Commit directly or PR within hours
+
+  qa:
+    - Test with flags on/off
+    - Automated test coverage mandatory
+    - Performance testing for each change
+
+feature_flags:
+  naming: "kebab-case-descriptive"
+  structure: |
+    {
+      "flag": "new-user-dashboard",
+      "description": "Redesigned dashboard for users",
+      "rollout": {
+        "dev": 100,
+        "staging": 100,
+        "production": 10
+      },
+      "expiry": "2024-Q2"
+    }
+
+ci_cd_requirements:
+  pipeline: |
+    1. Automated tests (must pass)
+    2. Security scanning
+    3. Deploy to staging
+    4. Smoke tests
+    5. Deploy to production (behind flag)
+    6. Progressive rollout
+
+best_practices:
+  - "Main branch always deployable"
+  - "No long-lived branches (max 24 hours)"
+  - "Feature flags for all new functionality"
+  - "Small, frequent commits"
+  - "Pair programming or immediate review"
+  - "Rollback is always an option"
