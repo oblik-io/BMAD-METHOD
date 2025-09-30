@@ -1,0 +1,26 @@
+# BMVCS: BMad Version Control Suite Configuration
+
+code: bmvcs
+name: "BMVCS: Version Control Suite"
+default_selected: false # Optional module - install only if VCS adaptation needed
+
+prompt:
+  - "BMVCS adapts BMAD to your version control workflow"
+  - "Supports Git (GitHub Flow, GitFlow, Trunk-Based), SVN, Perforce, and no-VCS setups"
+  - "All paths are relative to project root, with no leading slash."
+
+# Variables from Core Config inserted:
+## user_name
+## communication_language
+## output_folder
+
+vcs_config_location:
+  prompt: "Where should VCS configuration be stored?"
+  default: ".bmad/vcs-config.yaml"
+  result: "{project-root}/{value}"
+
+run_vcs_discovery:
+  prompt: "Would you like to run VCS discovery now to detect your version control setup?"
+  default: true
+  result: "{value}"
+  type: boolean
