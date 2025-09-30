@@ -1,0 +1,298 @@
+# VCS Setup Workflow
+# Machine-readable workflow definition for BMAD agents
+
+name: VCS Discovery and Configuration
+version: 1.0.0
+type: initialization
+category: system_configuration
+
+trigger:
+  events:
+    - project_initialization
+    - vcs_config_missing
+    - vcs_config_expired
+    - user_request_reconfigure
+
+prerequisites:
+  required:
+    - bmad_core_accessible: true
+    - write_permissions: true
+  optional:
+    - git_available: false # Only needed for auto-detection
+
+steps:
+  - id: check_existing_config
+    type: conditional
+    action: check_file_exists
+    file: .bmad-core/vcs-config.yaml
+    on_exists: validate_config
+    on_missing: proceed_to_detection
+
+  - id: validate_config
+    type: validation
+    checks:
+      - cache_expired: check_timestamp
+      - valid_yaml: parse_yaml
+    on_valid: confirm_existing
+    on_invalid: proceed_to_detection
+
+  - id: confirm_existing
+    type: user_prompt
+    message: |
+      Found existing VCS configuration:
+      - System: {{type}}
+      - Workflow: {{workflow}}
+
+      Is this still accurate?
+    options:
+      - value: yes
+        action: exit_workflow
+      - value: no
+        action: proceed_to_detection
+
+  - id: proceed_to_detection
+    type: conditional
+    condition: is_git_repo AND git_available
+    on_true: attempt_auto_detection
+    on_false: manual_discovery
+
+  - id: attempt_auto_detection
+    type: detection
+    method: analyze_git_history
+    confidence_threshold: 0.7
+    on_high_confidence: present_detection
+    on_low_confidence: manual_discovery
+
+  - id: present_detection
+    type: user_prompt
+    message: |
+      🔍 Detected workflow: {{workflow}} ({{confidence}}% confidence)
+
+      Evidence:
+      {{#evidence}}
+      ✓ {{.}}
+      {{/evidence}}
+
+      Is this correct?
+    options:
+      - value: yes
+        action: save_configuration
+      - value: no
+        action: manual_discovery
+      - value: migration
+        action: handle_migration
+
+  - id: manual_discovery
+    type: user_prompt
+    message: "How does your team manage code versions?"
+    options:
+      - value: git_github
+        label: "Git with GitHub/GitLab/Bitbucket [MOST COMMON]"
+        action: git_workflow_selection
+      - value: git_corporate
+        label: "Git with corporate server"
+        action: git_workflow_selection
+      - value: other_vcs
+        label: "Other version control system"
+        action: other_vcs_selection
+      - value: no_vcs
+        label: "No version control needed"
+        action: configure_no_vcs
+      - value: custom_complex
+        label: "Custom/Complex setup"
+        action: custom_description
+
+  - id: git_workflow_selection
+    type: user_prompt
+    message: "Which Git workflow best describes your approach?"
+    options:
+      - value: github_flow
+        label: "GitHub Flow - Simple feature branches"
+        metadata:
+          workflow: github-flow
+          best_for: "Web apps, continuous deployment"
+        action: save_configuration
+      - value: gitflow
+        label: "GitFlow - Structured branches (develop, release, hotfix)"
+        metadata:
+          workflow: gitflow
+          best_for: "Versioned software, scheduled releases"
+        action: save_configuration
+      - value: trunk_based
+        label: "Trunk-Based - Direct commits or very short branches"
+        metadata:
+          workflow: trunk-based
+          best_for: "Mature CI/CD, experienced teams"
+        action: save_configuration
+      - value: not_sure
+        label: "Not sure - I'd like a recommendation"
+        action: clarifying_questions
+      - value: custom
+        label: "Custom Git workflow"
+        action: custom_description
+
+  - id: clarifying_questions
+    type: questionnaire
+    questions:
+      - id: team_size
+        text: "How many developers on your team?"
+        options:
+          - value: "1"
+            scoring: { trunk_based: 0.3 }
+          - value: "2-5"
+            scoring: { github_flow: 0.2 }
+          - value: "6+"
+            scoring: { gitflow: 0.2 }
+
+      - id: release_frequency
+        text: "How often do you release?"
+        options:
+          - value: daily
+            scoring: { trunk_based: 0.3 }
+          - value: weekly
+            scoring: { github_flow: 0.3 }
+          - value: monthly
+            scoring: { gitflow: 0.3 }
+
+      - id: multiple_versions
+        text: "Do you maintain multiple versions?"
+        options:
+          - value: yes
+            scoring: { gitflow: 0.4 }
+          - value: no
+            scoring: { github_flow: 0.2, trunk_based: 0.2 }
+
+    action: recommend_workflow
+
+  - id: recommend_workflow
+    type: calculation
+    method: sum_scores
+    output: recommended_workflow
+    action: present_recommendation
+
+  - id: present_recommendation
+    type: user_prompt
+    message: "Based on your answers, we recommend: {{recommended_workflow}}"
+    action: save_configuration
+
+  - id: other_vcs_selection
+    type: user_prompt
+    message: "Which version control system do you use?"
+    options:
+      - value: svn
+        label: "Subversion (SVN)"
+      - value: perforce
+        label: "Perforce"
+      - value: mercurial
+        label: "Mercurial"
+      - value: tfs
+        label: "Team Foundation Server (TFS)"
+      - value: other
+        label: "Other (please specify)"
+    action: save_configuration
+
+  - id: configure_no_vcs
+    type: user_prompt
+    message: |
+      Understood. BMAD will generate:
+      - Self-contained deliverables
+      - Date-versioned packages
+      - No commit messages or branch references
+
+      Is this a prototype or one-time project?
+    options:
+      - value: yes
+        action: save_configuration
+      - value: no
+        action: save_configuration
+
+  - id: custom_description
+    type: user_input
+    message: |
+      Please describe your version control setup:
+      (e.g., "Monorepo with custom tooling", "Multiple systems for different components")
+    input_type: text
+    action: save_configuration
+
+  - id: handle_migration
+    type: user_prompt
+    message: |
+      📊 Detected possible workflow change.
+      Which should BMAD optimize for?
+    options:
+      - value: new
+        label: "New approach (migration complete)"
+      - value: old
+        label: "Old approach (recent was exceptional)"
+      - value: both
+        label: "Both (still transitioning)"
+    action: save_configuration
+
+  - id: save_configuration
+    type: file_write
+    file: .bmad-core/vcs-config.yaml
+    template: |
+      vcs_config:
+        type: {{type}}
+        workflow: {{workflow}}
+        details: {{details}}
+
+        adaptations:
+          artifact_format: {{artifact_format}}
+          terminology: {{terminology}}
+          commit_style: {{commit_style}}
+
+        metadata:
+          configured_at: {{timestamp}}
+          method: {{method}}
+          confidence_score: {{confidence}}
+          cache_valid_until: {{cache_expiry}}
+
+    on_success: show_confirmation
+    on_error: handle_save_error
+
+  - id: show_confirmation
+    type: notification
+    message: |
+      ✅ VCS Configuration Saved!
+
+      System: {{type}}
+      Workflow: {{workflow}}
+
+      All BMAD agents will adapt to your workflow.
+    action: exit_workflow
+
+  - id: handle_save_error
+    type: error_handler
+    fallback: in_memory_config
+    message: |
+      ⚠️  Could not save configuration to file.
+      Will use configuration for this session only.
+
+outputs:
+  vcs_config:
+    type: object
+    location: .bmad-core/vcs-config.yaml
+    schema: VCS_CONFIG_SCHEMA_V1
+    cache_duration: 604800 # 7 days in seconds
+
+error_handling:
+  detection_fails:
+    action: fallback_to_manual
+    log_level: info
+
+  invalid_selection:
+    action: re_prompt
+    message: "Please select a valid option"
+
+  write_fails:
+    action: use_in_memory
+    warning: "Configuration not persisted"
+
+metadata:
+  author: BMAD BMVCS Module
+  documentation: ./instructions.md
+  checklist: ./checklist.md
+  related_tasks:
+    - ../../tasks/discover-vcs.md
+    - ../../tasks/validate-vcs-config.md
