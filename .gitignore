@@ -57,3 +57,6 @@ tools/template-test-generator/test-scenarios/
 # Test Install Output
 
 z*/
+
+# BMVCS Migration Planning (local only)
+.bmvcs-migration/
