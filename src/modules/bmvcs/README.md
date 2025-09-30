@@ -144,7 +144,7 @@ BMVCS integrates optionally with BMM (BMad Method) agents:
 - **[VCS Agnostic Principles](./docs/VCS_AGNOSTIC_PRINCIPLES.md)** - Philosophy and approach
 - **[VCS Agnostic Proposal](./docs/VCS_AGNOSTIC_PROPOSAL.md)** - Detailed implementation design
 - **[VCS Detection Confidence](./docs/VCS_DETECTION_CONFIDENCE.md)** - How discovery scoring works
-- **[Usage Examples](./docs/examples/vcs-adaptation-examples.md)** - Practical examples
+- **[Usage Examples](./examples/vcs-adaptation-examples.md)** - Practical examples
 
 ---
 
@@ -187,6 +187,16 @@ src/modules/bmvcs/
 
 ---
 
+## 📚 Documentation
+
+- **[VCS Agnostic Principles](./docs/VCS_AGNOSTIC_PRINCIPLES.md)** - Philosophy and approach
+- **[VCS Agnostic Proposal](./docs/VCS_AGNOSTIC_PROPOSAL.md)** - Detailed implementation design
+- **[VCS Detection Confidence](./docs/VCS_DETECTION_CONFIDENCE.md)** - How discovery scoring works
+- **[Usage Examples](./examples/vcs-adaptation-examples.md)** - Practical examples
+- **[Development Approach](./docs/DEVELOPMENT_APPROACH.md)** - Module creation strategy and BMB comparison
+
+---
+
 ## 🤝 Contributing
 
 BMVCS is part of the BMAD Method project. See [CONTRIBUTING.md](../../../CONTRIBUTING.md) for guidelines.
@@ -208,9 +218,9 @@ Same license as BMAD Method project.
 
 ## 🔗 Links
 
-- **BMAD Method:** https://github.com/bmad-code-org/BMAD-METHOD
-- **Issue Tracker:** https://github.com/bmad-code-org/BMAD-METHOD/issues
-- **Discord:** https://discord.gg/gk8jAdXWmj
+- **BMAD Method:** <https://github.com/bmad-code-org/BMAD-METHOD>
+- **Issue Tracker:** <https://github.com/bmad-code-org/BMAD-METHOD/issues>
+- **Discord:** <https://discord.gg/gk8jAdXWmj>
 
 ---
 
