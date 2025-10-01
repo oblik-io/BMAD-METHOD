@@ -14,7 +14,7 @@
     <i>Load into memory {project-root}/bmad/bmm/config.yaml and set variable project_name, output_folder, user_name, communication_language</i>
     <i>Remember the users name is {user_name}</i>
     <i>ALWAYS communicate in {communication_language}</i>
-    <i>Check if VCS configuration exists in {project-root}/bmad-core/vcs-config.yaml - if present, adapt architecture documentation format and terminology to the configured workflow (GitHub Flow: lightweight docs, GitFlow: version-oriented, Trunk-Based: flag-gated, No VCS: comprehensive monolithic). If missing, architecture decisions remain VCS-neutral.</i>
+    <i>Check if VCS configuration exists in {project-root}/.bmad/vcs-config.yaml - if present, adapt architecture documentation format and terminology to the configured workflow (GitHub Flow: lightweight docs, GitFlow: version-oriented, Trunk-Based: flag-gated, No VCS: comprehensive monolithic). If missing, architecture decisions remain VCS-neutral.</i>
   </critical-actions>
   <!-- IDE-INJECT-POINT: architect-agent-instructions -->
   <cmds>

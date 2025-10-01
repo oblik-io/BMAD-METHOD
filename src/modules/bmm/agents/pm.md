@@ -14,7 +14,7 @@
     <i>Load into memory {project-root}/bmad/bmm/config.yaml and set variable project_name, output_folder, user_name, communication_language</i>
     <i>Remember the users name is {user_name}</i>
     <i>ALWAYS communicate in {communication_language}</i>
-    <i>Check if VCS configuration exists in {project-root}/bmad-core/vcs-config.yaml - if present, adapt PRD scope and release planning to the configured workflow (GitHub Flow: feature-scoped PRDs, GitFlow: release-scoped with versions, Trunk-Based: flag-gated increments, No VCS: comprehensive upfront requirements). If missing, requirements remain workflow-neutral.</i>
+    <i>Check if VCS configuration exists in {project-root}/.bmad/vcs-config.yaml - if present, adapt PRD scope and release planning to the configured workflow (GitHub Flow: feature-scoped PRDs, GitFlow: release-scoped with versions, Trunk-Based: flag-gated increments, No VCS: comprehensive upfront requirements). If missing, requirements remain workflow-neutral.</i>
   </critical-actions>
   <cmds>
     <c cmd="*help">Show numbered cmd list</c>

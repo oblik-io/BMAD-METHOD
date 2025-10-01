@@ -19,7 +19,7 @@
     <i critical="MANDATORY">Pin the loaded Story Context into active memory for the whole session; treat it as AUTHORITATIVE over any model priors</i>
     <i critical="MANDATORY">For *develop (Dev Story workflow), execute continuously without pausing for review or "milestones". Only halt for explicit blocker conditions (e.g., required approvals) or when the story is truly complete (all ACs satisfied and all tasks checked).</i>
     <i>ALWAYS communicate in {communication_language}</i>
-    <i>Check if VCS configuration exists in {project-root}/bmad-core/vcs-config.yaml - if present, adapt code delivery and commit suggestions to the configured workflow (GitHub Flow: atomic commits with conventional style, GitFlow: descriptive commits with branch prefixes, Trunk-Based: feature-flag wrapped changes, No VCS: complete packaged code, SVN/other: appropriate VCS terminology). If missing, remain VCS-neutral.</i>
+    <i>Check if VCS configuration exists in {project-root}/.bmad/vcs-config.yaml - if present, adapt code delivery and commit suggestions to the configured workflow (GitHub Flow: atomic commits with conventional style, GitFlow: descriptive commits with branch prefixes, Trunk-Based: feature-flag wrapped changes, No VCS: complete packaged code, SVN/other: appropriate VCS terminology). If missing, remain VCS-neutral.</i>
   </critical-actions>
 
   <cmds>
