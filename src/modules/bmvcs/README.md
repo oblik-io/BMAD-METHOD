@@ -193,7 +193,6 @@ src/modules/bmvcs/
 - **[VCS Agnostic Proposal](./docs/VCS_AGNOSTIC_PROPOSAL.md)** - Detailed implementation design
 - **[VCS Detection Confidence](./docs/VCS_DETECTION_CONFIDENCE.md)** - How discovery scoring works
 - **[Usage Examples](./examples/vcs-adaptation-examples.md)** - Practical examples
-- **[Development Approach](./docs/DEVELOPMENT_APPROACH.md)** - Module creation strategy and BMB comparison
 
 ---
 
