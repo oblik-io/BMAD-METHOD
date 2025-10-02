@@ -60,3 +60,6 @@ z*/
 
 # BMVCS Migration Planning (local only)
 .bmvcs-migration/
+
+# AI Development Session Workspace (local only)
+dev-docs/
