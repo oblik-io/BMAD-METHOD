@@ -1,6 +1,6 @@
 # Create Story - Workflow Instructions (Spec-compliant, non-interactive by default)
 
-```xml
+````xml
 <critical>The workflow execution engine is governed by: {project_root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
 <critical>This workflow creates or updates the next user story from epics/PRD and architecture context, saving to the configured stories directory and optionally invoking Story Context.</critical>
@@ -16,6 +16,7 @@
   </step>
 
   <step n="2" goal="Discover and load source documents">
+    <action>If doc index exists at {{doc_index_file}}: READ it and parse the Machine Index JSON block (```json doc-index ... ```). Use it to resolve authoritative documents for this epic in priority: PRD (requirements), Architecture (HLA / architecture docs), Design (if relevant), Testing (strategy/standards). Fallback to direct file discovery below if any are missing.</action>
     <action>If {{tech_spec_file}} empty: derive from {{tech_spec_glob_template}} with {{epic_num}} and search {{tech_spec_search_dir}} recursively. If multiple, pick most recent by modified time.</action>
     <action>Build a prioritized document set for this epic:
       1) tech_spec_file (epic-scoped)
@@ -78,4 +79,4 @@
   </step>
 
 </workflow>
-```
+````

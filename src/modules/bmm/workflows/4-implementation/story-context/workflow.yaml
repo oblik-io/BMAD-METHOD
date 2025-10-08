@@ -25,6 +25,7 @@ variables:
   tech_spec_search_dir: "{project-root}/docs"
   tech_spec_glob_template: "tech-spec-epic-{{epic_id}}*.md"
   non_interactive: true
+  doc_index_file: "{project-root}/docs/doc-index.md" # Optional documentation index to accelerate discovery
 
 # Output configuration
 default_output_file: "{output_folder}/story-context-{{epic_id}}.{{story_id}}.xml"

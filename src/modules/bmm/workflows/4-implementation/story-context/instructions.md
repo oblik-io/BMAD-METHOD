@@ -1,6 +1,6 @@
 <!-- BMAD BMM Story Context Assembly Instructions (v6) -->
 
-```xml
+````xml
 <critical>The workflow execution engine is governed by: {project_root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
 <critical>This workflow assembles a Story Context XML for a single user story by extracting ACs, tasks, relevant docs/code, interfaces, constraints, and testing guidance to support implementation.</critical>
@@ -22,7 +22,8 @@
   </step>
 
   <step n="2" goal="Collect relevant documentation">
-    <action>Scan docs and src module docs for items relevant to this story's domain: search keywords from story title, ACs, and tasks<</action>
+    <action>If doc index exists at {{doc_index_file}}: READ it and parse the Machine Index JSON (```json doc-index ... ```). Use it to quickly pull relevant Requirements (PRD), Architecture (HLA, patterns), Testing & QA (strategy/standards), API (OpenAPI/REST), Data (schema/models) for this story based on title/AC keywords. Fallback to scanning if any are missing.</action>
+    <action>Scan docs and src module docs for items relevant to this story's domain: search keywords from story title, ACs, and tasks</action>
     <action>Prefer authoritative sources: PRD, Architecture, Front-end Spec, Testing standards, module-specific docs.</action>
     <template-output file="{default_output_file}">
       Add artifacts.docs entries with {path, title, section, snippet} (NO invention)
@@ -73,4 +74,4 @@
   </step>
 
 </workflow>
-```
+````

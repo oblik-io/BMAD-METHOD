@@ -41,3 +41,11 @@ agent:
       workflow: "{project-root}/bmad/bmm/workflows/4-implementation/retrospective/workflow.yaml"
       data: "{project-root}/bmad/_cfg/agent-party.xml"
       description: Facilitate team retrospective after epic/sprint
+
+    - trigger: doc-index
+      workflow: "{project-root}/bmad/bmm/workflows/documentation/doc-index/workflow.yaml"
+      description: Build or update categorized documentation index for quick reference
+
+    - trigger: update-doc-index
+      workflow: "{project-root}/bmad/bmm/workflows/documentation/doc-index/workflow.yaml"
+      description: Update documentation index (incremental)

@@ -21,6 +21,7 @@ variables:
   epics_file: "{output_folder}/epics.md" # Preferred source for epic/story breakdown
   prd_file: "{output_folder}/prd.md" # Fallback for requirements
   hla_file: "{output_folder}/high-level-architecture.md" # Optional architecture context
+  doc_index_file: "{project-root}/docs/doc-index.md" # Optional documentation index to accelerate discovery
   tech_spec_file: "" # Will be auto-discovered from docs as tech-spec-epic-{{epic_num}}-*.md
   tech_spec_search_dir: "{project-root}/docs"
   tech_spec_glob_template: "tech-spec-epic-{{epic_num}}*.md"

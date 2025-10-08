@@ -1,0 +1,147 @@
+# Documentation Index Workflow
+name: doc-index
+description: "Scan generated documentation and build/update a categorized, tagged Markdown index for quick referencing by workflows"
+author: "BMad"
+
+# Config and environment
+config_source: "{project-root}/bmad/bmm/config.yaml"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+# Workflow components
+installed_path: "{project-root}/bmad/bmm/workflows/documentation/doc-index"
+template: "{installed_path}/template.md"
+instructions: "{installed_path}/instructions.md"
+validation: "{installed_path}/checklist.md"
+
+# Variables and inputs
+variables:
+  scan_dirs: |
+    - "{project-root}/docs"
+    - "{output_folder}"
+  include_globs: |
+    - "**/*.md"
+    - "**/*.mdx"
+  exclude_globs: |
+    - "**/node_modules/**"
+    - "**/.git/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/.cache/**"
+    - "**/.vite/**"
+    - "**/bmad/**"
+    - "**/ide-info/**"
+  output_file: "{project-root}/docs/doc-index.md"
+  incremental: true
+  non_interactive: true
+  max_desc_words: 14
+  # Main archetypes and patterns used for categorization. Patterns are matched
+  # against lowercase filename and content signals.
+  category_patterns:
+    architecture:
+      - "solution-architecture"
+      - "infrastructure-architecture"
+      - "architecture"
+      - "tech-stack"
+      - "backend-architecture"
+      - "frontend-architecture"
+      - "data-models"
+      - "database-schema"
+      - "rest-api-spec"
+      - "external-apis"
+      - "system-context"
+    requirements:
+      - "prd"
+      - "product-requirements"
+      - "requirements"
+      - "brd"
+      - "specification"
+    design:
+      - "brain-storm"
+      - "brainstorm"
+      - "product-brief"
+      - "ux"
+      - "ui"
+      - "wireframe"
+      - "prototype"
+    testing:
+      - "testing-strategy"
+      - "test-strategy"
+      - "qa"
+      - "quality"
+      - "nfr"
+      - "non-functional"
+      - "coverage"
+    api:
+      - "openapi"
+      - "swagger"
+      - "api"
+      - "rest"
+      - "graphql"
+    data:
+      - "database"
+      - "schema"
+      - "er-"
+      - "data-model"
+    security:
+      - "security"
+      - "threat"
+      - "owasp"
+      - "secret"
+      - "auth"
+      - "authorization"
+      - "authentication"
+    development:
+      - "coding-standards"
+      - "contributing"
+      - "developer-guide"
+      - "setup"
+      - "local-dev"
+      - "styleguide"
+    operations:
+      - "devops"
+      - "infrastructure"
+      - "deployment"
+      - "ci"
+      - "cd"
+      - "observability"
+      - "monitoring"
+    decisions:
+      - "adr"
+      - "decision"
+      - "technical-decisions"
+    planning:
+      - "epics"
+      - "roadmap"
+      - "backlog"
+      - "stories"
+    knowledge:
+      - "kb"
+      - "knowledge-base"
+
+# Output
+default_output_file: "{output_file}"
+
+required_tools:
+  - list_files
+  - file_info
+  - read_file
+  - write_file
+  - glob
+  - search_repo
+  - parse_markdown
+
+tags:
+  - docs
+  - indexing
+  - bmad-v6
+  - utilities
+
+execution_hints:
+  interactive: false
+  autonomous: true
+  iterative: true
+
+web_bundle: false

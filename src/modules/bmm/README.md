@@ -45,6 +45,7 @@ The heart of BMM - structured workflows for the four development phases:
    - `review-story` - Quality validation
    - `correct-course` - Issue resolution
    - `retrospective` - Continuous improvement
+   - `doc-index` - Build/update categorized documentation index (post-doc generation)
 
 ### 👥 `/teams`
 
@@ -76,6 +77,9 @@ bmad dev develop
 
 # Review implementation
 bmad sr review-story
+
+# Build or update documentation index (after docs exist)
+bmad sm doc-index
 ```
 
 ## Key Concepts
