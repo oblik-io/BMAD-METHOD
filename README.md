@@ -1,40 +1,13 @@
 # BMAD-METHOD™: Universal AI Agent Framework
 
-> ## 🚨 **IMPORTANT VERSION ANNOUNCEMENT** 🚨
->
-> ### Current Stable: v4.x | Next Major: v6 Alpha
->
-> - **v4.x** - The current stable release version available via npm
-> - **v5** - Skipped (replaced by v6)
-> - **[v6-alpha](https://github.com/bmad-code-org/BMAD-METHOD/tree/v6-alpha)** - **NOW AVAILABLE FOR EARLY TESTING!**
->
-> ### 🧪 Try v6 Alpha (Early Adopters Only)
->
-> The next major version of BMAD-METHOD is now available for early experimentation and testing. This is a complete rewrite with significant architectural changes.
->
-> **⚠️ WARNING: v6-alpha is for early adopters who are comfortable with:**
->
-> - Potential breaking changes
-> - Daily updates and instability
-> - Incomplete features
-> - Experimental functionality
->
-> **📅 Timeline:** Official beta version will be merged mid-October 2025
->
-> **To try v6-alpha:**
->
-> ```bash
-> git clone https://github.com/bmad-code-org/BMAD-METHOD.git
-> cd BMAD-METHOD
-> git checkout v6-alpha
-> ```
->
-> ---
-
 [![Version](https://img.shields.io/npm/v/bmad-method?color=blue&label=version)](https://www.npmjs.com/package/bmad-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)](https://nodejs.org)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Community-7289da?logo=discord&logoColor=white)](https://discord.gg/gk8jAdXWmj)
+
+> ## 🚨 **IMPORTANT: This Branch is a Frozen snapshot of the V4 version of the BMad Method.** 🚨
+>
+> Updates will be made to continue support for critical patches or updates. New features generally will not be added to v4 unless critical for support of existing usage, in very rare instances.
 
 Foundations in Agentic Agile Driven Development, known as the Breakthrough Method of Agile AI-Driven Development, yet so much more. Transform any domain with specialized AI expertise: software development, entertainment, creative writing, business strategy to personal wellness just to name a few.
 
@@ -106,9 +79,9 @@ This makes it easy to benefit from the latest improvements, bug fixes, and new a
 
 ```bash
 npx bmad-method install
-# OR if you already have BMad installed:
+# OR if you already have BMad project itself cloned locally, from the folder of this repo:
 git pull
-npm run install:bmad
+npm run install:bmad # when prompted, enter the destination folder
 ```
 
 This single command handles:
@@ -157,29 +130,7 @@ BMAD™'s natural language framework works in ANY domain. Expansion packs provid
 
 ## Contributing
 
-**We're excited about contributions and welcome your ideas, improvements, and expansion packs!** 🎉
-
-📋 **[Read CONTRIBUTING.md](CONTRIBUTING.md)** - Complete guide to contributing, including guidelines, process, and requirements
-
-### Working with Forks
-
-When you fork this repository, CI/CD workflows are **disabled by default** to save resources. This is intentional and helps keep your fork clean.
-
-#### Need CI/CD in Your Fork?
-
-See our [Fork CI/CD Guide](.github/FORK_GUIDE.md) for instructions on enabling workflows in your fork.
-
-#### Contributing Workflow
-
-1. **Fork the repository** - Click the Fork button on GitHub
-2. **Clone your fork** - `git clone https://github.com/YOUR-USERNAME/BMAD-METHOD.git`
-3. **Create a feature branch** - `git checkout -b feature/amazing-feature`
-4. **Make your changes** - Test locally with `npm test`
-5. **Commit your changes** - `git commit -m 'feat: add amazing feature'`
-6. **Push to your fork** - `git push origin feature/amazing-feature`
-7. **Open a Pull Request** - CI/CD will run automatically on the PR
-
-Your contributions are tested when you submit a PR - no need to enable CI in your fork!
+If you are interested in contributing, please switch to the latest on main and contribute to the current version.
 
 ## License
 
