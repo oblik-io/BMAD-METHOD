@@ -208,6 +208,13 @@ async function promptInstallation() {
   console.log(chalk.bold.magenta('🚀 Universal AI Agent Framework for Any Domain'));
   console.log(chalk.bold.blue(`✨ Installer v${version}\n`));
 
+  // Deprecation notice for v4
+  console.log(chalk.yellow.bold('⚠️  You are installing BMad v4 (stable but frozen)'));
+  console.log(chalk.yellow('   v4 receives critical patches only - no new features\n'));
+  console.log(chalk.cyan('💡 Want the latest features? Try BMad v6 Alpha:'));
+  console.log(chalk.white('   npx bmad-method@alpha install'));
+  console.log(chalk.dim('   (Alpha is stable enough for testing)\n'));
+
   const answers = {};
 
   // Ask for installation directory first

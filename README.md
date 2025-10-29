@@ -1,13 +1,32 @@
-# BMAD-METHOD™: Universal AI Agent Framework
+# BMAD-METHOD™: Universal AI Agent Framework (v4 - Stable)
 
 [![Version](https://img.shields.io/npm/v/bmad-method?color=blue&label=version)](https://www.npmjs.com/package/bmad-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)](https://nodejs.org)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Community-7289da?logo=discord&logoColor=white)](https://discord.gg/gk8jAdXWmj)
 
-> ## 🚨 **IMPORTANT: This Branch is a Frozen snapshot of the V4 version of the BMad Method.** 🚨
+> ## 🚨 **v4 STABLE - NO NEW FEATURES** 🚨
 >
-> Updates will be made to continue support for critical patches or updates. New features generally will not be added to v4 unless critical for support of existing usage, in very rare instances.
+> This is the **stable, production-ready v4 version** of BMad Method. It will receive **critical patches only** - no new features will be added.
+>
+> **Install v4 Stable:** `npx bmad-method install`
+
+---
+
+## 🆕 Want to Try v6 Alpha?
+
+**BMad v6** is under active development with major improvements:
+
+- Scale-adaptive workflows (Levels 0-4)
+- Project-adaptive architecture
+- Enhanced module system (BMM, BMB, CIS)
+- Update-safe customization
+
+**[View v6 Documentation](https://github.com/bmad-code-org/BMAD-METHOD/tree/main)** | **Install:** `npx bmad-method@alpha install`
+
+> **Note:** v6 is in alpha - stable enough for testing but not production-ready yet.
+
+---
 
 Foundations in Agentic Agile Driven Development, known as the Breakthrough Method of Agile AI-Driven Development, yet so much more. Transform any domain with specialized AI expertise: software development, entertainment, creative writing, business strategy to personal wellness just to name a few.
 
@@ -51,43 +70,37 @@ This two-phase approach eliminates both **planning inconsistency** and **context
 - **[Understand the architecture](docs/core-architecture.md)** → Technical deep dive
 - **[Join the community](https://discord.gg/gk8jAdXWmj)** → Get help and share ideas
 
-## Important: Keep Your BMad Installation Updated
+## Important: Keep Your v4 Installation Updated
 
-**Stay up-to-date effortlessly!** If you already have BMAD-METHOD™ installed in your project, simply run:
+**Stay up-to-date with v4 patches!** If you already have BMAD-METHOD™ v4 installed in your project, run:
 
 ```bash
 npx bmad-method install
-# OR
-git pull
-npm run install:bmad
 ```
 
 This will:
 
 - ✅ Automatically detect your existing v4 installation
-- ✅ Update only the files that have changed and add new files
+- ✅ Update only the files that have changed (critical patches only)
 - ✅ Create `.bak` backup files for any custom modifications you've made
 - ✅ Preserve your project-specific configurations
 
-This makes it easy to benefit from the latest improvements, bug fixes, and new agents without losing your customizations!
+> **Remember:** v4 receives critical patches only. For new features, try [v6 alpha](#-want-to-try-v6-alpha).
 
-## Quick Start
+## Quick Start (v4 Stable)
 
-### One Command for Everything (IDE Installation)
+### One Command Installation
 
-**Just run one of these commands:**
+**Install v4 stable version:**
 
 ```bash
 npx bmad-method install
-# OR if you already have BMad project itself cloned locally, from the folder of this repo:
-git pull
-npm run install:bmad # when prompted, enter the destination folder
 ```
 
-This single command handles:
+This command handles:
 
-- **New installations** - Sets up BMad in your project
-- **Upgrades** - Updates existing installations automatically
+- **New installations** - Sets up BMad v4 in your project
+- **Upgrades** - Updates existing v4 installations with patches
 - **Expansion packs** - Installs any expansion packs you've added to package.json
 
 > **That's it!** Whether you're installing for the first time, upgrading, or adding expansion packs - these commands do everything.
@@ -103,10 +116,11 @@ This single command handles:
 5. **CRITICAL**: Talk to BMad Orchestrator in the web at ANY TIME (#bmad-orchestrator command) and ask it questions about how this all works!
 6. **When to move to the IDE**: Once you have your PRD, Architecture, optional UX and Briefs - its time to switch over to the IDE to shard your docs, and start implementing the actual code! See the [User guide](docs/user-guide.md) for more details
 
-### Alternative: Clone and Build
+### Alternative: Clone v4 Branch
 
 ```bash
-git clone https://github.com/bmadcode/bmad-method.git
+git clone -b V4 https://github.com/bmad-code-org/BMAD-METHOD.git
+cd BMAD-METHOD
 npm run install:bmad # build and install all to a destination folder
 ```
 
@@ -130,7 +144,7 @@ BMAD™'s natural language framework works in ANY domain. Expansion packs provid
 
 ## Contributing
 
-If you are interested in contributing, please switch to the latest on main and contribute to the current version.
+**v4 is frozen** - only critical patches accepted. For new features and contributions, please work on **[v6 (main branch)](https://github.com/bmad-code-org/BMAD-METHOD/tree/main)**.
 
 ## License
 
