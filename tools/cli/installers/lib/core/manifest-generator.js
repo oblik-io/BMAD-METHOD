@@ -714,8 +714,11 @@ class ManifestGenerator {
   async writeFilesManifest(cfgDir) {
     const csvPath = path.join(cfgDir, 'files-manifest.csv');
 
+    // Define expected columns for schema consistency
+    const expectedColumns = ['type', 'name', 'module', 'path', 'hash'];
+
     // Get preserved rows from existing CSV (module is column 2, 0-indexed)
-    const preservedRows = await this.getPreservedCsvRows(csvPath, 2);
+    const preservedRows = await this.getPreservedCsvRows(csvPath, 2, expectedColumns);
 
     // Create CSV header with hash column
     let csv = 'type,name,module,path,hash\n';
