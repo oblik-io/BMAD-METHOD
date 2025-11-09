@@ -1,686 +1,870 @@
-## [4.36.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.36.1...v4.36.2) (2025-08-10)
+# Changelog
 
-### Bug Fixes
-
-- align installer dependencies with root package versions for ESM compatibility ([#420](https://github.com/bmadcode/BMAD-METHOD/issues/420)) ([3f6b674](https://github.com/bmadcode/BMAD-METHOD/commit/3f6b67443d61ae6add98656374bed27da4704644))
-
-## [4.36.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.36.0...v4.36.1) (2025-08-09)
-
-### Bug Fixes
-
-- update Node.js version to 20 in release workflow and reduce Discord spam ([3f7e19a](https://github.com/bmadcode/BMAD-METHOD/commit/3f7e19a098155341a2b89796addc47b0623cb87a))
-
-# [4.36.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.3...v4.36.0) (2025-08-09)
-
-### Features
-
-- modularize flattener tool into separate components with improved project root detection ([#417](https://github.com/bmadcode/BMAD-METHOD/issues/417)) ([0fdbca7](https://github.com/bmadcode/BMAD-METHOD/commit/0fdbca73fc60e306109f682f018e105e2b4623a2))
-
-## [4.35.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.2...v4.35.3) (2025-08-06)
-
-### Bug Fixes
-
-- doc location improvement ([1676f51](https://github.com/bmadcode/BMAD-METHOD/commit/1676f5189ed057fa2d7facbd6a771fe67cdb6372))
-
-## [4.35.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.1...v4.35.2) (2025-08-06)
-
-### Bug Fixes
-
-- npx status check ([f7c2a4f](https://github.com/bmadcode/BMAD-METHOD/commit/f7c2a4fb6c454b17d250b85537129b01ffee6b85))
-
-## [4.35.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.0...v4.35.1) (2025-08-06)
-
-### Bug Fixes
-
-- npx hanging commands ([2cf322e](https://github.com/bmadcode/BMAD-METHOD/commit/2cf322ee0d9b563a4998c72b2c5eab259594739b))
-
-# [4.35.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.34.0...v4.35.0) (2025-08-04)
-
-### Features
-
-- add qwen-code ide support to bmad installer. ([#392](https://github.com/bmadcode/BMAD-METHOD/issues/392)) ([a72b790](https://github.com/bmadcode/BMAD-METHOD/commit/a72b790f3be6c77355511ace2d63e6bec4d751f1))
+## [Unreleased]
 
-# [4.34.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.33.1...v4.34.0) (2025-08-03)
+## [6.0.0-alpha.5]
 
-### Features
+**Release: November 4, 2025**
 
-- add KiloCode integration support to BMAD installer ([#390](https://github.com/bmadcode/BMAD-METHOD/issues/390)) ([dcebe91](https://github.com/bmadcode/BMAD-METHOD/commit/dcebe91d5ea68e69aa27183411a81639d444efd7))
+This alpha release represents a major refinement of BMM workflows, documentation accuracy, and the introduction of the revolutionary 3-track scale system. The focus is on workflow consistency, eliminating bloat, and providing accurate, reality-based guidance for modern AI-driven development.
 
-## [4.33.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.33.0...v4.33.1) (2025-07-29)
+### 🎯 3-Track Scale System - Revolutionary Simplification
 
-### Bug Fixes
-
-- dev agent yaml syntax for develop-story command ([#362](https://github.com/bmadcode/BMAD-METHOD/issues/362)) ([bcb3728](https://github.com/bmadcode/BMAD-METHOD/commit/bcb3728f8868c0f83bca3d61fbd7e15c4e114526))
-
-# [4.33.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.32.0...v4.33.0) (2025-07-28)
-
-### Features
-
-- version bump ([e9dd4e7](https://github.com/bmadcode/BMAD-METHOD/commit/e9dd4e7beb46d0c80df0cd65ae02d1867a56d7c1))
-
-# [4.32.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.31.0...v4.32.0) (2025-07-27)
-
-### Bug Fixes
-
-- Add package-lock.json to fix GitHub Actions dependency resolution ([cce7a75](https://github.com/bmadcode/BMAD-METHOD/commit/cce7a758a632053e26d143b678eb7963599b432d))
-- GHA fix ([62ccccd](https://github.com/bmadcode/BMAD-METHOD/commit/62ccccdc9e85f8621f63f99bd1ce0d14abe09783))
-
-### Features
-
-- Overhaul and Enhance 2D Unity Game Dev Expansion Pack ([#350](https://github.com/bmadcode/BMAD-METHOD/issues/350)) ([a7038d4](https://github.com/bmadcode/BMAD-METHOD/commit/a7038d43d18246f6aef175aa89ba059b7c94f61f))
-
-# [4.31.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.4...v4.31.0) (2025-07-20)
+**From 5 Levels to 3 Clear Tracks:**
 
-### Bug Fixes
+The BMM scale system has been dramatically simplified from a confusing 5-level hierarchy (Levels 0-4) to 3 intuitive, preference-driven tracks:
 
-- enhanced user guide with better diagrams ([c445962](https://github.com/bmadcode/BMAD-METHOD/commit/c445962f259cd7d84c47a896e7fda99e83a30c8d))
+- **Quick Flow** - Fast, lightweight development for small changes and quick iterations
+- **BMad Method** - Balanced approach for most development projects
+- **Enterprise Method** - Comprehensive methodology for large-scale, mission-critical systems
 
-### Features
+**Key Changes:**
 
-- Installation includes a getting started user guide with detailed mermaid diagram ([df57d77](https://github.com/bmadcode/BMAD-METHOD/commit/df57d772cac9f9010811e7e86a6433a0fe636a45))
+- Replaced `project_level` variable with `project_track` throughout all workflows
+- Updated 8 workflow path YAML files to reflect new track naming (removed level-based paths)
+- Simplified workflow-init to guide users based on preference, not artificial "levels"
+- Updated all documentation to reference tracks instead of levels
+- Eliminated confusing "target_scale" variable (no longer needed)
 
-## [4.30.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.3...v4.30.4) (2025-07-19)
+**Impact:**
 
-### Bug Fixes
+Users now choose development approach based on **project needs and team preference**, not arbitrary complexity levels. This aligns with how real teams actually work and removes decision paralysis.
 
-- docs ([8619006](https://github.com/bmadcode/BMAD-METHOD/commit/8619006c16731b99fa36b434d209a0c2caf2d998))
-- lint fix ([49e4897](https://github.com/bmadcode/BMAD-METHOD/commit/49e489701e55feac481806740ea54bebef042fba))
+**Documentation Updated:**
 
-## [4.30.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.2...v4.30.3) (2025-07-19)
+- `scale-adaptive-system.md` - Complete rewrite around 3-track methodology (756 line overhaul)
+- `quick-start.md` - Updated to reference tracks
+- `brownfield-guide.md` - Track-based guidance instead of level-based
+- `glossary.md` - New track definitions, removed level references
+- `workflow-status/init/instructions.md` - Major rewrite for track-based initialization (865 lines)
 
-### Bug Fixes
+### ✨ Workflow Modernization & Standardization
 
-- improve code in the installer to be more memory efficient ([849e428](https://github.com/bmadcode/BMAD-METHOD/commit/849e42871ab845098fd196217bce83e43c736b8a))
+**1. Elicitation System Modernization:**
 
-## [4.30.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.1...v4.30.2) (2025-07-17)
+- Removed legacy `<elicit-required />` XML tag from core workflow.xml
+- Replaced with explicit `<invoke-task halt="true">adv-elicit.xml</invoke-task>` pattern
+- More self-documenting and eliminates confusing indirection layer
+- Added strategic elicitation points across all planning workflows:
+  - **PRD:** After success criteria, scope, functional requirements, and final review
+  - **Create-Epics-And-Stories:** After epic proposals and each epic's stories
+  - **Architecture:** After decisions, structure, patterns, implementation patterns, and final doc
+- Updated audit-workflow to remove obsolete elicit-required tag scanning
 
-### Bug Fixes
+**2. Input Document Discovery Streamlined:**
 
-- remove z2 ([dcb36a9](https://github.com/bmadcode/BMAD-METHOD/commit/dcb36a9b44b6644f6b2723c9067abaa9b0bc1999))
+- Replaced verbose 19-line "Input Document Discovery" sections with single critical tag
+- New concise format: `<critical>Input documents specified in workflow.yaml input_file_patterns...</critical>`
+- Eliminates duplication (workflow.yaml already defines patterns - why repeat them?)
+- Updated across 6 workflows: PRD, create-epics-and-stories, architecture, tech-spec, UX, gate-check
+- **Saved ~114 lines of repeated bloat**
 
-## [4.30.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.0...v4.30.1) (2025-07-15)
+**3. Epic/Story Template Standardization:**
 
-### Bug Fixes
+- Replaced hardcoded 8-epic templates with clean repeating patterns using N/M variables
+- Added BDD-style acceptance criteria (Given/When/Then/And) for better clarity
+- Removed instructional bloat from templates (moved to instructions.md where it belongs)
+- **Principle:** Templates show OUTPUT structure, instructions show PROCESS
+- Applied to both create-epics-and-stories and tech-spec workflows
+- Templates now use HTML comments to clearly indicate repeating sections
 
-- added logo to installer, because why not... ([2cea37a](https://github.com/bmadcode/BMAD-METHOD/commit/2cea37aa8c1924ddf5aa476f4c312837f2615a70))
+**4. Workflow.yaml Pattern Consistency:**
 
-# [4.30.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.7...v4.30.0) (2025-07-15)
+- Standardized `input_file_patterns` across all workflows
+- Separated `recommended_inputs` (semantic WHAT) from `input_file_patterns` (file discovery WHERE)
+- Removed duplication between recommended_inputs file paths and input_file_patterns
+- Create-epics-and-stories now uses proper whole/sharded pattern like architecture workflow
+- Solutioning-gate-check cleaned up to use semantic descriptions not file paths
 
-### Features
+**Files Changed:** 18 files across core, planning, and solutioning workflows
 
-- installer is now VERY clear about IDE selection being a multiselect ([e24b6f8](https://github.com/bmadcode/BMAD-METHOD/commit/e24b6f84fd9e4ff4b99263019b5021ca2b145b2f))
+### 📚 Documentation Accuracy Overhaul
 
-## [4.29.7](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.6...v4.29.7) (2025-07-14)
+**Agent YAML as Source of Truth:**
 
-### Bug Fixes
+Fixed critical documentation inaccuracies by treating agent YAML files as the authoritative source:
 
-- bundle build ([0723eed](https://github.com/bmadcode/BMAD-METHOD/commit/0723eed88140e76146dfbfdddd49afe86e8522ee))
+**agents-guide.md Corrections:**
 
-## [4.29.6](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.5...v4.29.6) (2025-07-14)
+- Fixed Game Developer workflow names (dev-story → develop-story, added story-done)
+- Added agent name "Paige" to Technical Writer (matches naming pattern)
+- Corrected epic-tech-context ownership (Architect → SM agent across all docs)
+- Updated agent reference tables to reflect actual capabilities from YAML configs
 
-### Bug Fixes
+**workflows-implementation.md Corrections:**
 
-- improve agent task folowing in agressing cost saving ide model combos ([3621c33](https://github.com/bmadcode/BMAD-METHOD/commit/3621c330e65f328e7326f93a5fe27e65b08907e7))
+- Fixed epic-tech-context agent attribution in 3 locations (Architect → SM)
+- Updated multi-agent workflow ownership table
+- Aligned all workflow descriptions with actual agent YAML definitions
 
-## [4.29.5](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.4...v4.29.5) (2025-07-14)
+**Impact:** Zero hallucination risk - documentation now accurately reflects what agents can actually do.
 
-### Bug Fixes
+### 🏗️ Brownfield Development Reality Check
 
-- windows regex issue ([9f48c1a](https://github.com/bmadcode/BMAD-METHOD/commit/9f48c1a869a9cc54fb5e7d899c2af7a5cef70e10))
+**Rewrote brownfield-guide.md Phase 0 Section:**
 
-## [4.29.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.3...v4.29.4) (2025-07-14)
+Replaced oversimplified 3-scenario model with **real-world guidance** for messy brownfield projects:
 
-### Bug Fixes
+**New Scenarios (4 instead of 3):**
 
-- empty .roomodes, support Windows-style newlines in YAML block regex ([#311](https://github.com/bmadcode/BMAD-METHOD/issues/311)) ([551e30b](https://github.com/bmadcode/BMAD-METHOD/commit/551e30b65e1f04386f0bd0193f726828df684d5b))
+- **Scenario A:** No documentation → `document-project` workflow (existing)
+- **Scenario B:** Docs exist but massive/outdated/incomplete → **document-project** (NEW - very common case)
+- **Scenario C:** Good docs but massive files → **shard-doc → index-docs** (NEW - handles >500 line files)
+- **Scenario D:** Confirmed AI-optimized docs → Skip Phase 0 (correctly marked as RARE)
 
-## [4.29.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.2...v4.29.3) (2025-07-13)
+**Key Additions:**
 
-### Bug Fixes
+- Default recommendation: "Run document-project unless you have confirmed, trusted, AI-optimized docs"
+- Quality assessment checklist (current, AI-optimized, comprehensive, trusted)
+- Massive document handling guidance (>500 lines, 10+ sections triggers shard-doc)
+- Explicit explanation of why regenerating is better than indexing bad docs
+- Impact explanation: how outdated docs break AI workflows (token limits, wrong assumptions, broken integrations)
 
-- annoying YAML lint error ([afea271](https://github.com/bmadcode/BMAD-METHOD/commit/afea271e5e3b14a0da497e241b6521ba5a80b85b))
+**Principle:** "When in doubt, run document-project" - Better to spend 10-30 minutes generating fresh docs than waste hours debugging AI agents with bad documentation.
 
-## [4.29.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.1...v4.29.2) (2025-07-13)
+### 🚀 PM/UX Evolution for Enterprise Agentic Development
 
-### Bug Fixes
+**New Section: The Evolving Role of Product Managers & UX Designers**
 
-- add readme note about discord joining issues ([4ceaced](https://github.com/bmadcode/BMAD-METHOD/commit/4ceacedd7370ea80181db0d66cf8da8dcbfdd109))
+Added comprehensive forward-looking guidance based on **November 2025 industry research**:
 
-## [4.29.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.0...v4.29.1) (2025-07-13)
+**Industry Trends:**
 
-### Bug Fixes
+- 56% of product professionals cite AI/ML as top strategic focus
+- PRD-to-Code automation: build and deploy apps in 10-15 minutes (current state)
+- By 2026: Roles converging into "Full-Stack Product Lead" (PM + Design + Engineering)
+- Very high salaries for AI Agent PMs who orchestrate autonomous development systems
 
-- brianstorming facilitation output ([f62c05a](https://github.com/bmadcode/BMAD-METHOD/commit/f62c05ab0f54e6c26c67cd9ac11200b172d11076))
+**Role Transformation:**
 
-# [4.29.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.28.0...v4.29.0) (2025-07-13)
+- PMs evolving from spec writers → code orchestrators
+- Writing AI-optimized PRDs that **feed agentic pipelines directly**
+- UX designers generating production code with Figma-to-code tools
+- Technical fluency becoming **table stakes**, not optional
+- Reviewing PRs from AI agents alongside human developers
 
-### Features
+**How BMad Method Enables This Future (10 Ways):**
 
-- Claude Code slash commands for Tasks and Agents! ([e9e541a](https://github.com/bmadcode/BMAD-METHOD/commit/e9e541a52e45f6632b2f8c91d10e39c077c1ecc9))
+1. AI-Executable PRD Generation - PRDs become work packages for cloud agents
+2. Automated Epic/Story Breakdown - No more manual story refinement sessions
+3. Human-in-the-Loop Architecture - PMs learn while validating technical decisions
+4. Cloud Agentic Pipeline Vision - Current (2025) + Future (2026) roadmap with diagrams
+5. UX Design Integration - Designs validated through working prototypes
+6. PM Technical Skills Development - Learn by doing through conversational workflows
+7. Organizational Leverage - 1 PM → 20-50 AI agents (5-10× productivity multiplier)
+8. Quality Consistency - What gets built matches what was specified
+9. Rapid Prototyping - Hours to validate ideas vs months
+10. Career Path Evolution - Positions PMs for emerging AI Agent PM, Full-Stack Product Lead roles
 
-# [4.28.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.6...v4.28.0) (2025-07-12)
+**Cloud Agentic Pipeline Vision:**
 
-### Features
+```
+Current (2025): PM PRD → Stories → Human devs + BMad agents → PRs → Review → Deploy
+Future (2026): PM PRD → Stories → Cloud AI agents → Auto PRs → Review → Auto-merge → Deploy
+Time savings: 6-8 weeks → 2-5 days
+```
 
-- bmad-master can load kb properly ([3c13c56](https://github.com/bmadcode/BMAD-METHOD/commit/3c13c564988f9750e043939dd770aea4196a7e7a))
+**What Remains Human:**
 
-## [4.27.6](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.5...v4.27.6) (2025-07-08)
+- Product vision, empathy, creativity, judgment, ethics
+- PMs spend MORE time on human elements (AI handles execution)
+- Product leaders become "builder-thinkers" not just spec writers
 
-### Bug Fixes
+### 📖 Document Tightening
 
-- installer improvement ([db30230](https://github.com/bmadcode/BMAD-METHOD/commit/db302309f42da49daa309b5ba1a625c719e5bb14))
+**enterprise-agentic-development.md Overhaul:**
 
-## [4.27.5](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.4...v4.27.5) (2025-07-08)
+- Reduced from 1207 → 640 lines (47% reduction)
+- 10× more BMad-centric - every section ties back to how BMad enables the future
+- Removed redundant examples, consolidated sections, kept actionable insights
+- Stronger value propositions for PMs, UX, enterprise teams throughout
 
-### Bug Fixes
+**Key Message:** "The future isn't AI replacing PMs—it's AI-augmented PMs becoming 10× more powerful through BMad Method."
 
-- installer for github copilot asks follow up questions right away now so it does not seem to hang, and some minor doc improvements ([cadf8b6](https://github.com/bmadcode/BMAD-METHOD/commit/cadf8b6750afd5daa32eb887608c614584156a69))
+### 🛠️ Infrastructure & Quality
 
-## [4.27.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.3...v4.27.4) (2025-07-07)
+**Agent Naming Consistency:**
 
-### Bug Fixes
+- Renamed `paige.agent.yaml` → `tech-writer.agent.yaml` (matches agent naming pattern)
+- Updated all references across documentation and workflow files
 
-- doc updates ([1b86cd4](https://github.com/bmadcode/BMAD-METHOD/commit/1b86cd4db3644ca2b2b4a94821cc8b5690d78e0a))
+**README Updates:**
 
-## [4.27.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.2...v4.27.3) (2025-07-07)
+- Updated local installation instructions
+- Better hierarchy and clearer CTAs in root README
 
-### Bug Fixes
+### 🔄 Breaking Changes
 
-- remove test zoo folder ([908dcd7](https://github.com/bmadcode/BMAD-METHOD/commit/908dcd7e9afae3fd23cd894c0d09855fc9c42d0e))
+**Variable Renames:**
 
-## [4.27.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.1...v4.27.2) (2025-07-07)
+- `project_level` → `project_track` in PRD and all planning workflows
+- Removed `target_scale` variable (no longer needed with 3-track system)
 
-### Bug Fixes
+**Workflow Path Files:**
 
-- improve output ([a5ffe7b](https://github.com/bmadcode/BMAD-METHOD/commit/a5ffe7b9b209ae02a9d97adf60fe73c0bc9701e4))
+- Removed 9 level-based workflow paths (brownfield-level-0, greenfield-level-3, etc.)
+- Added 6 new track-based workflow paths (quick-flow-greenfield, method-brownfield, enterprise-greenfield, etc.)
 
-## [4.27.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.0...v4.27.1) (2025-07-07)
+**Workflow Triggers:**
 
-### Bug Fixes
+- Tech-spec workflow descriptions updated to reference tracks not levels
 
-- build web bundles with new file extension includsion ([92201ae](https://github.com/bmadcode/BMAD-METHOD/commit/92201ae7ede620ec09b4764edaed97be42a3b78f))
+### 📊 Impact Summary
 
-# [4.27.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.26.0...v4.27.0) (2025-07-06)
+These changes bring BMM from alpha.4's solid foundation to alpha.5's **production-ready professionalism**:
 
-### Bug Fixes
+- **Accuracy:** Documentation matches YAML source of truth (zero hallucination risk)
+- **Simplicity:** 3-track system eliminates decision paralysis and artificial complexity
+- **Reality:** Brownfield guidance handles messy real-world scenarios, not idealized ones
+- **Forward-looking:** PM/UX evolution section positions BMad as essential framework for emerging roles
+- **Consistency:** Standardized elicitation, input discovery, and template patterns across all workflows
+- **Maintainability:** 47% documentation reduction + ~114 lines of bloat removed from workflows
+- **Actionable:** Concrete workflows, commands, examples throughout all guidance
 
-- readme consolidation and version bumps ([0a61d3d](https://github.com/bmadcode/BMAD-METHOD/commit/0a61d3de4af880f6e3bf934a92b1827754ed8ce6))
+Users now have **trustworthy, reality-based, future-oriented guidance** for using BMad Method in both current workflows and emerging agentic development patterns.
 
-### Features
+### 📦 Files Changed
 
-- big improvement to advanced elicitation ([1bc9960](https://github.com/bmadcode/BMAD-METHOD/commit/1bc9960808098fba6b43850311799022319df841))
-- experimental doc creator v2 and template system ([b785371](https://github.com/bmadcode/BMAD-METHOD/commit/b78537115da06b01e140833fd1d73950c7f2e41f))
-- Massive improvement to the brainstorming task! ([9f53caf](https://github.com/bmadcode/BMAD-METHOD/commit/9f53caf4c6f9c67195b1aae14d54987f81d76e07))
-- WIP create-docv2 ([c107af0](https://github.com/bmadcode/BMAD-METHOD/commit/c107af05984718c1af2cf80118353e8d2e6f906f))
+**Core & Infrastructure (3 files):**
 
-# [4.26.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.25.1...v4.26.0) (2025-07-06)
+- `bmad/core/tasks/workflow.xml` - Removed elicit-required tag
+- `src/core/tasks/workflow.xml` - Removed elicit-required tag
+- `package.json` - Version bump
 
-### Features
+**Documentation (8 files):**
 
-- **trae:** add support for trae ide integration ([#298](https://github.com/bmadcode/BMAD-METHOD/issues/298)) ([fae0f5f](https://github.com/bmadcode/BMAD-METHOD/commit/fae0f5ff73a603dc1aacc29f184e2a4138446524))
+- `src/modules/bmm/docs/README.md` - Track references
+- `src/modules/bmm/docs/agents-guide.md` - Accuracy fixes, agent ownership corrections
+- `src/modules/bmm/docs/brownfield-guide.md` - Phase 0 reality check, track migration
+- `src/modules/bmm/docs/enterprise-agentic-development.md` - PM/UX evolution, 47% reduction
+- `src/modules/bmm/docs/faq.md` - Track references
+- `src/modules/bmm/docs/glossary.md` - Track definitions, removed levels
+- `src/modules/bmm/docs/quick-spec-flow.md` - Track references
+- `src/modules/bmm/docs/scale-adaptive-system.md` - Complete 3-track rewrite
 
-## [4.25.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.25.0...v4.25.1) (2025-07-06)
+**Workflow Paths (14 files):**
 
-### Bug Fixes
+- Removed: 9 level-based paths (brownfield-level-0 through greenfield-level-4)
+- Added: 6 track-based paths (quick-flow/method/enterprise × greenfield/brownfield)
 
-- spelling errors in documentation. ([#297](https://github.com/bmadcode/BMAD-METHOD/issues/297)) ([47b9d9f](https://github.com/bmadcode/BMAD-METHOD/commit/47b9d9f3e87be62c8520ed6cb0048df727a9534f))
+**Planning Workflows (11 files):**
 
-# [4.25.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.6...v4.25.0) (2025-07-05)
+- PRD workflow: Elicitation, track migration, input discovery, checklist updates
+- Create-epics-and-stories: Template rebuild, BDD format, elicitation, input patterns
+- Tech-spec: Template rebuild, BDD format, input discovery
+- Architecture: Elicitation points, input discovery
 
-### Bug Fixes
+**Solutioning Workflows (2 files):**
 
-- update web bundles ([42684e6](https://github.com/bmadcode/BMAD-METHOD/commit/42684e68af4396797962f3f851147523a6741608))
+- UX Design: Input discovery streamlined
+- Gate-check: Input pattern cleanup, semantic descriptions
 
-### Features
+**Build & Utilities (2 files):**
 
-- improvements to agent task usage, sm story drafting, dev implementation, qa review process, and addition of a new sm independant review of a draft story ([2874a54](https://github.com/bmadcode/BMAD-METHOD/commit/2874a54a9b25b48c199b2e9dc63a9555e716c636))
+- Audit workflow: Updated tag scanner (removed elicit-required)
+- Workflow status init: Track-based initialization logic
 
-## [4.24.6](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.5...v4.24.6) (2025-07-04)
+**Total: 40+ files changed**
 
-### Bug Fixes
+---
 
-- version bump and web build fix ([1c845e5](https://github.com/bmadcode/BMAD-METHOD/commit/1c845e5b2c77a77d887d8216152ba09110c72e40))
+### Installation
 
-## [4.24.5](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.4...v4.24.5) (2025-07-04)
+```bash
+npx bmad-method@6.0.0-alpha.5 install
+```
 
-### Bug Fixes
+For upgrading from alpha.4:
 
-- yaml standardization in files and installer actions ([094f9f3](https://github.com/bmadcode/BMAD-METHOD/commit/094f9f3eabf563c9a89ecaf360fed63386b46ed4))
+```bash
+# Backup your customizations first
+npx bmad-method@6.0.0-alpha.5 install
+```
 
-## [4.24.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.3...v4.24.4) (2025-07-04)
+### Migration Notes
 
-### Bug Fixes
+If upgrading from v6.0.0-alpha.4:
 
-- documentation updates ([2018ad0](https://github.com/bmadcode/BMAD-METHOD/commit/2018ad07c7d4c68efb3c24d85ac7612942c6df9c))
+1. **Scale System Change:** The 5-level system (Levels 0-4) is now 3 tracks (Quick Flow, BMad Method, Enterprise Method)
+   - Existing projects continue to work - workflows auto-detect track from context
+   - New projects will use track-based initialization
+   - Review `docs/scale-adaptive-system.md` for the new mental model
 
-## [4.24.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.2...v4.24.3) (2025-07-04)
+2. **Workflow Improvements:**
+   - Better elicitation at strategic decision points (you'll be asked for input more frequently)
+   - Cleaner templates with BDD acceptance criteria
+   - More consistent input document discovery
 
-### Bug Fixes
+3. **Documentation Accuracy:**
+   - Agent capabilities now match YAML definitions exactly
+   - Brownfield guidance handles real-world messy scenarios
+   - PM/UX evolution section shows future of AI-driven development
 
-- update YAML library from 'yaml' to 'js-yaml' in resolveExpansionPackCoreAgents for consistency ([#295](https://github.com/bmadcode/BMAD-METHOD/issues/295)) ([03f30ad](https://github.com/bmadcode/BMAD-METHOD/commit/03f30ad28b282fbb4fa5a6ed6b57d0327218cce0))
+4. **Agent Naming:** Technical Writer agent file renamed (paige.agent.yaml → tech-writer.agent.yaml)
+   - No functional impact - just internal naming consistency
 
-## [4.24.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.1...v4.24.2) (2025-07-03)
+5. **No Breaking Changes:** Existing project structures, workflow outputs, and customizations remain compatible
 
-### Bug Fixes
+---
 
-- version bump and restore dist folder ([87c451a](https://github.com/bmadcode/BMAD-METHOD/commit/87c451a5c3161fbc86f88619a2bfcfc322eb247e))
+## [6.0.0-alpha.4]
 
-## [4.24.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.24.0...v4.24.1) (2025-07-03)
+**Release: November 2, 2025**
 
-### Bug Fixes
+This alpha release represents a major leap forward in documentation, workflow intelligence, and usability. The BMM module now features professional documentation, context-aware planning workflows, and universal document management capabilities.
 
-- centralized yamlExtraction function and all now fix character issues for windows ([e2985d6](https://github.com/bmadcode/BMAD-METHOD/commit/e2985d6093136575e8d8c91ce53c82abc4097de6))
-- filtering extension stripping logic update ([405954a](https://github.com/bmadcode/BMAD-METHOD/commit/405954ad924d8bd66f94c918643f6e9c091d4d09))
-- standardize on file extension .yaml instead of a mix of yml and yaml ([a4c0b18](https://github.com/bmadcode/BMAD-METHOD/commit/a4c0b1839d12d2ad21b7949aa30f4f7d82ec6c9c))
+### 📚 Complete Documentation Overhaul
 
-# [4.24.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.23.0...v4.24.0) (2025-07-02)
+**New Documentation Hub** (`src/modules/bmm/docs/`)
 
-### Bug Fixes
+- Created centralized documentation system with 18 comprehensive guides (7000+ lines)
+- Clear learning paths for greenfield, brownfield, and quick spec flows
+- Professional technical writing standards throughout all documentation
+- Reading time estimates and cross-referenced navigation
 
-- corrected cursor agent update instructions ([84e394a](https://github.com/bmadcode/BMAD-METHOD/commit/84e394ac11136d9cf8164cefc9ca8e298e8ef0ec))
+**New Documentation Files:**
 
-### Features
+- `README.md` - Complete documentation hub with topic navigation
+- `quick-start.md` - 15-minute getting started guide
+- `agents-guide.md` - Comprehensive 12-agent reference (45 min read)
+- `party-mode.md` - Multi-agent collaboration guide (20 min read)
+- `scale-adaptive-system.md` - Deep dive on Levels 0-4 (42 min read)
+- `brownfield-guide.md` - Existing codebase development (53 min read)
+- `quick-spec-flow.md` - Rapid Level 0-1 development (26 min read)
+- `workflows-analysis.md` - Phase 1 workflows deep-dive (12 min read)
+- `workflows-planning.md` - Phase 2 workflows deep-dive (19 min read)
+- `workflows-solutioning.md` - Phase 3 workflows deep-dive (13 min read)
+- `workflows-implementation.md` - Phase 4 workflows deep-dive (33 min read)
+- `workflows-testing.md` - Testing & QA workflows (29 min read)
+- `workflow-architecture-reference.md` - Architecture workflow technical reference
+- `workflow-document-project-reference.md` - Document-project workflow technical reference
+- `enterprise-agentic-development.md` - Team collaboration patterns
+- `faq.md` - Comprehensive Q&A covering all common questions
+- `glossary.md` - Complete BMM terminology reference
+- `troubleshooting.md` - Common issues and solutions guide
 
-- workflow plans introduced, preliminary feature under review ([731589a](https://github.com/bmadcode/BMAD-METHOD/commit/731589aa287c31ea120e232b4dcc07e9790500ff))
+**Documentation Improvements:**
 
-# [4.23.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.22.1...v4.23.0) (2025-07-01)
+- Removed version/date footers (git handles versioning automatically)
+- Agent customization docs now include full rebuild process
+- Consistent professional formatting and structure across all docs
+- Better separation of user documentation vs developer reference
 
-### Features
+### 🤖 New Agent: Paige (Documentation Guide)
 
-- Github Copilot integration ([#284](https://github.com/bmadcode/BMAD-METHOD/issues/284)) ([1a4ca4f](https://github.com/bmadcode/BMAD-METHOD/commit/1a4ca4ffa630c2d4156bdd7a040d4c2274801757))
+Introduced Paige, a specialized technical documentation agent:
 
-## [4.22.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.22.0...v4.22.1) (2025-06-30)
+- **Expertise:** Professional technical writing, information architecture, documentation structure
+- **Integration:** Available across all BMM phases for continuous documentation support
+- **Customizable:** Like all BMM agents, can be customized via sidecar files
+- **Status:** Work in progress - will evolve as documentation needs grow
 
-### Bug Fixes
+### 🚀 Quick Spec Flow - Intelligent Level 0-1 Planning
 
-- update expansion versions ([6905fe7](https://github.com/bmadcode/BMAD-METHOD/commit/6905fe72f6c2abefbfd65729d1be85752130a1d2))
+**Major Tech-Spec Workflow Transformation:**
 
-# [4.22.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.21.2...v4.22.0) (2025-06-30)
+- Transformed from template-filling into context-aware intelligent planning system
+- Ideal for bug fixes, single endpoint additions, and small isolated changes
+- Auto-detects project stack (package.json, requirements.txt, etc.)
+- Analyzes brownfield codebases for conventions and patterns
+- Integrates WebSearch for current framework versions and best practices
 
-### Features
+**Context-Aware Intelligence:**
 
-- create doc more explicit and readme improvement ([a1b30d9](https://github.com/bmadcode/BMAD-METHOD/commit/a1b30d9341d2ceff79db2c7e178860c5ef0d99e5))
+- Interactive level detection (Level 0 vs Level 1)
+- Brownfield convention detection with user confirmation
+- Comprehensive context discovery (stack, patterns, dependencies, test frameworks)
+- Auto-validation with quality scoring (no manual checklist needed)
+- UX/UI considerations capture for user-facing changes
 
-## [4.21.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.21.1...v4.21.2) (2025-06-30)
+**Enhanced Tech-Spec Template:**
 
-### Bug Fixes
+- Expanded from 8 to 23 sections for complete planning context
+- New sections: Development Context, UX/UI Considerations, Integration Points
+- Developer Resources section with file paths and testing guidance
+- All sections populated via template-output tags during workflow
 
-- improve create-doc task clarity for template execution ([86d5139](https://github.com/bmadcode/BMAD-METHOD/commit/86d5139aea7097cc5d4ee9da0f7d3e395ce0835e))
+**Story Generation Improvements:**
 
-## [4.21.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.21.0...v4.21.1) (2025-06-30)
+- Level 0: Extract single story from comprehensive tech-spec
+- Level 1: Story sequence validation with acceptance criteria quality checks
+- User Story Template includes Dev Agent Record sections for implementation tracking
+- Complete epic template rewrite with proper variable structure
 
-### Bug Fixes
+**Phase 4 Integration:**
 
-- readme clarifies that the installer handles installs upgrades and expansion installation ([9371a57](https://github.com/bmadcode/BMAD-METHOD/commit/9371a5784f6a6f2ad358a72ea0cde9c980357167))
+- Story Context and Create Story workflows now recognize tech-spec as authoritative source
+- Seamless integration between Quick Spec Flow and traditional BMM workflows
+- Tech-spec provides brownfield analysis, framework details, and existing patterns
 
-# [4.21.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.20.0...v4.21.0) (2025-06-30)
+### 📦 Universal Document Sharding
 
-### Bug Fixes
+**New Capability: Shard-Doc Workflow**
 
-- remove unneeded files ([c48f200](https://github.com/bmadcode/BMAD-METHOD/commit/c48f200727384f37a42f4c6b1a946cb90f2445fe))
+- Split large markdown documents into organized, smaller files based on sections
+- Dual-strategy loading: include individual shards OR single large document
+- Configurable section level (default: level 2 headings)
+- Automatic index.md generation with navigation links
+- Ideal for large guides, API documentation, and knowledge bases
 
-### Features
+**Use Cases:**
 
-- massive installer improvement update ([c151bda](https://github.com/bmadcode/BMAD-METHOD/commit/c151bda93833aa310ccc7c0eabcf483376f9e82a))
+- Breaking down massive planning documents for better context management
+- Creating navigable documentation hierarchies
+- Managing agent knowledge bases efficiently
+- Optimizing context window usage during development
 
-# [4.20.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.19.2...v4.20.0) (2025-06-29)
+**Integration:**
 
-### Features
+- Available as BMad Core workflow: `/bmad:core:tools:shard-doc`
+- Works with any markdown document in your project
+- Preserves original file with automatic backups
+- Generated shards maintain formatting and structure
 
-- Massive documentation refactor, added explanation of the new expanded role of the QA agent that will make your code quality MUCH better. 2 new diagram clearly explain the role of the pre dev ideation cycle (prd and architecture) and the details of how the dev cycle works. ([c881dcc](https://github.com/bmadcode/BMAD-METHOD/commit/c881dcc48ff827ddfe8653aa364a021a66ce66eb))
+### 🔧 Planning Workflow Enhancements
 
-## [4.19.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.19.1...v4.19.2) (2025-06-28)
+**Intent-Driven Discovery (Product Brief & PRD):**
 
-### Bug Fixes
+- Transformed from rigid template-filling to natural conversational discovery
+- Adaptive questioning based on project context (hobby/startup/enterprise)
+- Real-time document building instead of end-of-session generation
+- Skill-level aware facilitation (expert/intermediate/beginner)
+- Context detection from user responses to guide exploration depth
 
-- docs update and correction ([2408068](https://github.com/bmadcode/BMAD-METHOD/commit/240806888448bb3a42acfd2f209976d489157e21))
+**Product Brief Workflow (96% BMAD v6 compliance):**
 
-## [4.19.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.19.0...v4.19.1) (2025-06-28)
+- Intent-driven facilitation with context-appropriate probing
+- Living document approach with continuous template updates
+- Enhanced discovery areas: problem exploration, solution vision, user understanding
+- Ruthless MVP scope management with feature prioritization
+- Template improvements with context-aware conditional sections
 
-### Bug Fixes
+**PRD Workflow (improved from 65% to 85%+ compliance):**
 
-- discord link ([2ea806b](https://github.com/bmadcode/BMAD-METHOD/commit/2ea806b3af58ad37fcb695146883a9cd3003363d))
+- Fixed critical config issues (missing date variable, status file extension mismatch)
+- Scale-adaptive intelligence with project type detection (API/Web App/Mobile/SaaS)
+- Domain complexity mapping (14 domain types with specialized considerations)
+- Enhanced requirements coverage: project-type specific sections, domain considerations
+- Separated epic planning into dedicated create-epics-and-stories child workflow
 
-# [4.19.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.18.0...v4.19.0) (2025-06-28)
+**Architecture Workflow:**
 
-### Bug Fixes
+- Better integration with PRD outputs
+- Domain complexity context support
+- Enhanced technical decision capture framework
 
-- expansion install config ([50d17ed](https://github.com/bmadcode/BMAD-METHOD/commit/50d17ed65d40f6688f3b6e62732fb2280b6b116e))
+### 🛠️ Research Workflow Improvements
 
-### Features
+**Enhanced Research Capabilities:**
 
-- install for ide now sets up rules also for expansion agents! ([b82978f](https://github.com/bmadcode/BMAD-METHOD/commit/b82978fd38ea789a799ccc1373cfb61a2001c1e0))
+- Updated to use web search more frequently for current information
+- Better understanding of current date context for finding latest documentation
+- Improved deep research prompt generation options
+- More accurate and up-to-date research results
 
-# [4.18.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.17.0...v4.18.0) (2025-06-28)
+### 🎨 User Experience Improvements
 
-### Features
+**Installer Updates:**
 
-- expansion teams can now include core agents and include their assets automatically ([c70f1a0](https://github.com/bmadcode/BMAD-METHOD/commit/c70f1a056b0f6e3c805096ee5d27f0a3640fb00c))
-- remove hardcoding from installer for agents, improve expansion pack installation to its own locations, common files moved to common folder ([95e833b](https://github.com/bmadcode/BMAD-METHOD/commit/95e833beebc3a60f73a7a1c67d534c8eb6bf48fd))
+- Improved installation notes and guidance
+- Better command examples (shard-doc uses npx command pattern)
 
-# [4.17.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.16.1...v4.17.0) (2025-06-27)
+**Workflow Cleanup:**
 
-### Features
+- Removed unused voice hooks functionality
+- Cleaned up backup and temporary files
+- Better workflow naming consistency
 
-- add GEMINI.md to agent context files ([#272](https://github.com/bmadcode/BMAD-METHOD/issues/272)) ([b557570](https://github.com/bmadcode/BMAD-METHOD/commit/b557570081149352e4efbef8046935650f6ecea1))
+### 📋 Infrastructure & Quality
 
-## [4.16.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.16.0...v4.16.1) (2025-06-26)
+**Agent & Workflow Manifests:**
 
-### Bug Fixes
+- Added Paige to agent manifest
+- Updated workflow manifest with new and restructured workflows
+- Better workflow-to-agent mappings across all documentation
+- Updated files manifest with all new documentation
 
-- remove accidental folder add ([b1c2de1](https://github.com/bmadcode/BMAD-METHOD/commit/b1c2de1fb58029f68e021faa90cd5d5faf345198))
+**Module Organization:**
 
-# [4.16.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.15.0...v4.16.0) (2025-06-26)
+- Streamlined BMM README to lean signpost format
+- Polished root README with better hierarchy and clear CTAs
+- Moved documentation from root `docs/` to module-specific locations
+- Better separation of user docs vs developer reference
 
-### Features
+**Data Infrastructure:**
 
-- repo builds all rules sets for supported ides for easy copy if desired ([ea945bb](https://github.com/bmadcode/BMAD-METHOD/commit/ea945bb43f6ea50594910b954c72e79f96a8504c))
+- New CSV data files for project types and domain complexity
+- Enhanced workflow configuration with runtime variables
+- Better template variable mapping and tracking
 
-# [4.15.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.14.1...v4.15.0) (2025-06-26)
+### 🔄 Breaking Changes
 
-### Features
+**File Removals:**
 
-- Add Gemini CLI Integration ([#271](https://github.com/bmadcode/BMAD-METHOD/issues/271)) ([44b9d7b](https://github.com/bmadcode/BMAD-METHOD/commit/44b9d7bcb5cbb6de5a15d8f2ec7918d186ac9576))
+- Removed `src/modules/bmm/workflows/2-plan-workflows/prd/epics-template.md` (replaced by create-epics-and-stories child workflow)
 
-## [4.14.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.14.0...v4.14.1) (2025-06-26)
+**Workflow Trigger Changes:**
 
-### Bug Fixes
+- PM agent: `prd` → `create-prd`
+- New workflow triggers: `create-epics-and-stories`, `validate-prd`
+- Game Designer agent triggers renamed for consistency
 
-- add updated web builds ([6dabbcb](https://github.com/bmadcode/BMAD-METHOD/commit/6dabbcb670ef22708db6c01dac82069547ca79d6))
+### 📖 What's Next (Beta Roadmap)
 
-# [4.14.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.13.0...v4.14.0) (2025-06-25)
+- Knowledge base integration for enhanced context management
+- Web bundle functionality completion
+- Additional specialized agents based on community feedback
+- Enhanced multi-agent collaboration patterns
+- Performance optimizations for large projects
 
-### Features
+---
 
-- enhance QA agent as senior developer with code review capabilities and major brownfield improvements ([3af3d33](https://github.com/bmadcode/BMAD-METHOD/commit/3af3d33d4a40586479a382620687fa99a9f6a5f7))
+### Installation
 
-# [4.13.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.12.0...v4.13.0) (2025-06-24)
+```bash
+npx bmad-method@6.0.0-alpha.4 install
+```
 
-### Features
+For upgrading from alpha.3:
 
-- **ide-setup:** add support for Cline IDE and configuration rules ([#262](https://github.com/bmadcode/BMAD-METHOD/issues/262)) ([913dbec](https://github.com/bmadcode/BMAD-METHOD/commit/913dbeced60ad65086df6233086d83a51ead81a9))
+```bash
+# Backup your customizations first
+npx bmad-method@6.0.0-alpha.4 install
+```
 
-# [4.12.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.11.0...v4.12.0) (2025-06-23)
+### Migration Notes
 
-### Features
+If upgrading from v6.0.0-alpha.3:
 
-- **dev-agent:** add quality gates to prevent task completion with failing validations ([#261](https://github.com/bmadcode/BMAD-METHOD/issues/261)) ([45110ff](https://github.com/bmadcode/BMAD-METHOD/commit/45110ffffe6d29cc08e227e22a901892185dfbd2))
+1. New documentation is available in `bmad/bmm/docs/` - review the README.md for navigation
+2. Tech-spec workflow now has enhanced capabilities - review `docs/quick-spec-flow.md`
+3. Product Brief and PRD workflows have new conversational approaches
+4. Paige agent is now available for documentation tasks
+5. No breaking changes to existing project structures
 
-# [4.11.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.10.3...v4.11.0) (2025-06-21)
+---
 
-### Bug Fixes
+## [6.0.0-alpha.3]
 
-- resolve web bundles directory path when using relative paths in NPX installer ([5c8485d](https://github.com/bmadcode/BMAD-METHOD/commit/5c8485d09ffec60ad4965ced62f4595890cb7535))
+### Codex Installer
 
-### Features
+- Codex installer uses custom prompts in `.codex/prompts/`, instead of `AGENTS.md`
 
-- add markdown-tree integration for document sharding ([540578b](https://github.com/bmadcode/BMAD-METHOD/commit/540578b39d1815e41e11f0e87545de3f09ee54e1))
+## [6.0.0-alpha.0]
 
-## [4.10.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.10.2...v4.10.3) (2025-06-20)
+**Release: September 28, 2025**
 
-### Bug Fixes
+Initial alpha release of a major rewrite and overhaul improvement of past versions.
 
-- bundle update ([2cf3ba1](https://github.com/bmadcode/BMAD-METHOD/commit/2cf3ba1ab8dd7e52584bef16a96e65e7d2513c4f))
+### Major New Features
 
-## [4.10.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.10.1...v4.10.2) (2025-06-20)
+- **Lean Core**: The core of BMad is very simple - common tasks that apply to any future module or agents, along with common agents that will be added to any modules - bmad-web-orchestrator and bmad-master.
+- **BMad Method**: The new BMad Method (AKA bmm) is a complete overhaul of the v4 method, now a fully scale adaptive rewrite. The workflow now scales from small enhancements to massive undertakings across multiple services or architectures, supporting a new vast array of project type, including a full subclass of game development specifics.
+- **BoMB**: The BMad Builder (AKA BoMB) now is able to fully automate creation and conversion of expansion packs from v6 to modules in v6 along with the net new ideation and brainstorming through implementation and testing of net new Modules, Workflows (were tasks and templates), Module Agents, and Standalone Personal Agents
+- **CIS**: The Creative Intelligence Suite (AKA CIS)
 
-### Bug Fixes
+## [v6.0.0] - SKIPPED
 
-- file formatting ([c78a35f](https://github.com/bmadcode/BMAD-METHOD/commit/c78a35f547459b07a15d94c827ec05921cd21571))
+**Note**: Version 5.0.0 was skipped due to NPX registry issues that corrupted the version. Development continues with v6.0.0-alpha.0.
 
-## [4.10.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.10.0...v4.10.1) (2025-06-20)
+## [v4.43.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v4.43.0)
 
-### Bug Fixes
+**Release: August-September 2025 (v4.31.0 - v4.43.1)**
 
-- SM sometimes would skip the rest of the epic stories, fixed ([1148b32](https://github.com/bmadcode/BMAD-METHOD/commit/1148b32fa97586d2f86d07a70ffbf9bb8c327261))
+Focus on stability, ecosystem growth, and professional tooling.
 
-# [4.10.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.9.2...v4.10.0) (2025-06-19)
+### Major Integrations
 
-### Features
+- **Codex CLI & Web**: Full Codex integration with web and CLI modes
+- **Auggie CLI**: Augment Code integration
+- **iFlow CLI**: iFlow support in installer
+- **Gemini CLI Custom Commands**: Enhanced Gemini CLI capabilities
 
-- Core Config and doc sharding is now optional in v4 ([ff6112d](https://github.com/bmadcode/BMAD-METHOD/commit/ff6112d6c2f822ed22c75046f5a14f05e36041c2))
+### Expansion Packs
 
-## [4.9.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.9.1...v4.9.2) (2025-06-19)
+- **Godot Game Development**: Complete game dev workflow
+- **Creative Writing**: Professional writing agent system
+- **Agent System Templates**: Template expansion pack (Part 2)
 
-### Bug Fixes
+### Advanced Features
 
-- bad brownfield yml ([09d2ad6](https://github.com/bmadcode/BMAD-METHOD/commit/09d2ad6aea187996d0a2e1dff27d9bf7e3e6dc06))
+- **AGENTS.md Generation**: Auto-generated agent documentation
+- **NPM Script Injection**: Automatic package.json updates
+- **File Exclusion**: `.bmad-flattenignore` support for flattener
+- **JSON-only Integration**: Compact integration mode
 
-## [4.9.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.9.0...v4.9.1) (2025-06-19)
+### Quality & Stability
 
-### Bug Fixes
+- **PR Validation Workflow**: Automated contribution checks
+- **Fork-Friendly CI/CD**: Opt-in mechanism for forks
+- **Code Formatting**: Prettier integration with pre-commit hooks
+- **Update Checker**: `npx bmad-method update-check` command
 
-- dist bundles updated ([d9a989d](https://github.com/bmadcode/BMAD-METHOD/commit/d9a989dbe50da62cf598afa07a8588229c56b69c))
+### Flattener Improvements
 
-# [4.9.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.8.0...v4.9.0) (2025-06-19)
+- Detailed statistics with emoji-enhanced `.stats.md`
+- Improved project root detection
+- Modular component architecture
+- Binary directory exclusions (venv, node_modules, etc.)
 
-### Features
+### Documentation & Community
 
-- dev can use debug log configured in core-config.yaml ([0e5aaf0](https://github.com/bmadcode/BMAD-METHOD/commit/0e5aaf07bbc6fd9f2706ea26e35f5f38fd72147a))
+- Brownfield document naming consistency fixes
+- Architecture template improvements
+- Trademark and licensing clarity
+- Contributing guidelines refinement
 
-# [4.8.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.7.0...v4.8.0) (2025-06-19)
+### Developer Experience
 
-### Bug Fixes
+- Version synchronization scripts
+- Manual release workflow enhancements
+- Automatic release notes generation
+- Changelog file path configuration
 
-- installer has fast v4 update option now to keep the bmad method up to date with changes easily without breaking any customizations from the user. The SM and DEV are much more configurable to find epics stories and architectureal information when the prd and architecture are deviant from v4 templates and/or have not been sharded. so a config will give the user the option to configure the SM to use the full large documents or the sharded versions! ([aea7f3c](https://github.com/bmadcode/BMAD-METHOD/commit/aea7f3cc86e749d25ed18bed761dc2839023b3b3))
-- prevent double installation when updating v4 ([af0e767](https://github.com/bmadcode/BMAD-METHOD/commit/af0e767ecf1b91d41f114e1a5d7bf5da08de57d6))
-- resolve undefined config properties in performUpdate ([0185e01](https://github.com/bmadcode/BMAD-METHOD/commit/0185e012bb579948a4de1ea3950db4e399761619))
-- update file-manager to properly handle YAML manifest files ([724cdd0](https://github.com/bmadcode/BMAD-METHOD/commit/724cdd07a199cb12b82236ad34ca1a0c61eb43e2))
+[View v4.43.1 tag](https://github.com/bmad-code-org/BMAD-METHOD/tree/v4.43.1)
 
-### Features
+## [v4.30.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v4.30.0)
 
-- add early v4 detection for improved update flow ([29e7bbf](https://github.com/bmadcode/BMAD-METHOD/commit/29e7bbf4c5aa7e17854061a5ee695f44324f307a))
-- add file resolution context for IDE agents ([74d9bb4](https://github.com/bmadcode/BMAD-METHOD/commit/74d9bb4b2b70a341673849a1df704f6eac70c3de))
-- update web builder to remove IDE-specific properties from agent bundles ([2f2a1e7](https://github.com/bmadcode/BMAD-METHOD/commit/2f2a1e72d6a70f8127db6ba58a563d0f289621c3))
+**Release: July 2025 (v4.21.0 - v4.30.4)**
 
-# [4.7.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.6.3...v4.7.0) (2025-06-19)
+Introduction of advanced IDE integrations and command systems.
 
-### Features
+### Claude Code Integration
 
-- extensive bmad-kb for web orchestrator to be much more helpful ([e663a11](https://github.com/bmadcode/BMAD-METHOD/commit/e663a1146b89e7b5078d9726649a51ae5624da46))
+- **Slash Commands**: Native Claude Code slash command support for agents
+- **Task Commands**: Direct task invocation via slash commands
+- **BMad Subdirectory**: Organized command structure
+- **Nested Organization**: Clean command hierarchy
 
-## [4.6.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.6.2...v4.6.3) (2025-06-19)
+### Agent Enhancements
 
-### Bug Fixes
+- BMad-master knowledge base loading
+- Improved brainstorming facilitation
+- Better agent task following with cost-saving model combinations
+- Direct commands in agent definitions
 
-- SM fixed file resolution issue in v4 ([61ab116](https://github.com/bmadcode/BMAD-METHOD/commit/61ab1161e59a92d657ab663082abcaf26729fa6b))
+### Installer Improvements
 
-## [4.6.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.6.1...v4.6.2) (2025-06-19)
+- Memory-efficient processing
+- Clear multi-select IDE prompts
+- GitHub Copilot support with improved UX
+- ASCII logo (because why not)
 
-### Bug Fixes
+### Platform Support
 
-- installer upgrade path fixed ([bd6a558](https://github.com/bmadcode/BMAD-METHOD/commit/bd6a55892906077a700f488bde175b57e846729d))
+- Windows compatibility improvements (regex fixes, newline handling)
+- Roo modes configuration
+- Support for multiple CLI tools simultaneously
 
-## [4.6.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.6.0...v4.6.1) (2025-06-19)
+### Expansion Ecosystem
 
-### Bug Fixes
+- 2D Unity Game Development expansion pack
+- Improved expansion pack documentation
+- Better isolated expansion pack installations
 
-- expansion pack builder now includes proper dependencies from core as needed, and default template file name save added to template llm instructions ([9dded00](https://github.com/bmadcode/BMAD-METHOD/commit/9dded003565879901246885d60787695e0d0b7bd))
+[View v4.30.4 tag](https://github.com/bmad-code-org/BMAD-METHOD/tree/v4.30.4)
 
-# [4.6.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.5.1...v4.6.0) (2025-06-18)
+## [v4.20.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v4.20.0)
 
-### Bug Fixes
+**Release: June 2025 (v4.11.0 - v4.20.0)**
 
-- orchestractor yml ([3727cc7](https://github.com/bmadcode/BMAD-METHOD/commit/3727cc764a7c7295932ff872e2e5be8b4c4e6859))
+Major focus on documentation quality and expanding QA agent capabilities.
 
-### Features
+### Documentation Overhaul
 
-- removed some templates that are not ready for use ([b03aece](https://github.com/bmadcode/BMAD-METHOD/commit/b03aece79e52cfe9585225de5aff7659293d9295))
+- **Workflow Diagrams**: Visual explanations of planning and development cycles
+- **QA Role Expansion**: QA agent transformed into senior code reviewer
+- **User Guide Refresh**: Complete rewrite with clearer explanations
+- **Contributing Guidelines**: Clarified principles and contribution process
 
-## [4.5.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.5.0...v4.5.1) (2025-06-18)
+### QA Agent Transformation
 
-### Bug Fixes
+- Elevated from simple tester to senior developer/code reviewer
+- Code quality analysis and architectural feedback
+- Pre-implementation review capabilities
+- Integration with dev cycle for quality gates
 
-- docs had some ide specific errors ([a954c7e](https://github.com/bmadcode/BMAD-METHOD/commit/a954c7e24284a6637483a9e47fc63a8f9d7dfbad))
+### IDE Ecosystem Growth
 
-# [4.5.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.4.2...v4.5.0) (2025-06-17)
+- **Cline IDE Support**: Added configuration for Cline
+- **Gemini CLI Integration**: Native Gemini CLI support
+- **Expansion Pack Installation**: Automated expansion agent setup across IDEs
 
-### Bug Fixes
+### New Capabilities
 
-- installer relative path issue for npx resolved ([8b9bda5](https://github.com/bmadcode/BMAD-METHOD/commit/8b9bda5639ec882f1887f20b4610a6c2183042c6))
-- readme updated to indicate move of web-bundles ([7e9574f](https://github.com/bmadcode/BMAD-METHOD/commit/7e9574f571f41ae5003a1664d999c282dd7398be))
-- temp disable yml linting ([296c2fb](https://github.com/bmadcode/BMAD-METHOD/commit/296c2fbcbd9ac40b3c68633ba7454aacf1e31204))
-- update documentation and installer to reflect .roomodes file location in project root ([#236](https://github.com/bmadcode/BMAD-METHOD/issues/236)) ([bd7f030](https://github.com/bmadcode/BMAD-METHOD/commit/bd7f03016bfa13e39cb39aedb24db9fccbed18a7))
+- Markdown-tree integration for document sharding
+- Quality gates to prevent task completion with failures
+- Enhanced brownfield workflow documentation
+- Team-based agent bundling improvements
 
-### Features
+### Developer Tools
 
-- bmad the creator expansion with some basic tools for modifying bmad method ([2d61df4](https://github.com/bmadcode/BMAD-METHOD/commit/2d61df419ac683f5691b6ee3fab81174f3d2cdde))
-- can now select different web bundles from what ide agents are installed ([0c41633](https://github.com/bmadcode/BMAD-METHOD/commit/0c41633b07d7dd4d7dda8d3a14d572eac0dcbb47))
-- installer offers option to install web bundles ([e934769](https://github.com/bmadcode/BMAD-METHOD/commit/e934769a5e35dba99f59b4e2e6bb49131c43a526))
-- robust installer ([1fbeed7](https://github.com/bmadcode/BMAD-METHOD/commit/1fbeed75ea446b0912277cfec376ee34f0b3d853))
+- Better expansion pack isolation
+- Automatic rule generation for all supported IDEs
+- Common files moved to shared locations
+- Hardcoded dependencies removed from installer
 
-## [4.4.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.4.1...v4.4.2) (2025-06-17)
+[View v4.20.0 tag](https://github.com/bmad-code-org/BMAD-METHOD/tree/v4.20.0)
 
-### Bug Fixes
+## [v4.10.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v4.10.0)
 
-- single agent install and team installation support ([18a382b](https://github.com/bmadcode/BMAD-METHOD/commit/18a382baa4e4a82db20affa3525eb951af1081e0))
+**Release: June 2025 (v4.3.0 - v4.10.3)**
 
-## [4.4.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.4.0...v4.4.1) (2025-06-17)
+This release focused on making BMAD more configurable and adaptable to different project structures.
 
-### Bug Fixes
+### Configuration System
 
-- installer no longer suggests the bmad-method directory as defauly ([e2e1658](https://github.com/bmadcode/BMAD-METHOD/commit/e2e1658c07f6957fea4e3aa9e7657a650205ee71))
+- **Optional Core Config**: Document sharding and core configuration made optional
+- **Flexible File Resolution**: Support for non-standard document structures
+- **Debug Logging**: Configurable debug mode for agent troubleshooting
+- **Fast Update Mode**: Quick updates without breaking customizations
 
-# [4.4.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.3.0...v4.4.0) (2025-06-16)
+### Agent Improvements
 
-### Features
+- Clearer file resolution instructions for all agents
+- Fuzzy task resolution for better agent autonomy
+- Web orchestrator knowledge base expansion
+- Better handling of deviant PRD/Architecture structures
 
-- improve docs, technical preference usage ([764e770](https://github.com/bmadcode/BMAD-METHOD/commit/764e7702b313f34bb13a8bcce3b637699bb2b8ec))
-- web bundles updated ([f39b495](https://github.com/bmadcode/BMAD-METHOD/commit/f39b4951e9e37acd7b2bda4124ddd8edb7a6d0df))
+### Installation Enhancements
 
-# [5.0.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v5.0.0) (2025-06-15)
+- V4 early detection for improved update flow
+- Prevented double installation during updates
+- Better handling of YAML manifest files
+- Expansion pack dependencies properly included
 
 ### Bug Fixes
 
-- add docs ([48ef875](https://github.com/bmadcode/BMAD-METHOD/commit/48ef875f5ec5b0f0211baa43bbc04701e54824f4))
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- BMAD install creates `.bmad-core/.bmad-core/` directory structure + updates ([#223](https://github.com/bmadcode/BMAD-METHOD/issues/223)) ([28b313c](https://github.com/bmadcode/BMAD-METHOD/commit/28b313c01df41961cebb71fb3bce0fcc7b4b4796))
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
-- update dependency resolver to support both yml and yaml code blocks ([ba1e5ce](https://github.com/bmadcode/BMAD-METHOD/commit/ba1e5ceb36f4a0bb204ceee40e92725d3fc57c5f))
-- update glob usage to modern async API ([927515c](https://github.com/bmadcode/BMAD-METHOD/commit/927515c0895f94ce6fb0adf7cabe2f978c1ee108))
-- update yaml-format.js to use dynamic chalk imports ([b53d954](https://github.com/bmadcode/BMAD-METHOD/commit/b53d954b7aac68d25d688140ace3b98a43fa0e5f))
+- SM agent file resolution issues
+- Installer upgrade path corrections
+- Bundle build improvements
+- Template formatting fixes
 
-### Features
+[View v4.10.3 tag](https://github.com/bmad-code-org/BMAD-METHOD/tree/v4.10.3)
 
-- enhance installer with multi-IDE support and sync version bumping ([ebfd4c7](https://github.com/bmadcode/BMAD-METHOD/commit/ebfd4c7dd52fd38d71a4b054cd0c5d45a4b5d226))
-- improve semantic-release automation and disable manual version bumping ([38a5024](https://github.com/bmadcode/BMAD-METHOD/commit/38a5024026e9588276bc3c6c2b92f36139480ca4))
-- sync IDE configurations across all platforms ([b6a2f5b](https://github.com/bmadcode/BMAD-METHOD/commit/b6a2f5b25eaf96841bade4e236fffa2ce7de2773))
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
-- web bundles include a simplified prd with architecture now for simpler project folderes not needing a full plown architecture doc! ([8773545](https://github.com/bmadcode/BMAD-METHOD/commit/877354525e76cd1c9375e009a3a1429633010226))
+## [v4.0.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v4.0.0)
 
-### BREAKING CHANGES
+**Release: June 20, 2025 (v4.0.0 - v4.2.0)**
 
-- Manual version bumping via npm scripts is now disabled. Use conventional commits for automated releases.
-
-# [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
-
-### Bug Fixes
+Version 4 represented a complete architectural overhaul, transforming BMAD from a collection of prompts into a professional, distributable framework.
 
-- add docs ([48ef875](https://github.com/bmadcode/BMAD-METHOD/commit/48ef875f5ec5b0f0211baa43bbc04701e54824f4))
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
+### Framework Transformation
 
-### Features
+- **NPM Package**: Professional distribution and simple installation via `npx bmad-method install`
+- **Modular Architecture**: Move to `.bmad-core` hidden folder structure
+- **Multi-IDE Support**: Unified support for Claude Code, Cursor, Roo, Windsurf, and many more
+- **Schema Standardization**: YAML-based agent and team definitions
+- **Automated Installation**: One-command setup with upgrade detection
 
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
+### Agent System Overhaul
 
-# [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
+- Agent team workflows (fullstack, no-ui, all agents)
+- Web bundle generation for platform-agnostic deployment
+- Task-based architecture (separate task definitions from agents)
+- IDE-specific agent activation (slash commands for Claude Code, rules for Cursor, etc.)
 
-### Bug Fixes
+### New Capabilities
 
-- add docs ([48ef875](https://github.com/bmadcode/BMAD-METHOD/commit/48ef875f5ec5b0f0211baa43bbc04701e54824f4))
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
+- Brownfield project support (existing codebases)
+- Greenfield project workflows (new projects)
+- Expansion pack architecture for domain specialization
+- Document sharding for better context management
+- Automatic semantic versioning and releases
 
-### Features
+### Developer Experience
 
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
+- Automatic upgrade path from v3 to v4
+- Backup creation for user customizations
+- VSCode settings and markdown linting
+- Comprehensive documentation restructure
 
-# [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
+[View v4.2.0 tag](https://github.com/bmad-code-org/BMAD-METHOD/tree/v4.2.0)
 
-### Bug Fixes
+## [v3.0.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v3.0.0)
 
-- add docs ([48ef875](https://github.com/bmadcode/BMAD-METHOD/commit/48ef875f5ec5b0f0211baa43bbc04701e54824f4))
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
+**Release: May 20, 2025**
 
-### Features
+Version 3 introduced the revolutionary orchestrator concept, creating a unified agent experience.
 
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
+### Major Features
 
-# [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
+- **BMad Orchestrator**: Uber-agent that orchestrates all specialized agents
+- **Web-First Approach**: Streamlined web setup with pre-compiled agent bundles
+- **Simplified Onboarding**: Complete setup in minutes with clear quick-start guide
+- **Build System**: Scripts to compile web agents from modular components
 
-### Bug Fixes
+### Architecture Changes
 
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
+- Consolidated agent system with centralized orchestration
+- Web build sample folder with ready-to-deploy configurations
+- Improved documentation structure with visual setup guides
+- Better separation between web and IDE workflows
 
-### Features
+### New Capabilities
 
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
+- Single agent interface (`/help` command system)
+- Brainstorming and ideation support
+- Integrated method explanation within the agent itself
+- Cross-platform consistency (Gemini Gems, Custom GPTs)
 
-# [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
+[View V3 Branch](https://github.com/bmad-code-org/BMAD-METHOD/tree/V3)
 
-### Bug Fixes
+## [v2.0.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v2.0.0)
 
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
+**Release: April 17, 2025**
 
-### Features
+Version 2 addressed the major shortcomings of V1 by introducing separation of concerns and quality validation mechanisms.
 
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
+### Major Improvements
 
-# [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
+- **Template Separation**: Templates decoupled from agent definitions for greater flexibility
+- **Quality Checklists**: Advanced elicitation checklists to validate document quality
+- **Web Agent Discovery**: Recognition of Gemini Gems and Custom GPTs power for structured planning
+- **Granular Web Agents**: Simplified, clearly-defined agent roles optimized for web platforms
+- **Installer**: A project installer that copied the correct files to a folder at the destination
 
-### Bug Fixes
+### Key Features
 
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
+- Separated template files from agent personas
+- Introduced forced validation rounds through checklists
+- Cost-effective structured planning workflow using web platforms
+- Self-contained agent personas with external template references
 
-### Features
+### Known Issues
 
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
+- Duplicate templates/checklists for web vs IDE versions
+- Manual export/import workflow between agents
+- Creating each web agent separately was tedious
 
-# [1.1.0](https://github.com/bmadcode/BMAD-METHOD/compare/v1.0.1...v1.1.0) (2025-06-15)
+[View V2 Branch](https://github.com/bmad-code-org/BMAD-METHOD/tree/V2)
 
-### Features
+## [v1.0.0](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v1.0.0)
 
-- update badges to use dynamic NPM version ([5a6fe36](https://github.com/bmadcode/BMAD-METHOD/commit/5a6fe361d085fcaef891a1862fc67878e726949c))
+**Initial Release: April 6, 2025**
 
-## [1.0.1](https://github.com/bmadcode/BMAD-METHOD/compare/v1.0.0...v1.0.1) (2025-06-15)
+The original BMAD Method was a tech demo showcasing how different custom agile personas could be used to build out artifacts for planning and executing complex applications from scratch. This initial version established the foundation of the AI-driven agile development approach.
 
-### Bug Fixes
+### Key Features
 
-- resolve NPM token configuration ([620b09a](https://github.com/bmadcode/BMAD-METHOD/commit/620b09a556ce8d61ad1a4d8ee7c523d263abd69c))
+- Introduction of specialized AI agent personas (PM, Architect, Developer, etc.)
+- Template-based document generation for planning artifacts
+- Emphasis on planning MVP scope with sufficient detail to guide developer agents
+- Hard-coded custom mode prompts integrated directly into agent configurations
+- The OG of Context Engineering in a structured way
 
-# 1.0.0 (2025-06-15)
+### Limitations
 
-### Bug Fixes
+- Limited customization options
+- Web usage was complicated and not well-documented
+- Rigid scope and purpose with templates coupled to agents
+- Not optimized for IDE integration
 
-- Add bin field to root package.json for npx execution ([01cb46e](https://github.com/bmadcode/BMAD-METHOD/commit/01cb46e43da9713c24e68e57221ebe312c53b6ee)), closes [bmadcode/BMAD-METHOD#v4](https://github.com/bmadcode/BMAD-METHOD/issues/v4)
-- Add glob dependency for installer ([8d788b6](https://github.com/bmadcode/BMAD-METHOD/commit/8d788b6f490a94386658dff2f96165dca88c0a9a))
-- Add installer dependencies to root package.json ([0a838e9](https://github.com/bmadcode/BMAD-METHOD/commit/0a838e9d579a5efc632707d237194648394fbd61))
-- auto semantic versioning fix ([166ed04](https://github.com/bmadcode/BMAD-METHOD/commit/166ed047671cccab2874fd327efb1ac293ae7276))
-- auto semantic versioning fix again ([11260e4](https://github.com/bmadcode/BMAD-METHOD/commit/11260e43950b6bf78d68c759dc3ac278bc13f8a8))
-- Remove problematic install script from package.json ([cb1836b](https://github.com/bmadcode/BMAD-METHOD/commit/cb1836bd6ddbb2369e2ed97a1d2f5d6630a7152b))
-- resolve NPM token configuration ([b447a8b](https://github.com/bmadcode/BMAD-METHOD/commit/b447a8bd57625d02692d7e2771241bacd120c631))
+[View V1 Branch](https://github.com/bmad-code-org/BMAD-METHOD/tree/V1)
 
-### Features
+## Installation
 
-- add versioning and release automation ([0ea5e50](https://github.com/bmadcode/BMAD-METHOD/commit/0ea5e50aa7ace5946d0100c180dd4c0da3e2fd8c))
+```bash
+npx bmad-method
+```
 
-# Promote to stable release 5.0.0
+For detailed release notes, see the [GitHub releases page](https://github.com/bmad-code-org/BMAD-METHOD/releases).
