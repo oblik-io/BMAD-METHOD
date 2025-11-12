@@ -34,7 +34,8 @@ Thumbs.db
 .bmad*/.cursor/
 
 # AI assistant files
-CLAUDE.md
+# CLAUDE.md - Commented out in fork to track fork-specific configuration
+# CLAUDE.md
 .ai/*
 cursor
 .gemini
