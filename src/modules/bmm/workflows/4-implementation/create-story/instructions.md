@@ -10,10 +10,11 @@
 <workflow>
 
   <step n="1" goal="Load config and initialize">
-    <action>Resolve variables from config_source: story_dir (dev_ephemeral_location), output_folder, user_name, communication_language. If story_dir missing → ASK user to provide a stories directory and update variable.</action>
+    <action>Resolve variables from config_source: story_dir (sprint_artifacts), output_folder, user_name, communication_language. If story_dir missing → ASK user to provide a stories directory and update variable.</action>
     <action>Create {{story_dir}} if it does not exist</action>
     <action>Resolve installed component paths from workflow.yaml: template, instructions, validation</action>
     <action>Resolve recommended inputs if present: epics_file, prd_file, architecture_file</action>
+    <action>Load architecture/standards docs: For each file name in {{arch_docs_file_names}} within {{arch_docs_search_dirs}}, read if exists. Collect testing, coding standards, security, and architectural patterns.</action>
   </step>
 
   <step n="2" goal="Discover and load source documents">
@@ -139,12 +140,12 @@
     <check if="no backlog story found">
       <output>📋 No backlog stories found in sprint-status.yaml
 
-All stories are either already drafted or completed.
+        All stories are either already drafted or completed.
 
-**Options:**
-1. Run sprint-planning to refresh story tracking
-2. Load PM agent and run correct-course to add more stories
-3. Check if current sprint is complete
+        **Options:**
+        1. Run sprint-planning to refresh story tracking
+        2. Load PM agent and run correct-course to add more stories
+        3. Check if current sprint is complete
       </output>
       <action>HALT</action>
     </check>
