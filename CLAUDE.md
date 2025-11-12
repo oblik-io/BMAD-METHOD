@@ -47,7 +47,7 @@ git push upstream feature/your-branch    # ❌ DON'T push to upstream
 **Key Documentation:**
 
 - `docs/discussions/` - Process improvement discussions
-- `.beads/` - Issue tracking database (prefix: BMAD-METHOD)
+- `.beads/` - Issue tracking database (prefix: bmm)
 - `.claude/skills/bd-issue-tracking/` - Beads skill для persistent memory
 
 ---
@@ -185,7 +185,7 @@ feat(process): add production process metrics framework
 Implement metrics framework for documentation-heavy projects
 based on Agile and Theory of Constraints insights.
 
-Related: BMAD-METHOD-c4q
+Related: bmm-c4q
 ```
 
 **Co-Authoring:** Optional (не автоматично). Додавайте manually якщо потрібно.
@@ -272,26 +272,26 @@ git push origin sync/upstream-YYYY-MM-DD
 
 ## Production Process Tracking
 
-**Current Focus:** Production process improvements (Epic: BMAD-METHOD-ive)
+**Current Focus:** Production process improvements (Epic: bmm-ive)
 
 **Active Issues:**
 
-- `BMAD-METHOD-8on` - Trusted Repository Pattern docs
-- `BMAD-METHOD-c4q` - Production Metrics Framework docs
-- `BMAD-METHOD-3ti` - Strategic Shifts for Knowledge Work docs
+- `bmm-8on` - Trusted Repository Pattern docs
+- `bmm-c4q` - Production Metrics Framework docs
+- `bmm-3ti` - Strategic Shifts for Knowledge Work docs
 
 **Check status:**
 
 ```bash
 bd ready --priority 2
-bd show BMAD-METHOD-ive
+bd show bmm-ive
 ```
 
 **Update progress:**
 
 ```bash
-bd update BMAD-METHOD-8on --status in_progress
-bd update BMAD-METHOD-8on --notes "COMPLETED: ... IN PROGRESS: ... NEXT: ..."
+bd update bmm-8on --status in_progress
+bd update bmm-8on --notes "COMPLETED: ... IN PROGRESS: ... NEXT: ..."
 ```
 
 ---
@@ -322,12 +322,12 @@ bd update BMAD-METHOD-8on --notes "COMPLETED: ... IN PROGRESS: ... NEXT: ..."
 ### Working on Process Improvements
 
 1. Check ready issues: `bd ready`
-2. Show issue details: `bd show BMAD-METHOD-XXX`
-3. Mark in progress: `bd update BMAD-METHOD-XXX --status in_progress`
+2. Show issue details: `bd show bmm-XXX`
+3. Mark in progress: `bd update bmm-XXX --status in_progress`
 4. Work on task (create docs, code, etc.)
 5. Update notes at milestones
 6. Commit changes with issue reference
-7. Close when complete: `bd close BMAD-METHOD-XXX`
+7. Close when complete: `bd close bmm-XXX`
 
 ### Creating New Discussion Documents
 
@@ -348,7 +348,7 @@ git commit -m "docs: add discussion on topic name
 
 Key insights: ...
 
-Related: BMAD-METHOD-XXX"
+Related: bmm-XXX"
 ```
 
 ### Testing Workflows
