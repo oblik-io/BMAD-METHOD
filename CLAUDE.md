@@ -70,7 +70,7 @@ Beads MCP server надає tools для AI agents:
 **Always call `set_context` before using other MCP tools:**
 
 ```
-mcp__plugin_beads_beads__set_context("/Users/sd/github/BMAD-METHOD")
+mcp__plugin_beads_beads__set_context("$PROJECT_ROOT")
 ```
 
 ### Skill Available
@@ -123,7 +123,7 @@ mcp__plugin_beads_beads__set_context("/Users/sd/github/BMAD-METHOD")
 1. Set beads context (MCP):
 
    ```
-   mcp__plugin_beads_beads__set_context("/Users/sd/github/BMAD-METHOD")
+   mcp__plugin_beads_beads__set_context("$PROJECT_ROOT")
    ```
 
 2. Check ready work:

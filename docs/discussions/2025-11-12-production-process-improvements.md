@@ -108,7 +108,7 @@ KRTM (критична інфраструктура, державний тенд
 **Trusted Fork Pattern:**
 
 ```
-KRTM repo → github.com/joyshmitz/krtm-bmad-bundles (CONTROLLED)
+KRTM repo → github.com/felectra/krtm-bmad-bundles (CONTROLLED)
               ↑
               Periodic sync + verification
               ↓
@@ -151,7 +151,7 @@ steps:
 
 **Story 1:** Initialize Trusted Repository (1h)
 
-- Create `github.com/joyshmitz/krtm-bmad-bundles`
+- Create `github.com/felectra/krtm-bmad-bundles`
 - Enable GitHub Pages
 - Initial structure
 
@@ -483,7 +483,7 @@ AC: BUNDLE_DISTRIBUTION_SETUP.md guides setup
 - **Bundle Distribution Docs:** `docs/BUNDLE_DISTRIBUTION_SETUP.md`
 - **Using Web Bundles:** `docs/USING_WEB_BUNDLES.md`
 - **Beads Issue Tracker:** https://github.com/bmad-code-org/beads
-- **KRTM Project:** https://github.com/joyshmitz/krtm
+- **KRTM Project:** https://github.com/felectra/krtm
 
 ---
 
