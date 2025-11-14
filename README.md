@@ -72,7 +72,7 @@ Foundation framework powering all BMad modules:
 
 ### v6 Core Enhancements
 
-- **🎨 Agent Customization** - Modify names, roles, personalities via `bmad/_cfg/agents/` **[→ Customization Guide](./docs/agent-customization-guide.md)**
+- **🎨 Agent Customization** - Modify names, roles, personalities via `{bmad_folder}/_cfg/agents/` **[→ Customization Guide](./docs/agent-customization-guide.md)**
 - **🌐 Multi-Language** - Independent language settings for communication and output
 - **👤 Personalization** - Agents adapt to your name, skill level, and preferences
 - **🔄 Persistent Config** - Customizations survive module updates
@@ -219,7 +219,7 @@ The installer provides:
 
 ```
 your-project/
-└── bmad/
+└── {bmad_folder}/
     ├── core/         # Core framework + BMad Master agent
     ├── bmm/          # BMad Method (12 agents, 34 workflows)
     ├── bmb/          # BMad Builder (1 agent, 7 workflows)
@@ -234,7 +234,7 @@ your-project/
 2. Run `*workflow-init` to set up your project workflow path
 3. Follow the [Quick Start](#-quick-start) guide above to choose your planning track
 
-**Alternative:** [**Web Bundles**](./docs/USING_WEB_BUNDLES.md) - Use BMAD agents in Claude Projects, ChatGPT, or Gemini without installation
+**Alternative:** [**Web Bundles**](https://bmad-code-org.github.io/bmad-bundles/) - Download pre-built agent bundles for use in Claude Projects, ChatGPT, or Gemini without installation (automatically updated on every commit to main)
 
 ---
 
@@ -301,7 +301,7 @@ BMad is flexible - you can execute workflows in several ways depending on your p
 
 Modify agents without touching core files:
 
-- Override agent names, personalities, expertise via `bmad/_cfg/agents/`
+- Override agent names, personalities, expertise via `{bmad_folder}/_cfg/agents/`
 - Customizations persist through all updates
 - Multi-language support (communication + output)
 - Module-level or global configuration
@@ -319,7 +319,7 @@ Smart setup that adapts to your environment:
 
 Everything in one place:
 
-- Single `bmad/` folder (no scattered files)
+- Single `{bmad_folder}/` folder (no scattered files, default folder name is .bmad)
 - Modules live side-by-side (core, bmm, bmb, cis)
 - Your configs in `_cfg/` (survives updates)
 - Easy to version control or exclude
